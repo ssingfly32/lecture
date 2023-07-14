@@ -82,7 +82,6 @@
       src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=c7b5ee17da1ef11e1189eb9d65bb9bf9"
     ></script>
     <script>
-      // https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-tabs.php 탭메뉴 집가서 공부하자.
       let contentId = '';
       $(function () {
         if (getParameter('contentId') == null || getParameter('contentId') == -1) {
@@ -212,45 +211,58 @@
       <div id="fh5co-main">
         <div class="fh5co-narrow-content">
           <h2 class="title"></h2>
-          <button>공통소개</button>
-          <button>공통소개</button>
-          <button>공통소개</button>
-          <button>공통소개</button>
-          <div class="common1"></div>
-          <div class="common2"></div>
-          <div id="map"></div>
-          <!-- Button to Open the Modal -->
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#myModal"
-          >
-            Open modal
-          </button>
-          <!-- 모달창  -->
-          <!-- The Modal -->
-          <div class="modal" id="myModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                  <h4 class="modal-title">Modal Heading</h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+          <div class="container">
+            <h2>Dynamic Tabs</h2>
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#home">공통소개</a></li>
+              <li><a data-toggle="tab" href="#menu1">소개정보</a></li>
+              <li><a data-toggle="tab" href="#menu2">반복정보</a></li>
+              <li><a data-toggle="tab" href="#menu3">추가 이미지</a></li>
+            </ul>
 
-                <!-- Modal body -->
-                <div class="modal-body"></div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    Close
-                  </button>
-                </div>
+            <div class="tab-content">
+              <div id="home" class="tab-pane fade in active">
+                <h3>공통소개</h3>
+                <div class="common1"></div>
+                <div class="common2"></div>
+                <div id="map"></div>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua.
+                </p>
+              </div>
+              <div id="menu1" class="tab-pane fade">
+                <h3>소개정보</h3>
+                <p>
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                  ex ea commodo consequat.
+                </p>
+              </div>
+              <div id="menu2" class="tab-pane fade">
+                <h3>반복정보</h3>
+                <p>
+                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                  doloremque laudantium, totam rem aperiam.
+                </p>
+              </div>
+              <div id="menu3" class="tab-pane fade">
+                <h3>추가 이미지</h3>
+                <p>
+                  Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+                  sunt explicabo.
+                </p>
               </div>
             </div>
           </div>
+          <!-- 탭창에 붙여넣기 시작 -->
+          <!-- <button>공통소개</button>
+          <button>공통소개</button>
+          <button>공통소개</button>
+          <button>공통소개</button> -->
+          <!-- <div class="common1"></div> -->
+          <!-- <div class="common2"></div> -->
+          <!-- <div id="map"></div> 잘라내기 끝-->
+
           <!-- <div class="row">
 
 					<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
@@ -299,7 +311,7 @@
     </div>
 
     <!-- jQuery -->
-    <script src="js/jquery.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
     <!-- jQuery Easing -->
     <script src="js/jquery.easing.1.3.js"></script>
     <!-- Bootstrap -->
