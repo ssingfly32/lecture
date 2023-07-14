@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <title>
+      비동기 통신 방식으로 xml 파일을 얻어와 파싱(parsing: 구문분석)해
+      출력해보자
+    </title>
+    <script>
+      $(function () {
+        transData();
+      });
+      function transData() {
+        // 데이터 가져오기
+        $.ajax({
+          url: "http://gott1219.cafe24.com/ksh/address.xml", // 데이터를 수신받을 서버 주소 // 객체일땐 = 사용x, : 사용
+          type: "get", // 통신방식(get, post, put, delete)
+          dataType: "xml", // 수신받을 데이터 타입
+          async: false, // 동기 방식으로 진행 (default : true) ***********************************************************8
+          success: function (data) {
+            // 통신이 성공했을 때 호출되는 콜백 함수
+            // console.log(data);
+            parsingData(data);
+          },
+          error: function () {
+            // 통신이 실패(부정적인 response) 했을 때 호출되는 콜백함수
+          },
+          complete: function () {}, // 통신이 완료 되었을 때 호출 되는 콜백함수
+        });
+      }
+      function parsingData(xmlData) {
+        console.log(xmlData);
+
+        let friends = xmlData.getElementsByTagName("friends");
+        console.log(friends);
+
+        let friend = friends[0].getElementsByTagName("friend");
+        console.log(friend);
+        let output = "<table border='1'>";
+        $.each(friend, function (i, friend) {
+          let fname = $(friend).find("friendName").html();
+          let age = $(friend).find("age").html();
+          let mobilePhone = $(friend).find("mobilePhone").html();
+          let imagePhoto = $(friend).find("imagePhoto").html();
+          let hobbies = "";
+          let hobbyAr = $(friend).find("hobbies").eq(0).find("hobby");
+          $.each(hobbyAr, function (i, h) {
+            hobbies += $(h).html() + ",";
+          });
+
+          console.log(fname, age, mobilePhone, hobbies);
+          output += "<tr>";
+          output += `<td>${fname}</td>`;
+          output += `<td>${age}</td>`;
+          output += `<td>${mobilePhone}</td>`;
+          output += `<td><img src='./images/${imagePhoto}'height='100px'/></td>`;
+          output += `<td>${hobbies}</td>`;
+          output += "</tr>";
+        }); // 프렌드 태그를 만날때마다 다음의 함수를 반복
+        output += "</table>";
+        $("#friends").html(output);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="friends"></div>
+  </body>
+</html>

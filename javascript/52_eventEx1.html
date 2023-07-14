@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키보드 관련 이벤트 (onKeyUp)</title>
+    <script>
+        function check(obj) {
+            console.log(obj.value);
+            document.getElementsByTagName('span')[0].innerHTML = obj.value.length;
+            if(obj.value.length > 10) {
+                alert('10자 이내로만 입력하세요');
+                obj.value='';
+            }
+
+            // event 속성 : 이벤트가 발생하면 발생된 이벤트 객체의 정보가 저장되는 속성
+            console.log(event);
+            if(event.keyCode == 13) { // 엔터키가 눌러졌다면..
+                alert(obj.value);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div><span></span>자 입력중...</div>
+    <input type="text" id="txt1" placeholder="10자 이내로 입력하세요..." onkeyup="check(this);"/>
+</body>
+</html>

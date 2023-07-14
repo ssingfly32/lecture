@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vanillar js 문법을 이용하여 비동기 통신을 해 보자</title>
+    <script>
+      // 로딩 버튼을 누르면 서버에 있는 "hello.txt" 파일을 읽어서 비동기통신 방식으로 읽어와 div 영역에 출력
+      function txtLoad() {
+        const xhttp = new XMLHttpRequest(); // XMLHttpRequest 객체 생성 (비동기 통신 객체)
+        if (xhttp != null) {
+          // ajax가 지원 된다면...
+          xhttp.onreadystatechange = function () {
+            // 내가 호출하는게 아닌 콜백함수
+            if (this.readyState == 4 && this.status == 200) {
+              // 통신 완료(에러 없다는 의미는 아님)
+              document.getElementById("output").innerHTML = this.responseText;
+            }
+          };
+        }
+        xhttp.open("get", "http://gott1219.cafe24.com/ksh/hello.txt"); // readystate : 1
+        xhttp.send(); // 통신 시작
+      }
+    </script>
+  </head>
+  <body>
+    <input type="button" value="로딩" onclick="txtLoad();" />
+    <div id="output"></div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+[
+  {
+    "friendName": "둘리",
+    "age": 20,
+    "mobilePhone": "010-1234-5678",
+    "imagePhoto": "dooly.jpg",
+    "hobbies": ["게임", "IT기기 모으기"]
+  },
+  {
+    "friendName": "도우너",
+    "age": 22,
+    "mobilePhone": "010-3333-6666",
+    "imagePhoto": "douner.jpg",
+    "hobbies": ["축구", "영화보기"]
+  },
+  {
+    "friendName": "고길동",
+    "age": 45,
+    "mobilePhone": "010-6666-4444",
+    "imagePhoto": "kildong.jpg",
+    "hobbies": ["영화보기", "음악듣기"]
+  }
+]

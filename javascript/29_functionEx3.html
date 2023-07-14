@@ -1,0 +1,75 @@
+1 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // let sum = function(a,b) {
+        //     return a+b;
+        // }
+        let sum = (a,b) => a + b;
+
+        console.log(sum(4,5));
+
+        // function double(n) {
+        //     return n * 2;
+        // }
+
+        let double = n => n * 2;
+
+        console.log(double(4));
+
+        // 사용자에게 나이를 입력받아 19세 이상이면 "환영" 출력, 아니면 "안녕히가세요" 출력(alert())
+        //     window는 js 최상위 객체여서 생략가능
+        // const check = function() {
+        //     let userAge = prompt("나이를 입력하세요","0");
+        //     if(userAge > 18) {
+        //         alert("환영");
+        //     } else {
+        //         alert("안녕히가세요");
+        //     }
+        // }
+        // check();
+
+
+
+
+
+
+
+        let age = prompt("나이를 입력하세요","0");
+        let welcome = (age >= 19)?
+            () => alert(`환영`) :               // 매개변수 없음
+            () => alert(`안녕히가세요`);        // 매개변수 없음
+        welcome();
+        
+        // function sayHello() {
+        //     document.write('hi');
+        // }
+        
+        const sayHello = () => {
+            document.write('hi');
+        }
+
+        sayHello();
+
+        const add = (a,b) => {  // 중괄호가 있을 땐 return 생략 불가
+            if (a%2==0) {
+                return a +b;
+            }
+        }
+
+        const add2= (a,b) => (a%2 ==0)? a+b : undefined;
+
+        // 화살표 함수에서 중괄호 생략하면 expression이 바로 return됨
+        // 중괄호를 생략 하지 않을을 경우 반환 해야 할 값이 있다면 return 키워드를 반드시 사용해야함.
+        // const add = (a,b) => a+b;   // 화살표 뒤의 a+b 리턴됨
+
+        console.log(add(4,5));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

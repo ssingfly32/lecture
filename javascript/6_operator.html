@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산자</title>
+    <script>
+        // (1) 산술연산자 : +, -, *, /, %(mod 연산, 나머지 연산자), **(거듭제곱 연산자)
+        let a = 3, b = 5;
+        console.log(a + b);
+        console.log(a - b);
+        console.log(a * b);
+        console.log(a / b);
+        console.log(a % b);
+        console.log(a ** b);
+        
+        // (2) 관계 연산자 : 참 또는 거짓의 결과가 되는 연산자. >, < >=, <=, 
+        // ==(값이 같을 때 참 equal), ===(dataType도 같고 값도 같을 때 참), 
+        // !=(값이 같지 않을 때 참), !==(값이 다르거나 type도 다를 때 참)
+
+       console.log(a > b);
+       console.log(a < b);
+       console.log(a >= b);
+       console.log(a <= b);
+       console.log(a == b);
+       console.log(a != b);
+            
+        // (3) 논리 연산자 : 2개 이상의 관계연산식을 연결할 때 사용한다.
+        // or(|| : 여러개중 하나라도 참이면 모두 참, 모두 거짓일 때 거짓)
+        // and (%% : 여러개가 모두 참이면 참, 하나라도 거짓이면 거짓)
+        // ! (단항연산자, 참이면 거짓, 거짓이면 참)
+        console.log(a > b && b != 3);
+        console.log(a < b && b != 3);
+        console.log(!(a > b));
+        
+        // (4) 대입 연산자 : (할당 연산자)
+        // = , +=, _=, *=, /=, %=
+        let result = 0;
+        result += 3; // result = result + 3;
+        console.log(result);
+        result *= 2;  
+        result %= 2; // 0
+
+        // (5) 증감 연산자 : 1씩 증가시키거나(++), 1씩 감소(--)시키는 연산자
+        // 연산자의 위치에 따라 우선순위 때문에 결과값이 달라질 때가 있음
+        // 선치연산 : 증감연산자가 피연산자 앞에 있을 때 (선증감 후대입)
+        // 후치연산 : 증감연산자가 피연산자 뒤에 있을 때 (선대입 후증감)
+        let c = 5, d = 8;
+        console.log(++c); // 6
+        console.log(c++); // 6
+        console.log(c); // 7
+        console.log(++a + b--); // 4 + 5 = 9, b = 4
+        console.log(b);
+
+        // --------------------------------------------------------------------------------------------------------
+        // (6) 비트 연산자 : 2진수로 바꾸어 1비트씩 연산하여 결과를 수행
+        // &(AND), |(OR), ~(NOT), ^(XOR : 두비트가 다를 때 참)
+
+        console.log(13 | 9);
+        console.log(13 ^ 9);
+        
+        //  (7) 쉬프트(자리이동) 연산자 : 2진수로 바꾸어 자리이동
+        // << (왼쪽 쉬프트), >> (오른쪽 쉬프트)
+        console.log(2 << 4);  // 2 * 2^4승
+        console.log(2 >> 4);  // 2 * 2^4승 분수의 1
+        
+        // (8) 연산자의 우선순위
+        // 단항연산자 산 관 논, 대
+
+        // 문자열 비교가 가능 (문자가 ascii 코드값이 있기 때문)
+        console.log('Z' > 'a');
+        console.log('Hello' > 'Bye'); // 앞 글자만 비교
+        document.write("😃😊🤷‍♂️"); // 윈도우 + .
+
+        console.log("2" > 1); // true, 문자열이 숫자로 내부적 형변환
+        console.log(0 == false); // true
+        console.log('' == false); // true, ''(falsy)
+        console.log(null == undefined); // true
+
+        console.log(null > 0); // false ( null이 숫자와 비교 될 때 0으로 바뀐 후 수행)
+        
+        // undefined는 숫자와 비교 불가 (false)
+        console.log(undefined < 0);
+        // NaN (Not A Number)
+
+        // (9) 조건 연산자(3항 연산자)
+        // (관계연산자를 이용한 조건식) ? 조건식이 참일 때 수행되는 값 : 조건식이 거짓일 때 수행되는 값
+        let number = 65;
+        let response = (number % 2 == 0) ? "짝수" : "홀수";
+        console.log(response);
+
+        // false는 아니지만 false 값과 같은 값 (falsy)
+        // 숫자 0, 빈문자열"", null, undefined, NaN : boolean으로 변환될 때 모두 false
+
+        // 위의 falsy 값 이외의 모든 값은 불리언으로 변환될 때 true가 됨 (truthy)
+    </script>
+</head>
+<body>   
+</body>
+</html>

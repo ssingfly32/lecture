@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/jquery-3.7.0.min.js"></script>
+    <script>
+      //   입력받은 값 저장
+      $(function () {
+        $('table').on('click', '.rembtn', function () {
+          console.log($('tr').length);
+          if ($('tr').length > 2) {
+            $('.remBtn').parent().parent().remove();
+          } else {
+            alert('삭제불가');
+          }
+        });
+        $('table').on('click', '.addBtn', function () {
+          const copyTr = $(this).parent().parent();
+          let newTr = copyTr.clone();
+          clearContents($(newTr).children());
+          newTr.insertAfter($(copyTr));
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td>상품명</td>
+        <td>수량</td>
+        <td>가격</td>
+        <td>추가</td>
+        <td>삭제</td>
+      </tr>
+      <tr>
+        <td><input type="text" name="prodName" /></td>
+        <td><input type="text" name="prodQty" /></td>
+        <td><input type="text" name="prodPrice" /></td>
+        <td><button class="addBtn">+</button></td>
+        <td><button class="remBtn">-</button></td>
+      </tr>
+    </table>
+    <button onclick="save();">저장</button>
+    <hr />
+    <div id="output"></div>
+  </body>
+</html>

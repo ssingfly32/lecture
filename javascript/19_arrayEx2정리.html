@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열과 함께 쓰면 좋은 반복문</title>
+    <script>
+        const heros = ["아이언맨", "캡틴아메리카노", "토루", "헐크", "나타샤", "블랙팬서"]; // 배열의 반복문을 돌릴 때 length 속성 사용
+                                                                    
+                                                                                    ///배열 길이(주소값) 는 변화하지 않기 때문에 const 사용 가능
+        console.log(heros);
+        
+        heros[1] = "캡틴아메리카"; // 배열 안 값만 바뀌는 것
+        console.log(heros);
+
+        for(let i = 0; i < heros.length; i++){ //동적 배열이기때문에 반복문 돌릴 때 숫자보다 .length 사용
+            document.write(heros[i] + ', ');
+        }
+        document.write("<hr>");
+        
+        //for ~ in 문법 (heros 배열의 모든 index를 i에 자동 대입                         /// i 안에 있는 값으로 출력
+        for(let i in heros){
+            document.write(heros[i] + ', ');
+        }
+        document.write("<hr>");
+        
+        // for ~ of 문법 (heros 배열의 원소 값을 하나씩 꺼내온 후 i에 저장)              ///자동으로 i의 값을 꺼내와서 출력
+        for(let i of heros) {
+            document.write(i + ', ');            
+        }
+        document.write("<hr>");
+        
+        // forEach 문법
+                                                                                         ///() 안에 콜백 함수(조건이 맞춰졌을 때 호출되는 함수) 넣기 
+                                                                                         ///매개변수(value, index, ...) 생략가능 / 반환값 X(void) 
+        heros.forEach(function(value, index){
+            document.write(`<div>${index}번째 있는 히어로 : ${value}</div>`); 
+        });
+        document.write("<hr>"); 
+        
+        // map 문법                                                                     ///forEach와 차이점 : 배열 반환(return) - 새로운 배열 작성에 유리 
+                                                                                        ///ex) 연봉인상 비교 시 (forEach, map 추가 설명 사진 참고/ 글씨체 무시)
+                                                                                       /// 반환을 하고 싶지 않을 때에는 forEach와 같은 기능이기때문에 map만 사용하는 사람도 많다.
+        
+        let arr1 = [1, 3, 5, 7, 9];
+        let newArr= arr1.map(function(value, index){
+            return value * 10;
+        });
+        console.log(newArr);
+
+
+        // arrow 함수 사용시(아직 안 배운거라서 몰라도 된대요.)
+        // let arr2 = [1, 3, 5, 7, 9];
+        // let newArr1= arr2.map((value, index) => 
+        //     value *10
+        // );
+
+        // console.log(newArr1);
+
+
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

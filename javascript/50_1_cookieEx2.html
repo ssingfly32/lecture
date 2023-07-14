@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루동안 이 창 열지않기(쿠키활용)_공지사항</title>
+    <style>
+        .bottom {
+            position: absolute;
+            bottom: 40px;
+        }
+    </style>
+    <script>
+        function winClose() {
+            // 유저가 이 창을 닫을 때 
+            // 체크박스에 체크를 했다면 -> 쿠키를 남기고 닫아야 한다.
+            // 체크박스에 체크 하지 않았다면 -> 그냥 닫는다.
+            // 닫는다는 공통점으로 if 하나만 쓰자
+            if(document.getElementsByTagName('input')[0].checked) {
+                 // 쿠키 저장 형식(문자열)
+                // "쿠키이름=값; expires=쿠키만료일(날짜시간/string);[domain=도메인명; path=쿠키저장경로]"
+                let now = new Date();
+                now.setDate(now.getDate() + 1); 
+
+                let myCookie = "";
+                myCookie = "notice=off;expires=" + now.toUTCString();
+                console.log(myCookie);
+
+                document.cookie = myCookie; // 쿠키 저장
+            }
+            window.close(); // 닫기
+        }
+    </script>
+</head>
+<body>
+    <div class="notice">
+    <h5>공지 사항</h5>
+    <div class="content">
+        여름 휴가 기간으로 배송이 늦어질 수 있습니다.
+        문제가 지속되면 세환씨에게 연락 주세요...
+    </div>
+    <div class="bottom">
+        <input type="checkbox" /> 하루 동안 이 창 열지 않기
+        <button onclick="winClose();">닫기</button>
+    </div>
+</div>
+</body>
+</html>

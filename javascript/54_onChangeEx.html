@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>onChange이벤트</title>
+    <script>
+        // onChange: 값이 입력이 완료되어 변했을 때 판별
+        function selectCity(obj) {
+            // 방법 1)
+            // console.log(obj.value);
+
+            // 방법 2)
+            console.log(obj.options[obj.selectedIndex].value);
+            // 바인딩하려면 이방법으로...
+        }
+    </script>
+</head>
+<body>
+    <select name="city" id="city" onchange="selectCity(this);">
+        <option >서울</option>
+        <option >대구</option>
+        <option >부산</option>
+    </select>
+</body>
+</html>

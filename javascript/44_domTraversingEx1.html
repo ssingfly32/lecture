@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 운행</title>
+    <script>
+        window.onload = function() {
+            let p = document.getElementById('firstP');
+
+            // document.write(`<div>p.tagName: ${p.tagName}</div>`);
+            // document.write(`<div>p.id : ${p.id}</div>`);
+            // document.write(`<div>p.class : ${p.className}</div>`);
+            // document.write(`<div>p.innerHTML : ${p.innerHTML}</div>`);
+            // document.write(`<div>p.innerText : ${p.innerText}</div>`);
+            // // html 태그가 실행 될 수 있는 영역 : innerHTML <-> innerText(태그 실행 안되고 문자만 보임)
+            // document.write(`<div>p.style.color : ${p.style.color}</div>`);
+            // document.write(`<div>p.children : ${p.children}</div>`);
+            // console.log(p.children)
+
+            p.style.border = '1px dotted gray';
+        };
+    </script>
+</head>
+<body>
+    <h1>DOM 객체, 태그, 프로퍼티, 스타일, 이벤트 리스터...</h1>
+    <hr/>
+    <p id="firstP" class="groupP" style="color:blue; border:1px solid red;" onclick ="this.style.backgroundColor='yellow';">
+    이것은 <span>문단</span>태그 <b>입니다.</b></p>
+</body>
+</html>

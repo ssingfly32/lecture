@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카카오 지도 활용하기</title>
+    <script
+      type="text/javascript"
+      src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=c7b5ee17da1ef11e1189eb9d65bb9bf9"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("#addr").keyup(function (evt) {
+          if (evt.keyCode == 13) {
+            alert($(this).val());
+          }
+        });
+      });
+      // c7b5ee17da1ef11e1189eb9d65bb9bf9
+      window.onload = function () {
+        if (!navigator.geolocation) {
+          // 없을 때
+          document.getElementById("output").innerHTML =
+            "이 기기는 위치정보를 지원하지 않습니다";
+        } else {
+          navigator.geolocation.getCurrentPosition(showPosition, outputError);
+        }
+
+        // inner function 기법 : 밖에서는 호출 불가 안에서는 호출 가능, 캡슐화, 안에서만 보이도록
+
+        function showPosition(pos) {
+          console.log(pos);
+          let lat = pos.coords.latitude;
+          let long = pos.coords.longitude;
+
+          let date = new Date(pos.timestamp);
+
+          console.log(lat, long, date);
+          drawKakaoMap(lat, long, date);
+
+          //   return { lat: lat, long: long, date: date }; // 우리가 호출한 함수가 아니고 콜백함수기 때문에 리턴안됨
+        }
+        function outputError() {
+          document.getElementById("output").innerHTML =
+            "위치 정보를 얻어오는 데 실패했습니다";
+        }
+      };
+      function drawKakaoMap(lat, long, date) {
+        const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+        const options = {
+          //지도를 생성할 때 필요한 기본 옵션
+          center: new kakao.maps.LatLng(lat, long), //지도의 중심좌표.
+          level: 3, //지도의 레벨(확대, 축소 정도)
+        };
+
+        const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+        // 마커가 표시될 위치입니다
+        const markerPosition = new kakao.maps.LatLng(lat, long);
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="text" placeholder="동 이름을 입력하세요.." id="addr" />
+    <div id="map" style="width: 500px; height: 400px"></div>
+  </body>
+</html>

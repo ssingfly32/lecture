@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/gameStart.js" type="text/javascript"></script>
+    <script>
+        // 유저와 컴퓨터가 가위바위보 게임을 한다고 치자.
+        // 유저에게 가위 = 1, 바위 = 2, 보 = 3을 입력 받고
+        // 컴퓨터는 1~3까지의 랜덤한 수를 생각하게 한다.
+        // 비교 판단을 하여 유저와 컴퓨터 중 누가 이겼는지를 출력하는 프로그램을 만드세요.
+        // 숫자가 아닌것을 입력했을 때
+        let winCount = 0, loseCount = 0, drawCount=0, totalCount=0;
+
+        function gameReady() {
+            totalCount++;
+            let comp = Math.floor(Math.random() * 10) % 3 + 1; // 0 ~ 9 (컴퓨터가 정한 가위바위보)
+            let user = Number(document.getElementById("userSelect").value);
+            let compImg = "";
+            switch(comp) {
+                case 1:
+                    compImg = "./images/가위.PNG";
+                    break;
+                case 2:
+                    compImg = "./images/바위.PNG";
+                    break;
+                case 3:
+                    compImg = "./images/qh.PNG";
+                    break;
+            }
+            let userImg = ""
+            switch(user) {
+                case 1:
+                    userImg = "./images/가위.PNG";
+                    break;
+                case 2:
+                    userImg = "./images/바위.PNG";
+                    break;
+                case 3:
+                    userImg = "./images/qh.PNG";
+                    break;
+            }
+            document.getElementById("userImg").innerHTML = `<img src='${userImg}'/>`;
+            document.getElementById("compImg").innerHTML = `<img src='${compImg}'/>`;
+            
+            let result = gameStart(user,comp);
+            switch(result) {
+                case "이겼다" :
+                    winCount++;
+                    break;
+                case "비겼다" :
+                    drawCount++;
+                    break;
+                case "졌다" :
+                    loseCount++;
+                    break;
+            }
+            document.getElementById("result").innerHTML = result;
+            document.getElementById('total').innerHTML = `<h1>${totalCount}전 ${winCount}승 ${drawCount}무 ${loseCount}패</h1>)`;
+        }
+        // window.onload = function () {} 무명함수 (gameReady와 달리 이름없음), 콜백함수
+        
+        
+        // 숙제 👀if문 적게 만들어보기
+
+        // 지역변수 : 중괄호 안에서 생성된 변수
+    </script>
+    <style>
+        img {
+            height: 300px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>가위, 바위, 보 게임</h1>
+    <div class="userInput">
+        <!-- 태그가 만들어지고나서 실행되기 때문에 온로드 필요x -->
+        가위, 바위, 보 중에 하나를 선택하시고, 버튼을 누르세요 
+        <select id="userSelect">
+            <option value="1">가위</option>
+            <option value="2">바위</option>
+            <option value="3">보</option>
+        </select>
+        <input type="button" value="게임시작" onclick="gameReady();"/> 
+        <!-- 소괄호 나오면 함수 -->
+        <table border="1">
+            <tr>
+                <td>User</td>
+                <td>Computer</td>
+            </tr>
+            <tr>
+                <td id="userImg"></td>
+                <td id="compImg"></td>
+            </tr>
+        </table>
+        <div id="result"></div>
+        <div id="total"></div>
+    </div>
+</body>
+</html>

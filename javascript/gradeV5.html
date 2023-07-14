@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    // 연습문제) 3명의 학생의 성적표를 객체를 이용하여 처리한다.
+    // 학번, 이름, 국어, 영어, 수학, 총점, 평균, 등급을 구하여 객체를 만들고
+    // 그 객체를 이용하여 성적을 처리 하세요.🤣😉👀
+    
+    
+    
+
+
+    class Student { // 클래스는 멤버 객체를 만드는 틀, name,에이지 속성(파란색박스) 갖고있음
+            constructor(stuNo, stuName, kor, eng, math, tot, avg, grade) { // 지역변수 name,age 
+                this.stuNo = window.prompt("학번을 입력하세요", "222222");
+                this.stuName = window.prompt("이름을 입력하세요", "ㅇㅇ");
+                this.kor = Number(window.prompt("국어 점수를 입력하세요", "33"));
+                this.math = Number(window.prompt("수학 점수를 입력하세요", "33"));
+                this.eng = Number(window.prompt("영어 점수를 입력하세요", "33"));
+                this.tot = parseInt(this.kor + this.eng + this.math);
+                this.avg = Math.round((this.tot/3)* 100)/100;
+                
+                switch(Math.floor(this.avg/10)) {
+                case 10:
+                case 9:
+                    this.grade="A";
+                    break;
+                case 8:
+                    this.grade="B";
+                    break;
+                case 7:
+                    this.grade="C";
+                    break;
+                case 6:
+                    this.grade="D";   
+                    break; 
+                default:
+                    this.grade="F";
+                    break;
+                }
+            }
+
+            // displayMember() {      // 메서드로 인식함(보라색박스)
+            //     document.write(`<div>이름은 ${this.name}이고, 나이는 ${this.age}인 멤버 입니다.</div>`)
+            // }
+            // static displayMember() {  // 객체가 만들어지기 이전에 상단부에 올라감.(대문자로 시작하면 클래스명)
+            //     document.write(`<div>이름은 ${this.name}이고, 나이는 ${this.age}인 멤버 입니다.</div>`)
+            // }
+        }
+        
+        
+        let student = [];
+        const DATA_SIZE = 3;
+        for(let i = 0; i<DATA_SIZE; i++) {
+            student[i] = new Student();
+        }
+        window.onload = function() {     // on으로 시작하는건 이벤트 속성. ~할 때 // 콜백함수 내가 호출할 수 없음.
+            let output = outputScores();
+            document.getElementById('output').innerHTML = output;
+        };
+
+        function outputScores() {        // 출력할 준비
+
+        let output = `<table border="1">`;
+        output += `<tr><th>학번</th><th>이름</th><th>국어</th><th>영어</th><th>수학</th><th>총점</th><th>평균</th><th>등급</th><th>등수</th></tr>`;
+        for (let i = 0; i <student.length; i++) {
+            
+            output += `<tr><td>${student[i].stuNo}</td><td>${student[i].stuName}</td><td>${student[i].kor}</td><td>${student[i].eng}</td><td>${student[i].math}</td><td>${student[i].tot}</td><td>${student[i].avg}</td><td>${student[i].grade}</td></tr>`;
+            
+        }
+        output += `</table>`;
+        return output;
+        }
+                
+
+        console.log(student[0], student[1]);
+
+        
+        
+
+
+
+        
+       
+        
+    </script>
+</head>
+<body>
+    <div id="output"></div>
+</body>
+</html>

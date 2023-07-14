@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차원 배열 성적표</title>
+    <script>
+        // 1차원 배열에 객체 넣는게 더 효과적. 2차원 배열 안씀. 
+        const STUDENT_CNT = 5;
+        let scores = new Array(STUDENT_CNT);
+        for(let i=0; i < scores.length; i++) {
+            scores[i] = new Array(9);
+        }
+        scores=[["230627_1","둘리",98, 44, 23],["230627_1","도우너",77, 24, 90],["230627_1","마이콜",100, 90, 77],["230627_4","희동이",100, 90, 77],["230627_5","고길동",88, 77, 80]];
+        // console.log(scores);
+        // for(let i=0; i < scores.length; i++) {
+        //     scores[i][0] = prompt("학번을 입력해주세요","0");
+        //     scores[i][1] = prompt("이름 입력해주세요","0");
+        //     scores[i][2] = parseInt(("국어 입력해주세요","0"));
+        //     scores[i][3] = parseInt(("영어 입력해주세요","0"));
+        //     scores[i][4] = parseInt(("수학 입력해주세요","0"));
+        // }
+
+        for(let i=0; i<scores.length; i++) {
+            scores[i][5] = scores[i][2] + scores[i][3] + scores[i][4];
+            scores[i][6] = (scores[i][5]/3).toFixed(2);
+        }
+        for(let i=0; i<scores.length;i++) {
+            switch(Math.floor((scores[i][6])/10)) {
+                case 10:
+                case 9:
+                scores[i][7]="A";
+                break;
+                case 8:
+                scores[i][7]="B";
+                break;
+                case 7:
+                scores[i][7]="C";
+                break;
+                case 6:
+                scores[i][7]="D";   
+                break; 
+                default:
+                scores[i][7]="F";
+            }
+        }
+        reOrder('desc'); // 정렬 + 등수 매기기 (초기값이 내림차순) 유저가 클릭할 때 마다 호출되니까 자주 실행되서 함수로 만듦.
+
+        window.onload = function() {     // on으로 시작하는건 이벤트 속성. ~할 때 // 콜백함수 내가 호출할 수 없음.
+            let output = outputScores();
+            document.getElementById('output').innerHTML = output;
+        };
+        function reOrder(orderMethod) {
+            //  정렬 (평균을 기준으로 내림차순)
+            for(let i = 0; i<scores.length-1; i++) { // 마지막꺼 비교안해도 되어서 -1
+                for(let j=i+1; j<scores.length; j++) {
+                    if(orderMethod === 'desc') {
+                        if(scores[i][6] < scores[j][6]) { //내림
+                        let tmp = scores[i];
+                        scores[i] = scores[j];
+                        scores[j] = tmp;
+                        }
+                    } else if(orderMethod ==='asc') {
+                        if(scores[i][6] > scores[j][6]) { //오름
+                        let tmp = scores[i];
+                        scores[i] = scores[j];
+                        scores[j] = tmp;
+                        }
+                    }
+                   
+                }
+            }
+            if(orderMethod == 'desc') {
+                // Rank 알고리즘을 이용한 등수 매기기
+                let rank = 1; curRank = 1;
+                scores[0][8] = curRank;
+                for(let i = 1; i < scores.length; i++) {
+                    rank++;
+                    if(scores[i][6] != scores[i-1][6]) {
+                        curRank = rank;
+                    }
+                    scores[i][8] = curRank;
+                }
+            } else if (orderMethod === 'asc') {
+            //     // 스스로 해보기!!
+            
+                
+             }
+            
+        }
+        console.log(scores);
+
+        function outputScores() {        // 출력할 준비
+
+            let output = `<table border="1">`;
+            output += `<tr><th>학번</th><th>이름</th><th>국어</th><th>영어</th><th>수학</th><th>총점</th><th>평균</th><th>등급</th><th>등수</th></tr>`;
+            for (let i = 0; i <scores.length; i++) {
+                output +=`<tr>`;
+                for(let j = 0; j<scores[0].length; j++) {
+                    output += `<td>${scores[i][j]}</td>`;
+                } 
+                output += `</tr>`;
+            }
+            output += `</table>`;
+            return output;
+        }
+
+        
+
+        
+        // console.log(document.getElementsByName('order'));        // 배열 나옴
+        const order = () => {
+            // 유저가 선택한 라디오 버튼값을 얻어서 
+            let radios = document.getElementsByName('order');    // 주소값 복사
+            let order = '';
+            // console.log(radios);
+            radios.forEach((radioTag, index) => {             // 지역 변수 마음대로 지음
+                if(radioTag.checked) {
+                    order = radioTag.value;
+                }
+            });
+            console.log(order);
+
+            // 다시 정렬
+            reOrder(order);
+
+            let output = outputScores(); // 출력할 준비
+            document.getElementById('output').innerHTML = output;
+        };
+        // for (let i = 0; i<document.getElementsByName('order').length; i++) {  // 다른 방식
+        //     if (document.getElementsByName('order')[i].checked) {
+        //         alert(document.getElementsByName('order')[i].value);
+        //     }
+        // }
+
+        // 라디오 태그 두개, 네임 속성이 같음, 배열 형태로 반환되는데 체크 속성이 달라서 그걸 이용
+
+    </script>
+</head>
+<body>
+    <h1>성 적 표</h1>
+    <div id="order">
+        <input type="radio" value="asc" name="order"> 오름차순 정렬
+        <input type="radio" value="desc" name="order" checked> 내림차순 정렬
+        <button onclick="order();">정렬</button>
+    </div>
+    <div id="output"></div>
+</body>
+</html>

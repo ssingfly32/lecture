@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery 기본</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // html 문서의 로딩이 다 끝나면
+        // document.getElementsByTagName("h1")[0].style.color = 'pink'; // 바닐라js
+        $('h1').css('color', 'pink');
+
+        // html() : innerHTML
+        $('div').html('참 쉽죠?');
+
+        $('#lorem').click(function () {
+          // #lorem인 태그를 클릭하여 실행된 함수이므로 this는 #lorem인 태그 객체
+          $(this).css('font-size', '40px');
+        });
+        $('div.ani').mouseover(() => {
+          // 애니메이션이 결합된 함수도 있다.
+          $('#lorem').hide(2000, () => {
+            alert('없네유');
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>헬로우, 제이쿼리</h1>
+    <div>
+      jQuery는 자바스크립트 코딩을 좀 더 빠르고 편하게 사용할 수 있도록 하는
+      라이브러리입니다.
+    </div>
+
+    <p id="lorem">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat
+      eligendi, minus aperiam voluptatem cum repudiandae nemo incidunt. Odio
+      minima dignissimos natus ducimus perferendis eius laudantium autem, soluta
+      quidem sequi voluptates.
+    </p>
+
+    <div class="ani">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae,
+      consequatur quas odio dolorem molestiae rem et rerum illo? Totam
+      repudiandae magni culpa facilis itaque maxime suscipit vitae rem illum
+      quidem!
+    </div>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+<!-- 시작페이지. url에 index.html 없어도 제일 먼저 뜸 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈 페이지</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let currentPosition = parseInt($('.quickmenu').css('top'));
+        console.log('currentPos : ' + currentPosition);
+        $(window).scroll(function () {
+          let position = $(window).scrollTop();
+          console.log('pos : ' + position);
+          $('.quickmenu')
+            .stop()
+            .animate({ top: position + currentPosition + 'px' }, 1000);
+        });
+      });
+    </script>
+    <style>
+      body {
+        height: 1000px;
+      }
+
+      .quickmenu {
+        border: 1px solid #333;
+        z-index: 999;
+        position: fixed;
+        right: 100px;
+        top: 10px;
+        background-color: cornflowerblue;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./areaList.html">지역기반관광정보</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">숙소정보</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">음식점정보</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                >Dropdown</a
+              >
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Link</a></li>
+                <li><a class="dropdown-item" href="#">Another link</a></li>
+                <li><a class="dropdown-item" href="#">A third link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem ex,
+        laborum recusandae vel impedit, beatae dolorem maxime eos quia deleniti
+        dicta iure. Dolorum accusamus omnis quia illum, nostrum quibusdam rem?
+      </div>
+    </div>
+    <div class="quickmenu">
+      <ul>
+        <li><a href="#">등급별혜택</a></li>
+        <li><a href="#">1:1문의</a></li>
+        <li><a href="#">후기</a></li>
+      </ul>
+    </div>
+    <div class="mt-5 p-4 bg-dark text-white text-center">
+      <p>Footer</p>
+    </div>
+  </body>
+</html>

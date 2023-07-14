@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 주소록 표시 -->
+<!-- root(부모)태그는 하나만, html과 같이 여는 태그 닫는 태그 필요 -->
+<friends>
+    <friend>
+        <friendName>둘리</friendName>
+        <age>20</age>
+        <mobilePhone>010-1234-5678</mobilePhone>
+        <imagePhoto>2.webp</imagePhoto>
+        <hobbies>
+            <hobby>게임</hobby>
+            <hobby>IT기기 모으기</hobby>
+        </hobbies>
+        <!-- <blood type="0"/> -->
+    </friend>
+
+    <friend>
+        <friendName>도우너</friendName>
+        <age>22</age>
+        <mobilePhone>010-3333-6666</mobilePhone>
+        <imagePhoto>3.jpg</imagePhoto>
+        <hobbies>
+            <hobby>축구</hobby>
+            <hobby>영화보기</hobby>
+        </hobbies>
+    </friend>
+
+    <friend>
+        <friendName>고길동</friendName>
+        <age>45</age>
+        <mobilePhone>010-6666-4444</mobilePhone>
+        <imagePhoto>bb.jpg</imagePhoto>
+        <hobbies>
+            <hobby>영화보기</hobby>
+            <hobby>음악듣기</hobby>
+        </hobbies>
+    </friend>
+</friends>

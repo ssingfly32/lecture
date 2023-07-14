@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿼리스트링으로 데이터 넘기고 받기</title>
+    <!-- <script src="./js/commonJs.js"></script> -->
+    <script>
+        // 성적표 전송 함수
+        const transScore = () => {
+            let name = document.getElementsByClassName('userInput')[0].value; // 길이가 4개짜리인 배열나옴 그중에 0번째의 밸류값
+            let kor = document.getElementsByName('kor')[0].value;
+            let eng = document.getElementsByTagName('input')[2].value;
+            // 배열은 태그구조가 바뀌면 유지보수 힘들어서 아이디 권장
+            let math = document.getElementById('math').value;
+
+            console.log(name, kor, eng, math);
+
+            location.href = `41_1queryStringEx1.html?name=${name}&kor=${kor}&eng=${eng}&math=${math}`;
+        };
+
+    </script>
+</head>
+<body>
+    <!-- 겟 : 쿼리스트링, 데이터가 노출되고 많은 데이터 보내기 힘듦
+         포스트 : 
+         아이디나 클래스는 프론트 작업할 때 쓰기 편함
+         백엔드에 전송하기111 위해서는 네임 속성
+    -->
+    <!--<form action="41_1queryStringEx1.html" method="GET"> 
+         폼태그, 네임속성는 주로 백엔드단에 데이터보낼때 사용 
+        <div>
+             / 쿼리스트링으로 넘기려면 네임속성 반드시 필요 
+            밑변 : <input type="text" class="userInput" name="base">
+        </div>
+        <div>
+            높이 : <input type="text" class="userInput" name="height">
+        </div>
+        <div>
+            <input type="submit" value="계산" /> 
+            <input type="reset" value="취소" />
+        </div>
+    </form>-->
+
+    <!-- 프론트에서는... -->
+    <div>
+       이름 : <input type="text" class="userInput" name="stuName">
+   </div>
+   <div>
+       국어 : <input type="text" class="userInput" name="kor">
+   </div>
+   <div>
+       영어 : <input type="text" class="userInput" name="eng">
+   </div>
+   <div>
+       수학 : <input type="text" class="userInput" name="math" id="math">
+   </div>
+   <div>
+       <input type="button" value="계산" onclick="transScore();"/> 
+       <input type="button" value="취소" onclick="location.reload();"/>
+   </div>
+</body>
+</html>

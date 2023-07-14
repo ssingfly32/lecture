@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>초 간단 기념일 계산기</title>
+    <script>
+        const calcDate = function() {
+            let userDate = new Date(document.getElementById('celeDate').value); // string 타입이어서 형변환 해줘야됨
+            console.log(userDate, typeof userDate); 
+            let curDate = new Date();
+            
+            let tmp = null;
+            let output = '';
+            if(curDate > userDate) {
+                // 몇 일 지났습니다
+                tmp = curDate - userDate;
+                output =  Math.floor(tmp / 1000 / 60 / 60 / 24)+"일 지났습니다"; // 타임스탬프(밀리세컨드타입)로 나옴
+
+            } else if (curDate < userDate) {
+                // 몇 일 남았습니다
+                tmp = userDate - curDate;
+                output =  Math.floor(tmp / 1000 / 60 / 60 / 24)+"일 남았습니다";
+            }
+            document.getElementById('result').innerHTML = output;
+
+            // let name = "둘리";  축약 가능
+            // let name = new String("둘리");  원래 방식
+        };
+    </script>
+</head>
+<body>
+    <div id="calendar">
+        기념일을 입력하고 확인 버튼을 누르세요.
+        <input type="date" id="celeDate"/>
+        <button onclick="calcDate();">확인</button>
+        <div id="result"></div>
+    </div>
+</body>
+</html>

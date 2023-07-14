@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-3.7.0.min.js"></script>
+    <script>
+        $(function() {
+            // parent() : 부모요소, children() : 자식 요소들
+            // next(), prev()
+
+            $('#td5').prev().css('background-color','pink');
+            $('#td9').parent().parent().children().eq(0).children().eq(2).css('color','red');
+        })
+    </script>
+</head>
+<body>
+    <table border="1">
+        <tr class="tr">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr class="tr">
+            <td>4</td>
+            <td id="td5">5</td>
+            <td>6</td>
+        </tr>
+        <tr class="tr">
+            <td>7</td>
+            <td>8</td>
+            <td id="td9">9</td>
+        </tr>
+    </table>
+</body>
+</html>

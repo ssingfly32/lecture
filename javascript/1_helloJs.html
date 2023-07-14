@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #greeting {
+            text-align : center;
+            font-size:  20px;
+            font-weight: bold;
+            color: pink;
+        }
+    </style>
+</head>
+<body>
+    <h4 id="greeting" onmouseover="changeColor()">여기는 HTML : HTML은 웹 문서의 뼈대를 만듭니다.</h4>
+    <h5>작성자 : 김상희</h5>
+    <h6>오늘 점심 뭐 먹을까?</h6>
+    <script>
+
+        // 웹 문서의 태그에 접근하여 태그의 속성을 변화 함으로써 동적인 웹 페이지를 만들 수 있다.
+
+        function changeColor() {
+            // window.alert('안녕하세요!');
+            document.getElementById('greeting').style.color = "black";
+        }
+    </script>
+</body>
+</html>

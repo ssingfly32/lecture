@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>navigator 객체의 geoLocation</title>
+    <script>
+        
+        // let showPosition = function() {
+        //     alert("성공");
+        // };
+        // let outputError = function() {
+        //     document.getElementById('output').innerHTML = '위치 정보를 얻어오는 데 실패했습니다'
+        // };
+        function getLocation() {
+            if(!navigator.geolocation) { // 없을 때
+                document.getElementById('output').innerHTML = '이 기기는 위치정보를 지원하지 않습니다'
+            } else {
+                navigator.geolocation.getCurrentPosition(showPosition,outputError);
+            }
+
+            // inner function 기법 : 밖에서는 호출 불가 안에서는 호출 가능, 캡슐화, 안에서만 보이도록
+            
+            function showPosition(pos) {
+                console.log(pos);
+                let lat = pos.coords.latitude;
+                let long = pos.coords.longitude;
+
+                let date = new Date(pos.timestamp);
+
+                console.log(lat, long, date);
+                document.getElementById('output').innerHTML = `당신의 위치는 위도:${lat} 경도:${long}`
+             }
+            function outputError() {
+            document.getElementById('output').innerHTML = '위치 정보를 얻어오는 데 실패했습니다'
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <button onclick="getLocation();">Try it</button>
+    <div id="output"></div>
+</body>
+</html>

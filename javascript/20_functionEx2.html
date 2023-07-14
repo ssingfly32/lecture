@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 표현</title>
+    <script>
+
+    
+    <!-- 함수 선언시외에 함수표으로 함수를 만들 수 있다. -->
+    // 아래의 호출은 함수 선언문 방식으로 함수를 생성했을 때는 이사없이 흥분된다.
+    // 함수 표현식 방식으로 함수를 생성했을 때는 호출이 되지 않는다.
+    // 함수를 선언문 방식으로 만들면 hoisiting  되어 선언부에 로드 되어 ㅍ차일의 어디어세나 호출할 가능하게 되지만, 함수를 표현식으로 만들면 메모리의 선언부터 hoisting 되지 않는다.
+    // 따라서 함수, 표현식으로 성생한 함수를 호출 할 때에는 함수를 생성한 코드 이후에 작성해야 제대로 호출이 된다.
+    
+    // sayHello;() 함수 선언문 방식으로 생성할 때 가능
+
+    let sayHello = function () { // 함수  표현식으로 생성
+        document.write("hello");
+        
+    };
+    let func = sayHello;
+    func();
+    
+</script>
+</head>
+<body>
+    
+</body>
+</html>

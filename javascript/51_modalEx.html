@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부트스트랩 활용(모달창 띄우기)</title>
+    <link href="./css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function (){ // $로 시작하면 제이쿼리 문법
+            // $('#myModal').css('display',"block");               // cs선택자를 괄호안에 다 쓸 수 있음.
+            $(".modal-title").html('공지사항');
+            $(".modal-body").html('배가 부르다고 자는거 아닙니다')
+            $('#myModal').show(5000);
+
+            $(".modalClose").click(function() {
+                $('#myModal').hide();
+            })
+        });
+        // window.onload = function() {
+        //     document.getElementById('myModal').style.display = 'block';
+        // }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>모달창 띄우기</h1>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur saepe ratione impedit eaque at, nisi eius et sapiente quasi reiciendis voluptatibus, iure ab ea odit quae fuga. Quam, voluptatum non.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur saepe ratione impedit eaque at, nisi eius et sapiente quasi reiciendis voluptatibus, iure ab ea odit quae fuga. Quam, voluptatum non.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur saepe ratione impedit eaque at, nisi eius et sapiente quasi reiciendis voluptatibus, iure ab ea odit quae fuga. Quam, voluptatum non.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur saepe ratione impedit eaque at, nisi eius et sapiente quasi reiciendis voluptatibus, iure ab ea odit quae fuga. Quam, voluptatum non.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur saepe ratione impedit eaque at, nisi eius et sapiente quasi reiciendis voluptatibus, iure ab ea odit quae fuga. Quam, voluptatum non.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur saepe ratione impedit eaque at, nisi eius et sapiente quasi reiciendis voluptatibus, iure ab ea odit quae fuga. Quam, voluptatum non.
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+            <h4 class="modal-title">Modal Heading</h4>
+            <button type="button" class="btn-close modalClose" data-bs-dismiss="modal"></button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+            Modal body..
+            </div>
+    
+            <!-- Modal footer -->
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger modalClose" data-bs-dismiss="modal">Close</button>
+            </div>
+    
+        </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 정의 객체</title>
+    <script>
+        let account = new Object(); // accoutn 라는 비어있는 객체 생성
+        account.owner = "둘리"; // account 객체에 owner라는 속성을 부여하고 '둘리'값을 할당
+        account.accNum = "1111-11-2222"; // 계좌번호
+        account.balance = 500;
+        account.name = "직장인 비과세 예금";
+        account.bankName = "우리은행";
+
+        console.log(account);   // console창에 중괄호는 객체
+        
+        document.write(`예금주 : ${account.owner}`);
+
+        account.deposit = deposit;  // account 객체에 deposit 속성에 deposit 함수 할당
+        account.deposit(5000);
+
+        console.log(account);
+        
+        account.withDraw = withDraw;
+        console.log(account.withDraw(2000));
+        console.log(account);
+        
+
+        function deposit(money) {   // 함수 선언
+            this.balance += money;
+        }
+        function withDraw(money) {  // 인출하기
+            if(this.balance >= money) {
+                this.balance -= money;
+                return `잔액 : ${this.balance}`;
+            } else {
+                return "잔액부족";
+            }
+        }
+
+        // ///////////////////////////////////////////클래스 없이 하면 다른 손님 생성 시 중복 코드 많아짐
+        let account2 = new Object();
+        account.owner = "둘리"; // account 객체에 owner라는 속성을 부여하고 '둘리'값을 할당
+        account.accNum = "1111-11-2222"; // 계좌번호
+        account.balance = 500;
+        account.name = "직장인 비과세 예금";
+        account.bankName = "우리은행";
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

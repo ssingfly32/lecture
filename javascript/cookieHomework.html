@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/homeWork.js"></script>
+    <script>
+        function saveCookie() {
+            console.log("test");
+            getCookieExpires("myCook","dongas","7");  
+            console.log("test2");
+        } 
+        
+    </script>
+</head>
+<body>
+    <input type="button" value="쿠키저장" onclick="saveCookie();">
+    <input type="button" value="쿠키읽기" onclick="readCookie();">
+    <input type="button" value="쿠키삭제" onclick="delCookie();">
+</body>
+</html>

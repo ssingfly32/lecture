@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // let str="대한민국";
+        let str = new String("대한민국"); 
+        document.write(`<div>문자열의 길이 : ${str.length}</div>`);
+        
+        str = "대한민국 우리나라 좋은나라"
+        let arr = str.split(" ");
+        console.log(arr)
+        document.write(`<div>${str.charAt(2)}</div>`); // charAt(인덱스)
+        document.write(`<div>${str.concat("는 헬조선이 아니다.")}</div>`);
+        
+        // indexOf(): 왼쪽 부터 검색
+        document.write(`<div>${str.indexOf('나')}</div>`); // 7 처음 나오는 '나' 검색
+        document.write(`<div>${str.indexOf('나', 8)}</div>`); // 12 8번째부터 나오는 '나' 검색
+        document.write(`<div>${str.indexOf('나다')}</div>`); // -1 (찾는 문자열이 없을 때)
+       
+        // lastIndexOf() : 오른쪽 부터 검색 (찾는 문자열이 없으면 -1 반환)
+        document.write(`<div>${str.lastIndexOf('민국')}</div>`); // 2
+        document.write(`<div>${str.lastIndexOf('나')}</div>`); // 12
+
+        // substr() : 문자열 잘라 부분 문자열로 만들어준다. (~부터, 글자수)
+        document.write(`<div>${str.substr(5,4)}</div>`); // 우리나라
+        document.write(`<div>${str.substr(10,2)}</div>`); // 좋은
+
+        // substring() : 문자열 자르기. (~이상, ~미만)
+        document.write(`<div>${str.substring(5, 9)}</div>`);
+        document.write(`<div>${str.substring(5)}</div>`); // 두 번째 매개변수 생략하면 문자열의 끝까지 자름
+
+        let statement = 'I am a Student.';
+        document.write(`<div>${statement.toLowerCase()}</div>`); // 소문자로 바꾸기
+        document.write(`<div>${statement.toUpperCase()}</div>`); // 대문자로 바꾸기
+
+        // statement에서 student라는 단어를 추출하여 대문자로 변환하여 출력하세요.
+        document.write(`<div>${statement.substring(7,14).toUpperCase()}</div>`);
+        document.write(`<div>${statement.substr(7,7).toUpperCase()}</div>`);
+        document.write(`<div>${statement.substr(statement.indexOf('Student'), "Student".length)}</div>`);
+
+        let statement2 = ' 홍 길 동 ';
+        console.log('홍길동' === statement2);
+        document.write(`<div>${statement2.trim()}</div>`); // 앞 뒤 공백 제거
+        document.write(`<div>${statement2.replace(' ', '')}</div>`);
+
+        let tmp = '';
+        for (let i = 0; i <statement2.length; i++) {
+            if(statement2.charAt(i) != " ") {
+                tmp += statement2.charAt(i);
+            }
+        }
+        document.write(`<div>${tmp}</div>`);
+
+        // tip : 모든 공백을 제거하고 싶다면.. 정규 표현식을 쓰는 것이 가장 빠르다
+        document.write(`<div>` + statement2.replace(/\s/gi, "") + `</div>`)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루동안 이 창 열지않기(쿠키활용)_메인</title>
+    <script>
+        window.onload = function() {
+            // 1) 쿠키를 읽어본다. (notice)
+            // 2) notice 쿠키가 있고, 그 값이 'off'라면 공지창을 띄우지 않는다.
+            // 3) notice 라는 쿠키가 없던지 그 값이 off가 아니라면 공지창을 띄운다.
+
+            let cook = document.cookie;
+            console.log(cook);
+            let cookies =  cook.split(';')
+            let cookieValue = '';
+            let isNoticeShow = true;
+            cookies.forEach(cookie => {
+                // 쿠키 읽기.
+                if(cookie.split('=')[0] === 'notice') { // notice 쿠키가 존재
+                    cookieValue = cookie.split('=')[1];
+                    // break; for each구문에서 break 못쓰니 다른문법권장
+                    if(cookieValue === 'off') {
+                        isNoticeShow = false;
+                    }
+                }
+            });
+
+            if(isNoticeShow) {
+                window.open('./50_1_cookieEx2.html', "sub", "width=300px, height=500px");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>메인 페이지</h1>
+</body>
+</html>

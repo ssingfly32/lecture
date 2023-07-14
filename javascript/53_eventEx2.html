@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 관련 이벤트</title>
+    <script>
+        function sizeUp(obj) { 
+            obj.style.width= '50%';
+            obj.style.opacity = '1';
+        }
+        function sizeDown(obj) {
+            obj.style.width = '25%';
+            obj.style.opacity = '0.4';
+
+            console.log(event);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <img src="images/2.webp" width="25%" style="opacity: 0.4;" onmouseover="sizeUp(this);"
+        onmouseout="sizeDown(this);">
+    </div>
+</body>
+</html>

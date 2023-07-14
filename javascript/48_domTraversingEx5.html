@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS로 DOM객체를 동적 추가 및 삭제 가능하다</title>
+    <script>
+        window.onload = function() {
+
+            // element는 태그
+            // 태그 객체 생성
+            let newDiv = document.createElement("div");
+    
+            // 태그 객체에 속성 부여
+            newDiv.setAttribute("id","myDiv");
+            newDiv.innerText = "동적 DIV 태그";
+
+            newDiv.onclick = function() {
+                alert('!');
+            };
+    
+            // DOM 트리에 삽입
+            document.getElementById('result').append(newDiv); // 추가
+
+            // 동적으로 만들어진 태그 삭제
+            document.getElementById('result').removeChild(newDiv);
+        }
+    </script>
+</head>
+<body>
+    <div id="result"></div>
+</body>
+</html>

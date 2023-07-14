@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 버블링</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+        }
+
+        .div3 {
+            border: 1px solid red;
+        }
+        .div2 {
+            border: 1px solid blue;
+            position: relative;
+            left : 50px;
+            top: 50px;
+        }
+        .div1 {
+            border: 1px solid yellow;
+            position: relative;
+            left : 50px;
+            top: 50px;
+        }
+    </style>
+    <script>
+        window.onload=function() {
+            let divs = document.getElementsByTagName('div');
+            console.log(divs);
+
+            for(let div of divs) {
+                // 동적ㅇ ㅣ벤트
+                div.addEventListener('click', function(evt) {
+                    if(evt.target.className == 'div1') {
+                        evt.stopPropagation(); // 이벤트가 전파되는것을 중지
+                    }
+                    console.log(evt.target.className);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="div3">
+        <div class="div2">
+            <div class="div1"></div>
+        </div>
+    </div>
+</body>
+</html>

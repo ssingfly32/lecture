@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lotto</title>
+    <script src="./js/commonJs.js">//확장자가 js면 js문법만 쓸 수 있음</script>
+    <script>
+    
+        const lotto = new Array(6);
+        let tmp = -1
+        // 정해진 횟수가 있어서 for문이 적당
+        for (let i = 0; i < lotto.length; i++) {
+            do {
+                tmp = Math.floor(Math.random()*45)+1 
+            } while (isDuplicate(lotto,tmp)); // 인자를 보낸 순서에 맞게 함수도 인자를 같게 받음
+            lotto[i]=tmp;
+        }
+        
+        document.write(`이번주의 로또 1등 번호는 ${lotto}`);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

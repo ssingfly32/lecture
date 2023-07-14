@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적표</title>
+    <script>
+        window.onload = function() { // 웹문서가 로딩된 후에 실행 (태그가 만들어지면)
+             // 학생 1명의 학번, 이름, 국어, 영어, 수학 점수를 입력받아 총점 평균 학점을 구하시고 출력하세요.
+        let stuNo = "", stuName = "", kor = 0, eng = 0, math = 0, tot = 0, avg = 0, grade = ""; 
+        stuNo = window.prompt("학번을 입력하세요", "230621");
+        stuName = window.prompt("이름을 입력하세요", "둘리");
+        kor =  Number(window.prompt("국어를 입력하세요", "86"));
+        eng =  Number(window.prompt("수학 입력하세요", "77"));
+        math =  Number(window.prompt("영어를 입력하세요", "45"));
+
+        console.log(stuNo,stuName,kor,eng,math);
+
+        tot = kor + eng + math;
+        avg = Math.round((tot/3)*100)/100;
+        // if(avg <= 100 && avg >= 90) {
+        //     grade = "A";
+        // } else if(avg >= 80 && avg < 90) {
+        //     grade = "B";
+        // } else if(avg >= 70 && avg < 80) {
+        //     grade = "C";
+        // } else if(avg >= 60 && avg < 70) {
+        //     grade = "D";
+        // } else {
+        //     grade = "F";
+        // }
+        
+        switch(Math.floor(avg / 10)) {
+            case 10:
+            case 9:
+                grade = "A";
+                break;
+            case 8:
+                grade = "B";
+                 break;
+            case 7:
+                grade = "C";
+                break;
+            case 6:
+                grade = "D";
+                break;
+            default:
+                grade = "F";
+         }
+        console.log(stuNo, stuName, kor, eng, math, tot, avg, grade);
+
+        let output = `<table border='1'><tr><td>학번</td><td>이름</td><td>국어</td><td>영어</td><td>수학</td><td>총점</td>` +
+            `<td>평균</td><td>등급</td></tr><tr>`;
+        output += `<td>${stuNo}</td>`;
+        output += `<td>${stuName}</td>`;
+        output += `<td>${kor}</td>`;
+        output += `<td>${eng}</td>`;
+        output += `<td>${math}</td>`;
+        output += `<td>${tot}</td>`;
+        output += `<td>${avg}</td>`;
+        output += `<td>${grade}</td></tr></table>`;
+        document.getElementById('output').innerHTML = output;
+        }
+     
+        
+    </script>
+</head>
+<body>
+    <!-- div#output / div.output -->
+    <h4>성 적 표</h4>
+    <div id="output">
+    </div>
+    <script>
+    </script>
+</body>
+</html>

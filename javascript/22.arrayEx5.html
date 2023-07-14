@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+        // 3. 성적표 V3, 1명 학생의 학번, 이름, 국어, 영어, 수학 점수를 입력 받아 배열에 넣어두고 총점, 평균,                 등급 또한 구해 넣어둔다. 그 뒤 출력하기.
+
+        window.onload = function(){
+        
+            const student = new Array(8);
+        
+        
+            student[0] = window.prompt("학번을 입력하세요", "222222");
+            student[1] = window.prompt("이름을 입력하세요", "ㅇㅇ");
+            student[2] =  Number(window.prompt("국어 점수를 입력하세요", "33"));
+            student[3] =  Number(window.prompt("수학 점수를 입력하세요", "33"));
+            student[4] =  Number(window.prompt("영어 점수를 입력하세요", "33"));
+            student[5] = student[2] + student[3] + student[4];
+            student[6] = (student[5] / 3).toFixed(2);
+            
+            switch(Math.floor(student[6]/10)) {
+                case 10:
+                case 9:
+                student[7]="A";
+                break;
+                case 8:
+                student[7]="B";
+                break;
+                case 7:
+                student[7]="C";
+                break;
+                case 6:
+                student[7]="D";   
+                break; 
+                default:
+                student[7]="F";
+                break;
+            }
+           
+            console.log(student);
+
+            let output = `<table border='1'><tr><td>학번</td><td>이름</td><td>국어</td><td>영어</td><td>수학</td><td>총점</td>` +
+            `<td>평균</td><td>등급</td></tr><tr>`;
+            output += `<td>${student[0]}</td>`;
+            output += `<td>${student[1]}</td>`;
+            output += `<td>${student[2]}</td>`;
+            output += `<td>${student[3]}</td>`;
+            output += `<td>${student[4]}</td>`;
+            output += `<td>${student[5]}</td>`;
+            output += `<td>${student[6]}</td>`;
+            output += `<td>${student[7]}</td></tr></table>`;
+            document.getElementById('output').innerHTML = output;
+         }
+   
+    </script>
+</head>
+<body>
+    <h4>성 적 표</h4>
+    <div id="output">
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿼리스트링 받아 성적표 출력해보자</title>
+    <script src="./js/commonJs.js"></script>
+    <script>
+        let name = decodeURI(getParameter('name'));
+        let kor = Number(getParameter('kor'));
+        let eng = Number(getParameter('eng'));
+        let math = Number(getParameter('math'));
+        let sci = Number(getParameter('sci'));
+        console.log(name, kor, eng, math, sci);
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

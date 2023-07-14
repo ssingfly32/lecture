@@ -1,0 +1,18 @@
+<? xml version="1.0" encoding="utf-8" ?>
+<products>
+    <product>
+        <productName>새우깡</productName>
+        <productQty>100g</productQty>
+        <productPrice>1000</productPrice>
+    </product>
+    <product>
+        <productName>감자깡</productName>
+        <productQty>100g</productQty>
+        <productPrice>1000</productPrice>
+    </product>
+    <product>
+        <productName>고구마깡</productName>
+        <productQty>100g</productQty>
+        <productPrice>1000</productPrice>
+    </product>
+</products>

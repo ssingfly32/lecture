@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/commonJs.js"></script>
+    <script>
+        // 선택 정렬하고 출력해보기 
+        let data = new Array(10);
+        let tmp = -1;
+        for (let i = 0; i< data.length; i++) {
+            do {
+                tmp = Math.floor(Math.random()*100)+1 
+            } while (isDuplicate(data,tmp)); 
+            data[i]=tmp;
+        }
+        console.log(data);
+        outputArr(data);
+
+        function outputArr(data) {
+            let table = "<table border='1'><tr>";
+            for(let i = 0; i < data.length; i++) {
+                table += `<td id ='${data[i]}'>${data[i]}</td>`;
+            }
+            table += `</tr><table>`;
+    
+            document.write(table);
+        }
+        
+        for(let i = 0; i<data.length-1; i++) { // 마지막꺼 비교안해도 되어서 -1
+           for(let j=i+1; j<data.length; j++) {
+            if(data[i] > data[j]) {
+                let tmp = data[j];
+                data[j] = data[i];
+                data[i] = tmp;
+            }
+           }
+        }
+        outputArr(data);
+
+
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

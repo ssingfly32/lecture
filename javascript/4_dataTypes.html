@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트에서 사용 가능한 자료형태</title>
+    <script>
+        // 숫자형 (Number), 연산 가능, Infinity(무한대)
+        let num = 3; // 정수
+        let pi = 3.141592; // 실수
+        // window.alert(1/0);
+
+        // 문자형 (String) : 문자 타입
+        let name = '홍길동';
+        let addr = '동해번쩍 서해번쩍'; 
+        console.log(name, addr);
+        // 문자열끼리 덧셈 연산을 하면 문자열이 연결 됩니다.
+        console.log(name + addr);
+        console.log(addr + ' ' + name);
+        console.log(addr + ' 하는 사람은 ' + name + '입니다');
+        console.log(`${addr} 하는 사람은 ${name} 입니다`); // literal String
+
+        // 3) 불리언 (boolean) : 참(true) 또는 거짓(false)
+        let isSewhanHandsome = true;
+        let isWindowOpened = false;
+        console.log(isSewhanHandsome, isWindowOpened);
+
+        let isGreater = 4 > 1;
+        console.log(isGreater); 
+
+        // 4) null : 텅 빈 (empty)
+        let age = null;
+        console.log(age);
+
+        // 5) undefined : 할당되지 않은.
+        let heroName;
+        console.log(heroName);
+
+        // 6) 객체 타입 : 여기에 나온 것들 말고 전부 다
+
+        // 7) 변수의 자료형을 알기 위해서는
+        console.log(typeof isGreater);
+        console.log(typeof addr);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

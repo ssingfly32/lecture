@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        보내준 쿼리스트링 값 받아 출력하자
+    </title>
+    <script>
+        // 큰 데이터는 get 방식으로 보낼 수 없음. 주소 창 길이 제한
+        // post 방식은 백엔드 언어만 받을 수 있어서 현재 실습 불가
+        console.log(typeof location.href);
+        console.log(location.href);
+        let url = location.href;
+        let carName = decodeURI(url.split('?')[1].split("&")[0].split('=')[1]);
+        let brandName = decodeURI(url.split('?')[1].split("&")[1].split('=')[1]);
+        document.write(`carName : ${carName}, brandName = ${brandName}`);
+        // 물음표를 기준으로 나누고 문자열 배열로 반환
+        // 콘솔창 깨진거 아니고 인코딩 방식이 달라서 한글 안나옴.
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

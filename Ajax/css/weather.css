@@ -1,0 +1,43 @@
+@import "./weather_variable.css";
+.container {
+  margin-top: 25px;
+}
+h1 {
+  color: var(--titleColor);
+  padding: 10px 20px;
+}
+
+.controller {
+  display: flex;
+  justify-content: space-between;
+}
+.selectUnits {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selectUnits img {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+
+.selectUnits [type="radio"] {
+  opacity: 0;
+}
+
+.selectUnits [type="radio"]:checked + label {
+  outline: 5px solid indigo;
+}
+
+.contents {
+  color: var(--normalColor);
+  display: flex;
+  justify-content: space-between;
+}
+
+.contents .cityMap {
+  width: 50%;
+  padding: 10px;
+  /* border: 1px solid red; */
+}

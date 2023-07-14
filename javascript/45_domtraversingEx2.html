@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 운행(원거리 접근 방식)</title>
+    <script>
+        window.onload = function() {
+            document.getElementById('td9').innerHTML = '<b>여깄다</b>'
+            document.getElementsByClassName('tr')[1].style.backgroundColor = 'yellow';
+            document.getElementsByTagName('td')[8].innerHTML += '찾았네';
+
+            // input type radio value = "M" > Male로 변경
+            document.getElementsByName('gender')[1].value = "Male";
+        };
+    </script>
+</head>
+<body>
+    <table border="1">
+        <tr class="tr">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr class="tr">
+            <td>4</td>
+            <td id="td5">5</td>
+            <td>6</td>
+        </tr>
+        <tr class="tr">
+            <td>7</td>
+            <td>8</td>
+            <td id="td9">9</td>
+        </tr>
+    </table>
+    <div>
+        <input type="radio" name="gender" value="F"> female
+        <input type="radio" name="gender" value="M"> Male
+        
+    </div>
+</body>
+</html>

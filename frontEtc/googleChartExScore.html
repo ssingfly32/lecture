@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      const scores = new Array();
+      scores[0] = ["이름", "국어", "영어", "수학", "총점", "평균"];
+
+      $(function () {
+        $("#btnResult").click(function () {
+          inputData();
+
+          drawChart();
+        });
+      });
+
+      function inputData() {
+        $(".student").each(function (i, student) {
+          let stuName = $(student).children().find(".stuName").val(); // eq 쓰거나 find 쓰거나
+          let kor = Number($(student).children().find(".kor").val());
+          let eng = Number($(student).children().find(".eng").val());
+          let math = Number($(student).children().find(".math").val());
+          let tot = kor + eng + math;
+          let avg = tot / 3;
+
+          scores.push([stuName, kor, eng, math, tot, avg]);
+          $(student).children().find(".tot").val(tot);
+          $(student).children().find(".avg").val(avg);
+        });
+        console.log(scores);
+      }
+
+      function drawChart() {
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawVisualization);
+        function drawVisualization() {
+          // Some raw data (not necessarily accurate)
+          var data = google.visualization.arrayToDataTable(scores);
+
+          var options = {
+            title: "성적표",
+            vAxis: { title: "점수" },
+            hAxis: { title: "이름" },
+            seriesType: "bars",
+            series: { 5: { type: "line" } },
+          };
+
+          var chart = new google.visualization.ComboChart(
+            document.getElementById("chart_div")
+          );
+          chart.draw(data, options);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>이름</td>
+        <td>국어</td>
+        <td>영어</td>
+        <td>수학</td>
+        <td>총점</td>
+        <td>평균</td>
+      </tr>
+      <tr class="student">
+        <td><input type="text" class="stuName" /></td>
+        <td><input type="text" class="kor" /></td>
+        <td><input type="text" class="eng" /></td>
+        <td><input type="text" class="math" /></td>
+        <td><input type="text" class="tot" /></td>
+        <td><input type="text" class="avg" /></td>
+      </tr>
+      <tr class="student">
+        <td><input type="text" class="stuName" /></td>
+        <td><input type="text" class="kor" /></td>
+        <td><input type="text" class="eng" /></td>
+        <td><input type="text" class="math" /></td>
+        <td><input type="text" class="tot" /></td>
+        <td><input type="text" class="avg" /></td>
+      </tr>
+    </table>
+    <div>
+      <input type="button" value="결과" id="btnResult" />
+    </div>
+    <div id="chart_div" style="width: 900px; height: 500px"></div>
+  </body>
+</html>

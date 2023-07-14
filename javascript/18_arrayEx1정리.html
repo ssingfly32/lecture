@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 기초 운용 방법</title>
+    <script>
+         // 배열의 생성 후 값 넣기
+         let arr1 = [];  // 빈 배열 생성                          ///데이터타입이 결정되지 않아서 모든 데이터 타입 값 출력 가능)
+         // arr1 데이터 추가
+         arr1[0] = 40; //Number(정수)
+         arr1[1] = "웹 개발"; // String(문자열)
+         arr1[2] = 3.14; // 실수
+         arr1[3] = true; // boolean
+         arr1[4] = new Date(); // 객체
+
+         console.log(arr1);                                      ///console에 나오는 length : 배열 개수 ex) arr1 : 5 (0 ~ 4)
+         
+         // 배열의 생성과 동시에 초기값을 할당할 수 있다.        /// 배열을 생성하며 값 넣기
+         let arr2 = [40, "웹 개발", 3.14, true, new Date()];
+         console.log(arr2);
+         
+         //Array() 생성자를 이용하여 배열을 생성할 수도 있다.
+         let arr3 = new Array(5);
+         console.log(arr3);
+         
+         // 배열에 데이터 추가하기
+         arr1[5] = false;
+         arr2.push(false); // 배열의 끝에 새로운 데이터 추가     /// (<-> pop)
+         
+         console.log(arr1);
+         console.log(arr2);
+
+         //배열에 기존 데이터를 수정해보자
+         arr1[1] = "자바스크립트로 수정"                        /// 변수기때문에 다른 함수 필요없이 변경 가능
+         console.log(arr1);
+         
+         // 배열의 길이                                        /// length : 배열 항목(?)의 갯수
+         console.log(arr2.length);
+
+         // arr2 배열의 2번째 요소에 "배고파" 데이터 추가      /// #41 ~ #50 (array.splice 사진 주석 참고)
+         arr2.splice(2, 0, "배고파");
+         console.log(arr2);
+
+         // arr2 배열의 6번째 값을 "뭐 먹지"로 교체
+         arr2.splice(5, 1, "뭐 먹지");
+         console.log(arr2);
+
+         // arr2 배열의 3번째 요소 값을 삭제
+         arr2.slice(3, 1);
+
+         // arr3 배열의 마지막 요소를 삭제 ( <-> push #29열 참고)
+         arr1.pop();                                        /// (혹시 이해 안되면 array.pop 예시 사진 주석 참고)
+         console.log(arr1);
+
+         // arr1 배열의 2번째 요소값을 abc라는 변수에 저장
+         let abc = arr1[2];
+         console.log(abc);
+
+         //arr1 배열의 모든 요소 값을 화면에 출력해보자
+         document.write(arr1);
+
+         //arr1 배열의 모든 요소 값을 li태그에 출력해보자
+
+        // 방법 1.
+        document.write("<ul>");
+            for (let i = 0; i < 5; i++){
+                document.write(`<li>${arr1[i]}</li>`);
+            }
+        document.write("</ul>");
+
+        //방법 2.
+        let list = "<ul>"
+            for(let i = 0; i < 5; i++){
+                list += `<li>${arr1[i]}</li>`
+            }
+            list += "</ul>"
+        document.write(list);
+
+
+
+         
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

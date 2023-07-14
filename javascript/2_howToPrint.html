@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트에서 화면에 출력하는 방법</title>
+    <script>
+        // 한 줄 주석
+        /*
+            여러 줄 주석
+        */
+
+        // 1. document.writer()를 이용하여 출력한다.
+        // body태그에 출력
+        document.write('Hello, JS');
+        // 태그가 실행되면서 출력
+        document.write("<h4 style='color : pink;'>태그 또한 출력 가능</h4>"); 
+        
+        // 2. window.alert();를 이용하여 출력
+        window.alert('요렇게~');
+
+        // 3. console.log()를 이용하여 출력
+        console.log('여기에 출력된다!');
+
+    
+    </script>
+</head>
+<body>
+    <div id="here"></div>
+    <script>
+        // 4. 태그에 접근하여 출력
+        document.getElementById('here').innerHTML = '요렇게 태그에 접근하여 출력한다.';
+    </script>
+</body>
+</html>

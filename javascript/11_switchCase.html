@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch~case문</title>
+    <script>
+        window.onload = function () {
+        // 추천 식사 메뉴를 출력하는 프로그램
+        // 1~7 사이의 랜덤한 수를 만들고
+        // 랜덤한 수가 (1 : 짜장면, 2: 김치찌개, 3: 돈가스, 4: 햄버거, 5: 부대찌개, 6: 쌀국수, 7: 백반)
+        // 이 되도록 하세요.
+
+        // 1) 필요한 변수를 선언
+        let randNum = 0; foodName = ""; foodImg = "";
+        // 2) 1~7 사이의 랜덤한 수를 뽑는다
+        randNum = Math.floor(Math.random() * 10) % 7 + 1;
+        console.log(randNum);
+        
+        // 스위치 케이스문은 딱 딱 떨어지는 값에 사용
+
+        // randNum에 따라 음식명을 출력한다.
+        switch(randNum) {
+            case 1:
+                foodName = "짜장면";
+                foodImg = 'images/jj.webp';
+                break; // 해당 {}중괄호 블럭을 빠져나가게 하는 명령문
+            case 2:
+                foodName = "김치찌개";
+                foodImg = 'images/2.webp';
+                break;
+            case 3:
+                foodName = "돈가스";
+                foodImg = 'images/3.jpg';
+                 break;
+            case 4:
+                foodName = "햄버거";
+                foodImg = 'images/burger.webp';
+                break;
+            case 5:
+                foodName = "부대찌개";
+                foodImg = 'images/bu.webp';
+                 break;
+            case 6:
+                foodName = "쌀국수";
+                foodImg = 'images/rice.webp';
+                break;
+            default:
+                foodName = "백반";
+                foodImg = 'images/bb.jpg';
+         }
+         console.log(foodName, randNum, foodImg);
+         document.getElementById('foodImg').src = foodImg;
+         document.getElementById('foodName').innerHTML = foodName;
+        } //태그의 속성에 접근 -> 속성은 src, innerHTML...
+    </script>
+    <style>
+        .wrapper {
+            width: 600px;
+        }
+        .title {
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        .foodImg {
+            text-align: center;
+        }
+        .foodName {
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+    <h1 class="title">오늘의 추천 메뉴</h1>
+    <img class="foodImg" id="foodImg"/>
+    <div class="foodName" id="foodName">짜장면</div>
+    </div>
+</body>
+</html>

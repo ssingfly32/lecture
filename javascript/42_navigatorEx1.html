@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>접속환경이 pc인지 모바일인지</title>
+    <script>
+      let pcFilter = ["win16", "win32", "win64", "mac", "macintel"]; // pc일때 navigator.platform의 값
+      let isPc = false;
+      console.log(navigator.platform.toLowerCase());
+
+      // for (let pc of pcFilter) {
+      //     if (navigator.platform.toLowerCase().indexOf(pc) != -1) { // pc 에서 접속
+      //         isPc = true;
+      //         location.href = "https://www.google.com";
+      //     }
+      // }
+
+      // if (!isPc) {  // 모바일에서 접속
+      //     location.href = "https://www.daum.net";
+      // }
+    </script>
+  </head>
+
+  <body></body>
+</html>

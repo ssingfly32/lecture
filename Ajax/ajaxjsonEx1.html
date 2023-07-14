@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      type="text/javascript"
+      src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=c7b5ee17da1ef11e1189eb9d65bb9bf9"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="./css/weather.css" rel="stylesheet" />
+    <script>
+      // 현재 웹 문서가 로딩되면 서울 지역의 날씨를 출력
+      $(function () {
+        getWeatherInfo("seoul", "metric"); // 디폴트값
+        $("#selectCity").change(function () {
+          getWeatherInfo($(this).val(), $("input[name='unit']").val());
+        });
+        $("input[name='unit']").change(function () {
+          getWeatherInfo($("#selectCity").val(), $(this).val());
+        });
+      });
+
+      function getWeatherInfo(cityName, unit) {
+        // da4d32a660b59f2be0357bf6170a5337
+        // 37.483782 126.9003409
+        $.ajax({
+          url: `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=da4d32a660b59f2be0357bf6170a5337&units=${unit}`, // 데이터를 수신받을 서버 주소 // 객체일땐 = 사용x, : 사용
+          type: "get", // 통신방식(get, post, put, delete)
+          dataType: "json", // 수신받을 데이터 타입
+          async: false,
+          success: function (data) {
+            outputWeather(data);
+            // 통신이 성공했을 때 호출되는 콜백 함수
+            console.log(data);
+          },
+          error: function () {
+            // 통신이 실패(부정적인 response) 했을 때 호출되는 콜백함수
+          },
+          complete: function () {}, // 통신이 완료 되었을 때 호출 되는 콜백함수
+        });
+      }
+      function outputWeather(jsonData) {
+        const cityName = jsonData.name; // name 속성 . 으로 접근
+        $(".title").html(cityName);
+        const mainWeather = jsonData.weather[0].main;
+        const icon = jsonData.weather[0].icon;
+        const iconUrl = ` https://openweathermap.org/img/wn/${icon}@2x.png`;
+        $(".weatherInfo-mainWeather").html(
+          `main : ${mainWeather}<img src='${iconUrl}'/>`
+        );
+
+        const description = jsonData.weather[0].description;
+        $(".weatherInfo-description").html(`description : ${description}`);
+
+        const mainTemp = jsonData.main;
+        let weatherTemp = "<ul>";
+        for (const [key, value] of Object.entries(mainTemp)) {
+          // 객체의 모든 속성값과 밸류값을 가져올 때
+          weatherTemp += `<li>${key}: ${value}</li>`;
+        }
+        weatherTemp += "</ul>";
+        $(".weatherInfo-temperature").html(weatherTemp);
+
+        const lat = jsonData.coord.lat;
+        const long = jsonData.coord.lon;
+
+        drawMap(lat, long); // 스스로할것 지도 , 섭씨 화씨 캘빈 선택할 수 있게
+      }
+
+      function drawMap(lat, long) {
+        const container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+        const options = {
+          //지도를 생성할 때 필요한 기본 옵션
+          center: new kakao.maps.LatLng(lat, long), //지도의 중심좌표.
+          level: 3, //지도의 레벨(확대, 축소 정도)
+        };
+
+        const map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+        // 마커가 표시될 위치입니다
+        const markerPosition = new kakao.maps.LatLng(lat, long);
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+        });
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        <i class="fa-solid fa-sun-plant-wilt" style="color: #5390f9"></i
+        ><span class="title"></span> 도시의 날씨
+      </h1>
+      <div class="controller">
+        <select id="selectCity">
+          <option value="seoul">서울</option>
+          <option value="busan">부산</option>
+          <option value="daejeon">대전</option>
+          <option value="kwangju">광주</option>
+          <option value="daegu">대구</option>
+          <option value="jeju">제주</option>
+        </select>
+
+        <div class="selectUnits">
+          <label
+            ><input type="radio" name="unit" value="metric" />
+
+            <img src="./images/vitamin-c.png"
+          /></label>
+          <label
+            ><input type="radio" name="unit" value="imperial" />
+
+            <img src="./images/f.png"
+          /></label>
+          <label
+            ><input type="radio" name="unit" value="standard" />
+
+            <img src="./images/k.png"
+          /></label>
+        </div>
+      </div>
+
+      <div class="contents">
+        <div class="cityMap">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio
+          repellendus iure quidem at suscipit sequi necessitatibus veniam vel
+          commodi dolorem illum modi vero expedita magni aliquid, doloremque
+          debitis hic voluptates!
+          <div id="map" style="width: 500px; height: 400px"></div>
+        </div>
+        <div class="weatherInfo">
+          <div class="weatherInfo-mainWeather"></div>
+          <div class="weatherInfo-description"></div>
+          <div class="weatherInfo-temperature"></div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/2a1bbc9011.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>동적 테이블</title>
+    <script src="./js/jquery-3.7.0.min.js"></script>
+    <script>
+      $(function () {
+        // 입력받은 값을 저장해보자
+
+        $('table').on('click', '.remBtn', function () {
+          // 이벤트 바인딩
+          if ($('tr').length > 2) {
+            console.log($('tr'));
+            $(this).parent().parent().remove();
+          } else {
+            alert('삭제불가');
+          }
+        });
+        $('table').on('click', '.addBtn', function () {
+          // click()메서드는 동적으로 추가된 버튼에는 이벤트가 적용이 안된다.
+          // $(".addBtn").click(function () {
+          // 이 때 함수 표현식(화살표함수)을 사용하면 this 객체를 찾지 못한다.(hoisting이 안되기때문)
+          // 화살표 함수 내에서는 디스 사용 불가
+          console.log($(this));
+          const copyTr = $(this).parent().parent();
+          console.log(copyTr);
+          let newTr = copyTr.clone(); // deep copy : 깊은 복사 : 원본, 사본이 별도의 객체가 된다
+          clearContents($(newTr).children());
+          newTr.insertAfter($(copyTr));
+        });
+      });
+      //   새로 복사되는 tr의 input 태그들의 내용을 지운다
+      function clearContents(tdArr) {
+        // td태그 배열
+        $.each(tdArr, function (index, item) {
+          // 선택한 게 없고 배열부터 줌
+          if (index < 3) {
+            $(item).children().val('');
+          }
+        });
+      }
+      function save() {
+        const data = new Array();
+
+        $('tr').each(function (i, e) {
+          // i는 0, 1, 2, ...
+          // e는 tr태그 자체
+          // console.log(i, e);
+          const product = new Object();
+          if (i > 0) {
+            // 상품 객체에 속성 값을 얻어서 넣어야 함
+            product.productName = $(e).children().eq(0).children().val();
+            product.productQty = $(e).children().eq(1).children().val();
+            product.productPrice = $(e).children().eq(2).children().val();
+          }
+          console.log(product);
+          data.push(product);
+          // 배열에 상품을 넣음
+        });
+        console.log(data);
+        // 배열 객체를 json으로 만듦.
+        $('#output').html(JSON.stringify(data));
+      }
+
+      //   얕은 복사 (shallowed copy): 주소가 복사되어, 원본이 수정되면 사본 또한 수정된다.
+    </script>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <td>상품명</td>
+        <td>수량</td>
+        <td>가격</td>
+        <td>추가</td>
+        <td>삭제</td>
+      </tr>
+      <tr>
+        <td><input type="text" name="prodName" /></td>
+        <td><input type="text" name="prodQty" /></td>
+        <td><input type="text" name="prodPrice" /></td>
+        <td><button class="addBtn">+</button></td>
+        <td><button class="remBtn">-</button></td>
+      </tr>
+    </table>
+    <button onclick="save();">저장</button>
+    <hr />
+    <div id="output"></div>
+  </body>
+</html>

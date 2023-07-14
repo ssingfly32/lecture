@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const display = function(obj) {
+            console.log(obj);
+            document.getElementById("result").innerHTML += obj;
+        };
+        const cls = function() {
+            document.getElementById("result").innerHTML = "";
+        };
+        const calc = () => {
+            let exp = document.getElementById("result").innerHTML;
+            let result = eval(exp);
+            document.getElementById("result").innerHTML = result;
+        };
+
+    </script>
+    <style>
+        #result {
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 계산기 onclick 중복 코드 최소화 숙제, 성적표 2차원배열 -->
+    <table border="1">
+        <tr>
+            <td colspan="4">
+                <div id="result"></div>
+            </td>
+            <!-- <td></td>
+            <td></td>
+            <td></td> -->
+        </tr>
+        <!-- this는 현재 객체 -->
+        <tr>
+            <td><input type="button" value="7" onclick="display(this.value)"/></td>
+            <td><input type="button" value="8" onclick="display(this.value)"/></td>
+            <td><input type="button" value="9" onclick="display(this.value)"/></td>
+            <td><input type="button" value="/" onclick="display(this.value)"/></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="display(this.value)"/></td>
+            <td><input type="button" value="5" onclick="display(this.value)"/></td>
+            <td><input type="button" value="6" onclick="display(this.value)"/></td>
+            <td><input type="button" value="*" onclick="display(this.value)"/></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="display(this.value)"/></td>
+            <td><input type="button" value="2" onclick="display(this.value)"/></td>
+            <td><input type="button" value="3" onclick="display(this.value)"/></td>
+            <td><input type="button" value="-" onclick="display(this.value)"/></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="+" onclick="display(this.value)"/></td>
+            <td><input type="button" value="0" onclick="display(this.value)"/></td>
+            <td><input type="button" value="=" onclick="calc(this.value)"/></td>
+            <td><input type="button" value="c" onclick="cls()"/></td>
+        </tr>
+    </table>
+</body>
+</html>

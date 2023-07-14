@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Slider</title>
+    <script>
+        // 주소값이 달라지지 않아서 배열을 const로 가능
+        const images = new Array(5);
+        images[0] = "./images/bb.jpg";
+        images[1] = "./images/2.webp";
+        images[2] = "./images/3.jpg";
+        images[3] = "./images/bu.webp";
+        images[4] = "./images/burger.webp";
+        let curImgNo = 0; // 현재 화면에 보여질 이미지 배열의 인덱스 번호
+
+        function prev() { 
+            if(curImgNo == 0) { // 다음 이미지가 배열의 마지막 번째라면...
+                curImgNo = images.length;
+            }
+            document.getElementById("imgSlide").src=images[--curImgNo];
+        }
+        function next() {
+            if(++curImgNo == images.length) { // 다음 이미지가 배열의 마지막 번째라면...
+                curImgNo = 0;
+            }
+            document.getElementById("imgSlide").src=images[curImgNo];
+        }
+
+        let isAuto = false;
+
+        function autoSlide() {
+            isAuto = !isAuto;
+            if(isAuto) {
+                document.getElementById("autoBtn").style.backgroundColor = "violet";
+                setInterval(next, 3000)  // 밀리세컨드
+            } else {
+                location.reload(); // 페이지 새로고침
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="slider">
+        <img src="./images/bb.jpg" id="imgSlide"/>
+    </div>
+    <div class="controller">
+        <a href="#" onclick="prev();">이전</a>
+        <a href="#" onclick="next();">다음</a>
+        <button onclick="autoSlide();" id="autoBtn">auto</button>
+
+    </div>
+</body>
+</html>

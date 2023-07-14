@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수 표현</title>
+    <script>
+
+    
+    <!-- 함수 선언식외에 함수표현식으로 함수를 만들 수 있다. -->
+    함수 선언식은 세미 콜론(;)이 없고, 함수 표현식은 세미 콜론(;)이 붙는 것도 차이점이다.
+    // 아래의 호출은 함수 선언문 방식으로 함수 생성 시 이상없이 표현되지만 
+    // 함수 표현식 방식으로 함수를 생성했을 때는 호출이 되지 않는다.
+    // 함수를 선언문 방식으로 만들면 hoisting  되어(사용 가능 범위가 해당파일에 가장 위로 올라감)파일의 어디에서나 호출 가능하게 되지만, 
+    // 함수를 표현식으로 만들 시 메모리의 선언부에 hoisting 되지 않는다.
+    // 따라서 함수 표현식으로 생성한 함수를 호출 할 때에는 함수를 생성한 코드 이후에 작성해야 제대로 호출이 된다.
+    
+    // sayHello(); //함수 선언문 방식으로 생성할 때 가능
+    
+    // // 함수 선언식 vs 함수 표현식 vs 화살표 함수
+    // function sayHello() {
+    //   document.write("hello");
+    // }
+
+    const sayHello = function () {
+      document.write("hia")
+    }
+    // 함수 선언식으로 함수 생성 시 어디에서든 함수 호출 가능, 하지만 함수 표현식으로 함수를 생성하게 되면 함수 표현식 뒤에 코드를 작성해야 제대로 호출된다.
+
+
+
+
+
+
+		//function sayHello() {              // 함수 선언문 방식으로 생성
+		//	document.write("Hello");
+		//}
+
+    // let sayHello = function () { // 함수  표현식으로 생성
+    //     document.write("hello");
+        
+    // };
+		// sayHello();                  //함수 표현식, 함수 선언문 둘다 가능
+    let func = sayHello;         //함수 복사
+    func();                      //복사된 함수도 호출 가능
+    
+</script>
+</head>
+<body>
+    
+</body>
+</html>

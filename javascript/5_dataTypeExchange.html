@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 타입의 변환</title>
+    <script>
+        // 문자형으로의 변환
+        let value = true;
+        console.log(typeof value, value); // boolean
+        value = String(value);
+        console.log(typeof value, value); // string
+
+        let a = 3;
+        // a = String(a);
+        a = a + ""
+        console.log(typeof a);
+
+        let now = new Date(); // 현재 날짜 시간을 객체 타입으로 생성
+        // 앞글자가 대문자면 객체로 봐도 무방
+        console.log(typeof now, now);
+        console.log(now.toLocaleDateString());
+
+        // 숫자 타입으로 변환
+        console.log("3" + "4");
+        console.log("6"/"2"); // 내부에서 암시적으로 데이터 타입이 변환
+
+        let abc = "123";
+        abc = Number(abc); // 명시적 형변환
+        console.log(typeof abc);
+
+        // boolean으로 변환
+        console.log(Boolean(1));
+        console.log(Boolean(0));
+        console.log(Boolean("hello")); // true
+        console.log(Boolean("")); // false
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다중for문</title>
+    <script>
+        // 다중 for문 실행 구조 분석 (바깥쪽 for 루프가 1회 수행될 때 안쪽의 for 루프문이 각각 반복 수행)
+
+        for(let i=0; i<3; i++) {
+            document.write("★");
+            for(let j=0; j<2; j++) {
+                document.write("☆");
+            }
+        }
+
+        // 4행 3열 테이블 태그를 만드세요. (for문은 2번 사용).. td안에는 0부터 1씩 증가하는 숫자가 들어가도록 하세요.
+
+        document.write("<table border='1'>"); 
+        for(let i=0; i<4; i++) {
+            document.write("<tr>");
+                for(let j=0; j<3; j++) {
+                    document.write("<td></td>")
+                }
+            document.write("</tr>");
+        }
+        document.write("</table>");
+        // document.write(table);
+        let cnt = 0;
+        let table = "<table border='1'>";
+        for(let i=0; i<4; i++) {
+            table += "<tr>";
+            for(let j=0; j<3; j++) {
+                table +=`<td>${cnt++}</td>`;
+            }
+            table +="</tr>";
+        }
+        table += "</table>";
+        document.write(table);
+
+        // 구구단을 출력하세요. (1단~9단까지) 단, 한 단을 출력한뒤 줄바꿈하세요.
+       
+        for (let dan=1; dan<10; dan++) {
+            document.write("<div>");
+            for (let i=1; i<10; i++) {
+                document.write(`${dan}* ${i} = ${dan *i}&nbsp;&nbsp;&nbsp;`);
+            }
+            document.write("</div>");
+        }
+
+        // *
+        // **
+        // ***
+        // ****
+        // *****
+        for(let i=0; i<5; i++) {
+            document.write("<div>");
+            for (let j=0; j<=i; j++) {
+                document.write("*");
+            }
+            document.write("</div>");
+        }
+
+        // *****
+        // ****
+        // ***
+        // **
+        // *
+        for(let i = 0; i < 5; i++) {
+            for(let j=0; j< 5-i; j++) {
+                document.write("*");
+            }
+            document.write("<br />");
+        }
+
+        //    *
+        //   ***
+        //  *****
+        // *******
+        //*********
+
+        let br= "&nbsp";
+        for(let i=0; i<5; i++) {
+            for(let j=0; j<4-i; j++) { // 공백 4~
+                document.write(br);
+            }
+            for(let k=1; k<=(i*2)+1; k++) { // 1,3,5,7,9
+                document.write("*");
+            }
+            document.write("<br />");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

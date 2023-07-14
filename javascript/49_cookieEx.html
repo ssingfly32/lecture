@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>쿠키의 일반적인 운용</title>
+    <script>
+        function saveCookie() {
+            // 쿠키 저장 형식(문자열)
+            // "쿠키이름=값; expires=쿠키만료일(날짜시간/string);[domain=도메인명; path=쿠키저장경로]"
+            // path 생략하면 root에 저장
+            
+            let now = new Date();
+            now.setDate(now.getDate() + 7); // 현재날짜+7 -> 7일 이후에 만료되도록
+
+            let myCookie = "";
+            myCookie = "myCook=dongas;expires=" + now.toUTCString();
+            console.log(myCookie);
+
+            document.cookie = myCookie; // 쿠키 저장
+        }
+
+        function readCookie() {
+            let cook = document.cookie;
+            console.log(cook);
+            let cookies =  cook.split(';')
+            let cookieValue = '';
+            cookies.forEach(cookie => {
+                if(cookie.split('=')[0] === 'myCook') {
+                    cookieValue = cookie.split('=')[1];
+                    // break; for each구문에서 break 못쓰니 다른문법권장
+                }
+            });
+            alert(cookieValue);
+        }
+
+        function delCookie() {
+            // 삭제할 쿠키의 expires 값을 현재 날짜, 현재 시간으로 재 설정하여 다시 저장.
+            let now = new Date();
+            let cookie = 'myCook=;expires=' + now.toUTCString();
+
+            document.cookie = cookie;
+        }
+        // 일반화 연습 숙제
+    </script>
+</head>
+<body>
+    <input type="button" value="쿠키저장" onclick="saveCookie();">
+    <input type="button" value="쿠키읽기" onclick="readCookie();">
+    <input type="button" value="쿠키삭제" onclick="delCookie();">
+    <!-- 톰캣 : WAS 웹어플리케이션 서버 = 웹서버 + java돌릴수있음 -->
+</body>
+</html>

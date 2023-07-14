@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로그래밍 작성의 기초1</title>
+    <script>
+        // 문) 유저에게 가로, 세로 길이를 입력 받아, 삼각형의 넓이를 출력하는 프로그램 작성.
+        // 1) 유저에게 가로, 세로 길이를 입력받아 각각의 변수에 저장
+        let width = window.prompt("가로 길이를 입력하세요.", "0");
+        let height = window.prompt("세로 길이를 입력하세요.", "0");
+        console.log(width, height);
+
+        // 2) 가로 * 세로 / 2를 수행 후 삼각형 넓이를 계산하여 저장
+        let areaOfTriangle = width * height / 2;
+
+        // 3) 화면에 출력
+        document.write(`가로 ${width}, 세로 ${height} 삼각형의 넓이는 ${areaOfTriangle}cm<sup>2</sup> 입니다`);
+        
+        // 문) 유저에게 반지름을 입력받아 sg원넓이를 구하여 출력하세요.
+
+        let radius = window.prompt("반지름을 입력하세요.", "0");
+        const PI = Math.PI; // 상수는 대문자로 변수는 대문자 시작X
+        let areaOfCircle = radius * radius * PI;
+        document.write(`<div>반지름이 ${radius}인 원의 넓이는 ${areaOfCircle}입니다</div>`);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

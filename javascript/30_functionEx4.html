@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재귀 함수(자기 자신의 함수를 재 호출하는 프로그래밍 패턴)</title> 
+    <script>
+        // n! 구하기
+        function factorial(n) {
+            if (n <= 1) {
+                console.log(1);
+                return 1;
+            } else {
+                console.log(`${n} * factorial(${n}-1)`);
+                return n * factorial(n-1);
+            }
+        }
+        console.log(factorial(3));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

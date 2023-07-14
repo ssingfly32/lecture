@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date 객체</title>
+    <script>
+        // 생성자를 이용한 날짜 객체 생성
+        const now = new Date();
+        console.log(now);
+        
+        document.write(`<div>현재 : ${now}</div>`);
+        document.write(`<div>연도 : ${now.getFullYear()}</div>`);
+        document.write(`<div>월 : ${now.getMonth()+1}</div>`); // 미국 기준이라 +1
+        document.write(`<div>일 : ${now.getDate()}</div>`);
+        document.write(`<div>요일 : ${now.getDay()}</div>`); // 일요일(0) ~ 토요일(6)
+        const yoil = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일"]
+        document.write(`<div>요일 : ${yoil[now.getDay()]}</div>`); // 일요일(0) ~ 토요일(6)
+        document.write(`<div>시간 : ${now.getHours()}</div>`); // 일요일(0) ~ 토요일(6)
+        document.write(`<div>분 : ${now.getMinutes()}</div>`); // 일요일(0) ~ 토요일(6)
+        document.write(`<div>초 : ${now.getSeconds()}</div>`); // 일요일(0) ~ 토요일(6)
+        
+        let date = new Date();   // 빈 생성자 현재 날짜, 현재 시간
+        console.log(date);
+        
+        date.setFullYear(2022);
+        console.log(date); 
+    </script>
+</head>
+<body>
+    <div id="clock">
+        <script>
+            setInterval(()=>{
+                let curNow = new Date();
+                document.getElementById("clock").innerHTML = curNow;
+            },1000);
+        </script>
+    </div>
+</body>
+</html>

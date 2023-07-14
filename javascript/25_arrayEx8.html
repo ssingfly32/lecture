@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2차원 배열</title>
+    <script>
+
+        
+        // let arr = [["a", "b", "c"], ["d", "e", "f"]]; 
+        let arr = new Array(2);
+        arr[0] = new Array(3);
+        arr[1] = new Array(3);
+        arr[0][0] = "a";
+        arr[0][1] = "b";
+        arr[0][2] = "c";
+        arr[1][0] = "d";
+        arr[1][1] = "e";
+        arr[1][2] = "f";
+        
+        console.log(arr);
+
+        document.write(arr[0][2]+"<br/>");
+        document.write(arr[1][1]+"<br/>");
+
+        document.write(arr.length+"<br/>" );
+        document.write(arr[0].length+"<br/>" );
+
+        // jagged 배열 : 행마다 열의 길이가 각각 다른 구조의 2차원 배열 (옛날에 메모리 줄이려고 썼던거라 지금은 안씀)
+        let jagged = new Array(3);
+        jagged[0] = [45, 21, 3];
+        jagged[1] = [2, 3];
+        jagged[2] = [56, 66, 77, 88];
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

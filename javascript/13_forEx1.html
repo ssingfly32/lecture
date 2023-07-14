@@ -1,0 +1,65 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>for반복문</title>
+        <script>
+            // 화면에 "안녕하세요"를 3번 출력하도록 하자.
+            for(let i=0; i < 3; i++) { // i= 0, 1, 2 / i=지역변수
+                document.write("안녕하세요");
+            }
+
+            // *를 화면에 10번 반복하여 출력하도록 하자
+            for(let i = 0; i < 20; i+=2) {
+                document.write(`${i}번째 *<br />`);
+            }
+
+            // ul 태그 안에 li태그를 4번 나오도록 하시고 li 태그 안에는 0, 1, 2, 3 이 각각 출력되도록하자
+            document.write("<ul>");
+            for (let i=0; i<4; i++) {
+                document.write("<li>" + i + "</li>");
+            }
+            document.write("</ul>");
+
+            // 4행 3열 테이블 태그를 만드세요. (for문은 단 1번만 사용).. td안에는 0부터 1씩 증가하는 숫자가 들어가도록 하세요.
+            let output = "<table border='1'>";
+            let cnt=0;
+            for (let i=0; i<4; i++) {
+                output +=`<tr><td>${cnt++}</td><td>${cnt++}</td><td>${cnt++}</td></tr>`
+
+            }
+            output += "</table>";
+            document.write(output);
+            
+            // 1~5까지의 누적합을 구하는 프로그램 작성
+            let sum5 = 0;
+            for (let i=1; i<6; i++) {
+                sum5 +=i; //sum5 = sum5 + i
+                // console.log(sum5);
+            }
+            document.write(`1부터 5까지의 누적합은 ${sum5}<br />`);
+
+            // 1 ~ 100까지의 짝수합 홀수합을 각각 출력하세요.
+            let oddSum=0, evenSum=0;
+            for (let i=0; i<101; i++) {
+                if(i % 2 == 0) {
+                    evenSum += i; 
+                } else {
+                    oddSum += i;
+                }
+            }
+            document.write(`홀수합 : ${oddSum}, 짝수합: ${evenSum}`);
+
+            // 유저에게 단을 입력받아 (window.prompt) 해당 단의 구구단을 출력하세요
+            let num = window.prompt("단을 입력해주세요", "0");
+            for (let i=1; i<10; i++) {
+                document.write(`<div>${num} * ${i} = ${num*i}</div>  `);
+            }
+            
+        </script>
+    </head>
+    <body>
+       
+    </body>
+    </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>continue/break</title>
+    <script>
+        // 1 ~100 까지의 짝수합 만을 구하여 출력하자. (continue)
+        let evenSum = 0;
+        for(let i = 0 ; i < 101; i++){
+            if(i % 2 == 0){
+                evenSum += i;
+            } else {
+                continue;
+                document.write("짝수합 출력"); //No-effect 코드 : 수행되지 않는다. (continue코드 때문에 영향 X)
+            }
+        }
+        document.write(evenSum);
+
+        //----------------------------------------------------------------------------------------------
+        // 1부터 누적합을 구하되 몇까지 더해야 누적합이 1000이 넘어가는지 출력하세요.
+        let sum = 0;
+        for(let i = 0; i < 1000; i++) {
+            document.write(i + "<br>");
+            sum += i;
+            if(sum >= 1000){
+                break;
+            }
+        }
+
+        document.write("<hr>")
+
+        // 위 문제를 while을 통해 해결하면 더욱 좋다.
+
+        let acc = 0;
+        let i = 0;
+        while(acc <= 1000) {
+            acc+= i++; //(acc += i;) + (i++;)
+        }
+        document.write(i);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

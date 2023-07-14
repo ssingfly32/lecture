@@ -1,0 +1,154 @@
+<!-- 시작페이지. url에 index.html 없어도 제일 먼저 뜸 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈 페이지</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      let pageNo = 59;
+      let numOfRows = 12;
+      let totalCount = 0;
+      $(function () {
+        $('.loading').hide();
+        getTourList(pageNo);
+        $('.more').click(function () {
+          // 더 공부할 사람들은 제이쿼리 스크롤 메서드 또는 라이브러리 활용
+          $(this).remove();
+          pageNo++;
+          getTourList(pageNo);
+        });
+      });
+
+      function getTourList(pageNo) {
+        $('.loading').show();
+        const apiKey =
+          'GgTP6GXKOnOXVZYE%2BsIsosDcQD6y6vOZIozy%2FACsd5YHVEB7dVjFnvxiR4RWiLihH0dSUpA5vPT1R8Gp9fcQYQ%3D%3D';
+        $.ajax({
+          url: `http://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=${numOfRows}&pageNo=${pageNo}&MobileOS=ETC&MobileApp=AppTest&ServiceKey=${apiKey}&listYN=Y&arrange=A&contentTypeId=12&areaCode=1&sigunguCode=&cat1=&cat2=&cat3=&_type=json`,
+
+          type: 'get', // 통신방식(get, post, put, delete)
+          dataType: 'json', // 수신받을 데이터 타입
+          async: false,
+          success: function (data) {
+            // 통신이 성공했을 때 호출되는 콜백 함수
+            console.log(data);
+            parsingData(data);
+          },
+          error: function () {
+            // 통신이 실패(부정적인 response) 했을 때 호출되는 콜백함수
+          },
+          complete: function () {
+            $('.loading').hide();
+          }, // 통신이 완료 되었을 때 호출 되는 콜백함수
+        });
+        function parsingData(tourData) {
+          let output = `<div class="list-group">`;
+          const tourAr = tourData.response.body.items.item;
+          totalCount = tourData.response.body.totalCount;
+          console.log(tourAr);
+          $.each(tourAr, function (i, item) {
+            const contentId = item.contentid;
+            output += `<a href="./detailTour.html?contentId=${contentId}" class="list-group-item list-group-item-action">`;
+            output += `<div class='tour'>`;
+            output += `<div class='tourImg'>`;
+            let tourImg =
+              item.firstimage === '' || item.firstimage == null
+                ? './image/noimage.png'
+                : item.firstimage;
+            output += `<img src='${tourImg}'/>`;
+            output += `</div>`;
+            output += `<div class='tourInfo'>`;
+            output += `${item.title}`;
+            output += `</div>`;
+            output += `</div>`;
+            output += `</a>`;
+          });
+          output += '</div>';
+          let totalPage = Math.ceil(totalCount / numOfRows); // 전체 페이지 수
+          if (totalPage > pageNo) {
+            output += `<button type="button" class="btn btn-primary more">더보기</button>`;
+          }
+          $('.tourList').append(output);
+        }
+      }
+    </script>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .tourImg img {
+        width: 340px;
+      }
+
+      .loading img {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 999;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./areaList.html">지역기반관광정보</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">숙소정보</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">음식점정보</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                >Dropdown</a
+              >
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Link</a></li>
+                <li><a class="dropdown-item" href="#">Another link</a></li>
+                <li><a class="dropdown-item" href="#">A third link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid tourBox">
+      <h1>지역 기반 관광정보</h1>
+      <div class="tourList"></div>
+      <div class="loading">
+        <img src="./image/YCZH.gif" alt="" />
+      </div>
+    </div>
+
+    <div class="mt-5 p-4 bg-dark text-white text-center">
+      <p>Footer</p>
+    </div>
+  </body>
+</html>
