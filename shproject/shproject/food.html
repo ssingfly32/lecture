@@ -82,7 +82,6 @@
       let numOfRows = 12;
       let totalCount = 1;
       let contentId = '';
-      let contentTypeId = '';
       let btnValues = [];
 
       // 더보기 버튼
@@ -100,7 +99,7 @@
       $(function () {
         // $('.loading').hide();
         getTourList(pageNo); // 첫화면
-        firstReadCookie(contentId, contentTypeId);
+        firstReadCookie(contentId);
       });
 
       function reParsing(pageNo) {
@@ -116,38 +115,40 @@
         });
       }
 
-      function readCookie(contentId, contentTypeId) {
+      function readCookie(contentId) {
         let cook = document.cookie;
         console.log(cook);
-        let cookies = cook.split(';'); // contentId=?, contentTypeId=?, expires
+        let cookies = cook.split(';'); // contentId=?, expires
         let cookieValue = '';
         cookies.forEach((cookie) => {
           // 쿠키 읽기.
-          if (cookie.split('=')[0] === 'contentId') {
+          if (cookie.split('=')[0] == `${contentId}`) {
             // 쿠키가 존재
             cookieValue = cookie.split('=')[1]; // contentId=?
             // break; for each구문에서 break 못쓰니 다른문법권장
-            if (cookieValue == `${contentId}`) {
-              delCookie(contentId);
-            }
           } else {
-            saveCookie(contentId, contentTypeId);
+            saveCookie(contentId);
           }
         });
+        for (let i = 0; i < cookieValue.length; i++) {
+          if (cookieValue[i] == `${contentId}`) {
+            delCookie(contentId);
+          }
+        }
       }
-      function firstReadCookie(contentId, contentTypeId) {
+      function firstReadCookie(contentId) {
         let cook = document.cookie;
         console.log(cook);
-        let cookies = cook.split(';'); // contentId=?, contentTypeId=?, expires
+        let cookies = cook.split(';'); // contentId=?, expires
         let cookieValue = '';
         cookies.forEach((cookie) => {
           // 쿠키 읽기.
-          if (cookie.split('=')[0] === 'contentId') {
+          if (cookie.split('=')[0] === `${contentId}`) {
             // 쿠키가 존재
             cookieValue = cookie.split('=')[1]; // contentId=?
             // break; for each구문에서 break 못쓰니 다른문법권장
             for (let i = 0; i < numOfRows; i++) {
-              if (cookieValue === btnValues[i]) {
+              if (cookieValue == btnValues[i]) {
                 $(`#${cookieValue}`).html('찜콩♥');
                 $(`#${cookieValue}`).css('color', 'red');
               }
@@ -155,14 +156,13 @@
           }
         });
       }
-      function saveCookie(contentId, contentTypeId) {
-        getCookieExpires('contentId', `${contentId}`, 'contentTypeId', `${contentTypeId}`, '7');
+      function saveCookie(contentId) {
+        getCookieExpires(`${contentId}`, `${contentId}`, '7');
       }
-      function delCookie(contentId, contentTypeId) {
+      function delCookie(contentId) {
         // 삭제할 쿠키의 expires 값을 현재 날짜, 현재 시간으로 재 설정하여 다시 저장.
         let now = new Date();
-        let cookie =
-          `contentId=${contentId};contentTypeId=${contentTypeId};expires=` + now.toUTCString();
+        let cookie = `${contentId}=${contentId};expires=` + now.toUTCString();
 
         document.cookie = cookie;
       }
@@ -199,7 +199,6 @@
             console.log(i);
             output += `<div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 work-item">`;
             contentId = item.contentid;
-            contentTypeId = item.contenttypeid;
             output += `<a href="./detailFood.html?contentId=${contentId}">`;
             // output += `<div class='tour'>`;
             // output += `<div class='tourImg'>`;
@@ -225,7 +224,7 @@
             // 꽉 찬 하트
             // output += `<i class="fa-solid fa-heart" style="color: #ff0000;"></i>`;
             // 찜버튼?
-            output += `<button type="button" id="${contentId}" onclick="readCookie(${contentId},${contentTypeId});">찜</button>`;
+            output += `<button type="button" id="${contentId}" onclick="readCookie(${contentId});">찜</button>`;
             btnValues[i] = contentId;
             output += '</div>';
           });
