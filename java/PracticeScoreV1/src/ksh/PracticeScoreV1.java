@@ -44,7 +44,10 @@ public class PracticeScoreV1 {
 
 	public static void main(String[] args) {
 		PracticeScoreV1 p = new PracticeScoreV1();
-		p.displayMenu();
+		while(true) {
+			
+			p.displayMenu();
+		}
 		
 	}
 
