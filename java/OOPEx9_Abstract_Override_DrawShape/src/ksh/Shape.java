@@ -9,9 +9,9 @@ import java.awt.Color;
 public abstract class Shape {
 	private Color color;
 	private String name;
-	private Point p;
+	protected Point p;
 	
-	public Shape(Color color, String name, Point p) {
+	public Shape(Color color, String name, Point p) { // 객체가 생성될 때 호출, 멤버 초기화
 		this.color = color;
 		this.name = name;
 		this.p = p;
@@ -40,13 +40,13 @@ public abstract class Shape {
 		this.name = name;
 	}
 	
-//	추상 메서드 : body가 없는 메서드
-//	지금은 어떤 도형을 그릴지 모르기 때문에 쓸 코드가 없음.
-	public abstract void draw(Shape s);
+
+	public abstract void draw();
+
 
 	@Override
 	public String toString() {
-		return "Shape [color=" + color + ", name=" + name + "]";
+		return "Shape [color=" + color + ", name=" + name + "], " + "Point[" + this.p.getX() + ", " + this.p.getY() + "]";
 	}
 	
 	

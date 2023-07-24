@@ -15,7 +15,7 @@ public class OOPEx8_MethodOverriding {
 	}
 	
 //	아래의 메서드는 오버로딩 한것임
-	public String toString(String name) {
+	public String toString(String name) { // 매개변수 타입, 순서, 갯수가 달라서
 		return "OOPEx8_MethodOverriding [a=" + a + "]";
 	}
 
