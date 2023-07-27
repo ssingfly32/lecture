@@ -35,7 +35,8 @@ public class ArrayListTest {
 		arr1.add(4.0001);
 		arr1.add(3d);
 
-//		추상 클래스 Number는 기본 유형인 바이트, 더블, 플로트, 인트, 롱, 숏으로 변환할 수 있는 숫자 값을 나타내는 플랫폼 클래스의 슈퍼클래스입니다.
+		// 추상 클래스 Number는 기본 유형인 바이트, 더블, 플로트, 인트, 롱, 숏으로 
+		// 변환할 수 있는 숫자 값을 나타내는 플랫폼 클래스의 슈퍼클래스입니다.
 		List<Number> arr2 = new ArrayList<Number>();
 		arr2.addAll(stack);
 		arr2.addAll(arr1);
