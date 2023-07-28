@@ -1,7 +1,7 @@
 package ksh;
 
 
-public class Student{
+public class Student implements Comparable<Student>{
 
 	private String stuNo;
 	private String stuName;
@@ -61,6 +61,27 @@ public class Student{
 	public String toString() {
 		return "Student [stuNo=" + this.stuNo + ", stuName=" + this.stuName + ", score="
 				+ this.score + " hashCode =" + this.hashCode() + "]";
+	}
+
+	@Override
+	public int compareTo(Student o2) {
+		int result = 0;
+		if(this.getScore() < o2.getScore()) {
+			result = 1;
+		} else if(this.getScore() > o2.getScore()){
+			result = -1;
+		} else { // 점수가 같다면 학번 오름차순
+			// 문자열은 > , <, >=, <= 연산자를 사용하지 못한다.
+			// 그러나 String 클래스가 Comparable 인터페이스를 상속받아 compareTo 메서드를
+			// 구현했기 때문에 String.compareTo()를 이용하여 비교(유니코드 값)한다.
+			int tmp = this.getStuNo().compareTo(o2.getStuNo());
+			if(tmp > 0){
+				result = 1;
+			} else  {
+				result = -1;
+			} 
+		}
+		return result;
 	}
 
 

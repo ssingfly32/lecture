@@ -1,6 +1,6 @@
-package ksh2;
+package ksh;
 
-public class Student {
+public class Student{
 
 	private String stuNo;
 	private String stuName;
@@ -14,10 +14,6 @@ public class Student {
 
 	public String getStuNo() {
 		return stuNo;
-	}
-
-	public void setStuNo(String stuNo) {
-		this.stuNo = stuNo;
 	}
 
 	public String getStuName() {
@@ -42,18 +38,20 @@ public class Student {
 	public boolean equals(Object obj) {
 		boolean result = false;
 		if (obj instanceof Student) {
-			Student tmp = (Student) obj;
-			if ((this.stuNo.equals(tmp.stuNo))
-					&& (this.stuName.equals(tmp.stuName))) {
+			if(((Student)obj).stuNo.equals(this.stuNo)) {
 				result = true;
 			}
+			
 		}
 		return result;
 	}
 
 	@Override
 	public int hashCode() {
-		return (this.stuNo+this.stuName).hashCode();
+		// Object.hashCode() : 
+		// 객체가 생성될 때 같은 (객체를 판별하는 unique한 번호) 번호가 부여되지 않도록
+		// 내부적으로 해싱 기법에 의해 만들어진 번호를 반환하는 메서드
+		return this.stuNo.hashCode();
 		
 	}
 
