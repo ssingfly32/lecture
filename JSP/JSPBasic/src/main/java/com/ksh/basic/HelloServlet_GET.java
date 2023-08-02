@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 
 // 매핑 주소를 String[] 형식으로 여러개를 지정해도 된다.
-@WebServlet({"/helloServlet","/hGET"}) // /JSPBasic/helloServlet로 요청하면 현재 클래스(HelloServlet)가 실행되도록 mapping 함(클래스 이름 감추기 가능)
-
+///JSPBasic/helloServlet로 요청하면 현재 클래스(HelloServlet)가 실행되도록 mapping 함(클래스 이름 감추기 가능)
+//@WebServlet({"/hello.do","/hGET"}) 
 public class HelloServlet_GET extends HttpServlet {
 	/*
 	 * GET 방식 요청 : 데이터를 url의 쿼리스트링으로 표현하여 전송하는 방법(x)
@@ -23,6 +23,11 @@ public class HelloServlet_GET extends HttpServlet {
 	 * 
 	 */
 
+	@Override
+	public void init() throws ServletException { // 최초 실행될 때 객체가 만들어지고 만들어진 객체 계속 사용
+		System.out.println("현재 서블릿 객체 " + this.getClass().getName() + "가 생성됨!");
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// GET 방식으로 요청했을 때 실행되는 메서드
@@ -50,6 +55,7 @@ public class HelloServlet_GET extends HttpServlet {
 		out.close();
 		
 	}
+
 
 	
 }
