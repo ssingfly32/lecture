@@ -26,18 +26,18 @@ public class RequestServlet extends HttpServlet {
 		resp.sendRedirect("./useRequest.jsp"); // 페이지 이동
 		
 		// 자바스크립트로 페이지 이동
-		resp.setContentType("text/html; charset=utf-8");
-		PrintWriter write = resp.getWriter();
-		write.print("<html>");
-	      write.print("<head>");
-	      write.print("<script>");
-	      write.print("location.href='./useRequest.jsp';");
-	      write.print("</script>");
-	      write.print("</head>");
-	      write.print("</html>");
-	      
-	      write.flush();
-	      write.close();
+//		resp.setContentType("text/html; charset=utf-8");
+//		PrintWriter write = resp.getWriter();
+//		write.print("<html>");
+//	      write.print("<head>");
+//	      write.print("<script>");
+//	      write.print("location.href='./useRequest.jsp';");
+//	      write.print("</script>");
+//	      write.print("</head>");
+//	      write.print("</html>");
+//	      
+//	      write.flush();
+//	      write.close();
 		
 		//write.print .... 어쩌고
 		
