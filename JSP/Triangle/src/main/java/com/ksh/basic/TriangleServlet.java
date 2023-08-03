@@ -18,10 +18,14 @@ public class TriangleServlet extends HttpServlet {
 		System.out.println("get 방식으로 요청됨");
 		int base = Integer.parseInt(req.getParameter("base"));
 		int height = Integer.parseInt(req.getParameter("height"));
-		TriangleVo tri = new TriangleVo(base, height);
 		
-		req.setAttribute("triangle", tri);
-		req.getRequestDispatcher("./callTData.jsp").forward(req, resp);
+		if (base != 0 && height != 0) {
+			
+			TriangleVo tri = new TriangleVo(base, height);
+			
+			req.setAttribute("triangle", tri);
+			req.getRequestDispatcher("./callTData.jsp").forward(req, resp);
+		}
 		
 		
 	}

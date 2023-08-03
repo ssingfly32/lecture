@@ -28,6 +28,16 @@ public class RequestServlet extends HttpServlet {
 		// 자바스크립트로 페이지 이동
 		resp.setContentType("text/html; charset=utf-8");
 		PrintWriter write = resp.getWriter();
+		write.print("<html>");
+	      write.print("<head>");
+	      write.print("<script>");
+	      write.print("location.href='./useRequest.jsp';");
+	      write.print("</script>");
+	      write.print("</head>");
+	      write.print("</html>");
+	      
+	      write.flush();
+	      write.close();
 		
 		//write.print .... 어쩌고
 		
@@ -62,6 +72,18 @@ public class RequestServlet extends HttpServlet {
 		
 		// select ~ option : multiple 속성을 사용하지 않으면 단일 선택
 		String job = req.getParameter("job");
+		
+		if(req.getParameter("birth") == null || req.getParameter("birth").equals("")) {
+			PrintWriter write = resp.getWriter();
+			write.print("<html>");
+			write.print("<head>");
+			write.print("<script>");
+			write.print("alert('생일은 반드시 입력해 주세요')");
+			write.print("location.href='./useRequest.jsp';");
+			write.print("</script>");
+			write.print("</head>");
+			write.print("</html>");
+		}
 		
 		String birthStr = req.getParameter("birth");
 		Date birthDate = Date.valueOf(birthStr);

@@ -5,6 +5,26 @@
 <head>
 <meta charset="UTF-8">
 <title>다양한 input 태그들의 request 처리</title>
+<script>
+	function isvalid() {
+		let result = false;
+		
+		let name = '홍길동';
+		document.write(`\${name}안녕`); //jsp에서 temperture literal 사용법.
+		document.write(name+'안녕');
+		
+		// 생일이 입력 되었다면 true(생일 필수 항목)
+		let birth = document.getElementById('birth').value;
+		if(birth.length > 0) {
+			result = true;
+		} else {
+			alert('생일은 반드시 입력해야 합니다.');
+			// 뷰단에서 유효성 검사했기때문에 작성한 텍스트 그대로 남아있음.
+		}
+		
+		return result;
+	}
+</script>
 </head>
 <body>
 	<form action="./useRequest.do" method="post">
@@ -39,7 +59,7 @@
 		</div>
 		
 		<div>
-			생일 <input type="date" name="birth"> 
+			생일 <input type="date" name="birth" id="birth"> 
 		</div>
 		
 		<div>
@@ -47,7 +67,7 @@
 		</div>
 		
 		<div>
-			<input type="submit" value="전송">
+			<input type="submit" value="전송" onclick="return isvalid();">
 		</div>
 	</form>
 	<hr/>
