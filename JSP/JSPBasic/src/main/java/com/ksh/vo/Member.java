@@ -13,6 +13,10 @@ public class Member {
 	private Date birthDate;
 	private String memo;
 	
+	public Member() {
+		
+	};
+	
 	public Member(String userId, String userPwd, String userName, String gender, String military, String hobbies,
 			String job, Date birthDate, String memo) {
 		super();
