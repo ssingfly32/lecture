@@ -31,7 +31,7 @@ public class DBConnection { // 싱글톤
 		DataSource ds = (DataSource)envContext.lookup("oracleHr");
 		Connection conn = ds.getConnection();
 		
-		System.out.println(conn.toString());
+//		System.out.println(conn.toString());
 		
 		return conn;
 	}

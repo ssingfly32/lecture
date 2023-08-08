@@ -50,4 +50,44 @@ public class EmployeeCRUD { // 싱글톤
 		
 		return list;
 	}
+
+	public List<Employee> selectByEmpName(String findEmpName) throws NamingException, SQLException {
+		List<Employee> list = new ArrayList<Employee>();
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select e.*, d.department_name from employees e inner join departments d "
+				+ "on e.department_id = d.department_id where lower(e.first_name) like ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, "%"+findEmpName +"%");
+		
+		ResultSet resultSet = pstmt.executeQuery();
+		while(resultSet.next()) { // row가 있을동안 반복
+			list.add(new Employee(resultSet.getInt("EMPLOYEE_ID"), resultSet.getString("FIRST_NAME"), resultSet.getString("LAST_NAME"), 
+					resultSet.getString("EMAIL"), resultSet.getString("PHONE_NUMBER"), 
+					resultSet.getDate("HIRE_DATE"), resultSet.getString("JOB_ID"), resultSet.getFloat("SALARY"), 
+					resultSet.getFloat("COMMISSION_PCT"), resultSet.getInt("MANAGER_ID"), resultSet.getInt("DEPARTMENT_ID"), 
+					resultSet.getString("DEPARTMENT_NAME")));
+		}
+		DBConnection.getInstance().dbClose(resultSet, pstmt, con);
+		return list;
+	}
+	
+	public Employee selectByEmpNo(String findEmpNo) throws NamingException, SQLException {
+		Employee emp = null;
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select e.*, d.department_name from employees e inner join departments d on e.department_id = d.department_id where employee_id = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, findEmpNo);
+		ResultSet resultSet = pstmt.executeQuery();
+		while(resultSet.next()) {
+			emp = new Employee(resultSet.getInt("EMPLOYEE_ID"), resultSet.getString("FIRST_NAME"), resultSet.getString("LAST_NAME"), 
+					resultSet.getString("EMAIL"), resultSet.getString("PHONE_NUMBER"), 
+					resultSet.getDate("HIRE_DATE"), resultSet.getString("JOB_ID"), resultSet.getFloat("SALARY"), 
+					resultSet.getFloat("COMMISSION_PCT"), resultSet.getInt("MANAGER_ID"), resultSet.getInt("DEPARTMENT_ID"), 
+					resultSet.getString("DEPARTMENT_NAME"));
+		}
+		
+		return emp;
+		
+	}
 }
+ 
