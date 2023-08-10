@@ -1,5 +1,6 @@
 package com.ksh.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -118,6 +119,52 @@ public class EmployeeCRUD { // 싱글톤
 		}
 		DBConnection.getInstance().dbClose(resultSet, pstmt, con);
 		return list;
+	}
+
+	public int insertEmployee(Employee saveEmp) throws NamingException, SQLException {
+		Connection con = DBConnection.getInstance().dbConnect();
+		
+		// 저장프로시저를 DB에 만들고, 그 프로시저를 CallableStatement를 이용하여 호출해보자
+		String query = "{call SAVEEMPLOYEE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+		
+		CallableStatement cstmt = con.prepareCall(query);
+		
+		cstmt.setString(1, saveEmp.getFirst_name());
+		cstmt.setString(2, saveEmp.getLast_name());
+		cstmt.setString(3, saveEmp.getEmail());
+		cstmt.setString(4, saveEmp.getPhone_number());
+		cstmt.setDate(5, saveEmp.getHire_date());
+		cstmt.setString(6, saveEmp.getJob_id());
+		cstmt.setFloat(7, saveEmp.getSalary());
+		cstmt.setFloat(8, saveEmp.getCommission_pct());
+		cstmt.setInt(9, saveEmp.getManager_id());
+		cstmt.setInt(10, saveEmp.getDepartment_id());
+		
+		// 마지막 매개변수는 out 매개변수
+		cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+		
+		cstmt.executeUpdate(); // 실행
+		
+		// out매개변수에서 반환한 값을 가져오기
+		int result = cstmt.getInt(11);
+		
+		System.out.println(result);
+		
+		DBConnection.getInstance().dbClose(cstmt, con);
+		
+		return result;
+	}
+
+	public int deleteEmp(int empNo) throws NamingException, SQLException {
+		int result = -1;
+		Connection con = DBConnection.getInstance().dbConnect();
+
+		String query = "delete from employees where employee_id = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, empNo);
+		result = pstmt.executeUpdate();
+		DBConnection.getInstance().dbClose(pstmt, con);
+		return result;
 	}
 }
  

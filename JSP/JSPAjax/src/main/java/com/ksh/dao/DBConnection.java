@@ -41,4 +41,9 @@ public class DBConnection { // 싱글톤
 		stmt.close();
 		con.close();
 	}
+	
+	public void dbClose(Statement stmt, Connection con) throws SQLException {
+		stmt.close();
+		con.close();
+	}
 }
