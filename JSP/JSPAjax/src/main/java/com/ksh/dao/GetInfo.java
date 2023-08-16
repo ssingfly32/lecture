@@ -9,79 +9,88 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import com.ksh.vo.DepartmentVo;
-import com.ksh.vo.JobsVo;
-import com.ksh.vo.ManagerVo;
+import com.ksh.vo.DeptVO;
+import com.ksh.vo.JobsVO;
+import com.ksh.vo.ManagerVO;
 
 public class GetInfo {
-private static GetInfo instance = null;
-	
-	private GetInfo() {}
-	
+	private static GetInfo instance = null;
+
+	private GetInfo() {
+	}
+
 	public static GetInfo getInstance() {
 		if (instance == null) {
 			instance = new GetInfo();
 		}
+
 		return instance;
 	}
-	
-	public List<JobsVo> getJobsInfo() throws NamingException, SQLException {
-		List<JobsVo> lst = new ArrayList<JobsVo>();
+
+	public List<JobsVO> getJobsInfo() throws NamingException, SQLException {
+
+		List<JobsVO> lst = new ArrayList<JobsVO>();
+
 		Connection con = DBConnection.getInstance().dbConnect();
-		
+
 		String query = "select * from jobs";
-		
+
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
-		
-		while(rs.next()) {
-			lst.add(new JobsVo(rs.getString("JOB_ID"),
-					rs.getString("JOB_TITLE") , 
-					rs.getInt("MIN_SALARY"), 
+
+		while (rs.next()) {
+			lst.add(new JobsVO(rs.getString("JOB_ID"), rs.getString("JOB_TITLE"), rs.getInt("MIN_SALARY"),
 					rs.getInt("MAX_SALARY")));
+
 		}
 		DBConnection.getInstance().dbClose(rs, pstmt, con);
-		
+
 		return lst;
 	}
 
-	public List<ManagerVo> getManagerInfo() throws NamingException, SQLException {
+	public List<ManagerVO> getManagerInfo() throws NamingException, SQLException {
 		
-		List<ManagerVo> lst = new ArrayList<ManagerVo>();
-		
+		List<ManagerVO> lst = new ArrayList<ManagerVO>();
+
 		Connection con = DBConnection.getInstance().dbConnect();
-		
-		String query = "select first_name||','||last_name as fullName, employee_id "
+
+		String query = "select first_name||','||last_name as fullName, employee_id " 
 				+ "from employees";
-		
+
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
-		
-		while(rs.next()) {
-			lst.add(new ManagerVo(rs.getString("fullName"),
-					 rs.getInt("employee_id")));
+
+		while (rs.next()) {
+			lst.add(new ManagerVO(
+					rs.getString("fullName"), 
+					rs.getInt("employee_id")));
 		}
+		
 		DBConnection.getInstance().dbClose(rs, pstmt, con);
-		
+
 		return lst;
-		
 	}
 
-	public List<DepartmentVo> getDepartmentInfo() throws NamingException, SQLException {
-		List<DepartmentVo> lst = new ArrayList<DepartmentVo>();
+	public List<DeptVO> getDeptInfo() throws NamingException, SQLException {
+		List<DeptVO> lst = new ArrayList<DeptVO>();
+
 		Connection con = DBConnection.getInstance().dbConnect();
-		
+
 		String query = "select department_id, department_name "
 				+ "from departments";
-		
+
 		PreparedStatement pstmt = con.prepareStatement(query);
 		ResultSet rs = pstmt.executeQuery();
-		
-		while(rs.next()) {
-			lst.add(new DepartmentVo(rs.getInt("department_id"), rs.getString("department_name")));
+
+		while (rs.next()) {
+			lst.add(new DeptVO(
+					rs.getInt("department_id"), 
+					rs.getString("department_name")));
 		}
-		DBConnection.getInstance().dbClose(rs, pstmt, con);
 		
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+
 		return lst;
 	}
 }
+

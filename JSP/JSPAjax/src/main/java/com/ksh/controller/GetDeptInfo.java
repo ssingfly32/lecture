@@ -20,43 +20,40 @@ import org.json.simple.JSONObject;
 import com.google.gson.Gson;
 import com.ksh.dao.GetInfo;
 import com.ksh.etc.ResponseMessageCode;
-import com.ksh.vo.DepartmentVo;
+import com.ksh.vo.DeptVO;
 
 /**
  * Servlet implementation class GetDepartmentInfo
  */
-@WebServlet("/getDepartmentInfo.do")
-public class GetDepartmentInfo extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		
+@WebServlet("/getDeptInfo.do")
+public class GetDeptInfo extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+
+		resp.setContentType("application/json; charset=utf-8;");
+		PrintWriter out = resp.getWriter();
+
 		try {
-			List<DepartmentVo> lst = GetInfo.getInstance().getDepartmentInfo();
-			
+			List<DeptVO> lst = GetInfo.getInstance().getDeptInfo();
 			Gson gson = new Gson();
-			
+
 			out.print(gson.toJson(lst));
+
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
+
 			Map<String, String> jsonMap = new HashMap<String, String>();
 			jsonMap.put("count", "0");
 			jsonMap.put("createdTime", new Date(System.currentTimeMillis()).toLocaleString());
 			jsonMap.put("responseCode", "01");
 			jsonMap.put("responseMsg", ResponseMessageCode.getMessage("01"));
 			jsonMap.put("exceptionMsg", e.getMessage());
-			
+
 			JSONObject json = new JSONObject(jsonMap);
 			out.print(json.toJSONString());
 		}
-		
+
 		out.flush();
 		out.close();
-		
 	}
-
-
 }

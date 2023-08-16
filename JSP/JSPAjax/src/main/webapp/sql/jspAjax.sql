@@ -43,3 +43,15 @@ select max(employee_id) + 1 from employees;
 
 -- 사원 삭제 쿼리문
 delete from employees where employee_id = ?;
+
+-- 사번으로 사원 검색
+select e.*, d.department_name from employees e inner join departments d
+on e.department_id = d.department_id where employee_id = ?;
+
+-- 사원 수정 쿼리문
+update employees set first_name = ?, last_name = ?, email = ?, phone_number = ?,
+hire_date = ?, job_id = ?, salary = ?, commission_pct = ?, manager_id = ?, 
+department_id = ?
+where employee_id = ?;
+
+select e.*, d.department_name from employees e inner join departments d on e.department_id = d.department_id where employee_id = 100;

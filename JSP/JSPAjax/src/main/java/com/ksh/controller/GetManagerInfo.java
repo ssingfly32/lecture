@@ -20,26 +20,28 @@ import org.json.simple.JSONObject;
 import com.google.gson.Gson;
 import com.ksh.dao.GetInfo;
 import com.ksh.etc.ResponseMessageCode;
-import com.ksh.vo.ManagerVo;
+import com.ksh.vo.ManagerVO;
 
 @WebServlet("/getManagerInfo.do")
 public class GetManagerInfo extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		
-		resp.setContentType("application/json; charset=utf-8");
+		resp.setContentType("application/json; charset=utf-8;");
 		PrintWriter out = resp.getWriter();
+		
 		try {
-			List<ManagerVo> lst = GetInfo.getInstance().getManagerInfo();
+			List<ManagerVO> lst = GetInfo.getInstance().getManagerInfo();
 			
 			Gson gson = new Gson();
 			
 			out.print(gson.toJson(lst));
 			
-			
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
+			
 			Map<String, String> jsonMap = new HashMap<String, String>();
 			jsonMap.put("count", "0");
 			jsonMap.put("createdTime", new Date(System.currentTimeMillis()).toLocaleString());
@@ -47,13 +49,14 @@ public class GetManagerInfo extends HttpServlet {
 			jsonMap.put("responseMsg", ResponseMessageCode.getMessage("01"));
 			jsonMap.put("exceptionMsg", e.getMessage());
 			
+			
+			
 			JSONObject json = new JSONObject(jsonMap);
 			out.print(json.toJSONString());
 		}
 		
 		out.flush();
 		out.close();
-		}
-	
+	}
 	
 }

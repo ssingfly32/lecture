@@ -1,12 +1,12 @@
 package com.ksh.vo;
 
-public class JobsVo {
+public class JobsVO {
 	private String job_id;
 	private String job_title;
 	private int min_salary;
 	private int max_salary;
-	
-	public JobsVo(String job_id, String job_title, int min_salary, int max_salary) {
+
+	public JobsVO(String job_id, String job_title, int min_salary, int max_salary) {
 		super();
 		this.job_id = job_id;
 		this.job_title = job_title;
@@ -48,10 +48,8 @@ public class JobsVo {
 
 	@Override
 	public String toString() {
-		return "JobsVo [job_id=" + job_id + ", job_title=" + job_title + ", min_salary=" + min_salary + ", max_salary="
+		return "JobsVO [job_id=" + job_id + ", job_title=" + job_title + ", min_salary=" + min_salary + ", max_salary="
 				+ max_salary + "]";
 	}
-	
-	
-	
+
 }

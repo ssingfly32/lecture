@@ -1,9 +1,10 @@
+
 package com.ksh.vo;
 
-public class DepartmentVo {
+public class DeptVO {
 	private int department_id;
 	private String department_name;
-	public DepartmentVo(int department_id, String department_name) {
+	public DeptVO(int department_id, String department_name) {
 		super();
 		this.department_id = department_id;
 		this.department_name = department_name;
@@ -22,7 +23,7 @@ public class DepartmentVo {
 	}
 	@Override
 	public String toString() {
-		return "DepartmentVo [department_id=" + department_id + ", department_name=" + department_name + "]";
+		return "DeptVO [department_id=" + department_id + ", department_name=" + department_name + "]";
 	}
 	
 	

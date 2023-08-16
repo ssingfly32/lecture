@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.naming.NamingException;
@@ -18,32 +17,30 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
-import com.ksh.dao.GetInfo;
+import com.ksh.dao.EmployeeCRUD;
 import com.ksh.etc.ResponseMessageCode;
-import com.ksh.vo.JobsVO;
+import com.ksh.vo.Employee;
 
 /**
- * Servlet implementation class GetJobsInfo
+ * Servlet implementation class SearchEmployeeByEmpNo
  */
-@WebServlet("/getJobsInfo.do")
-public class GetJobsInfo extends HttpServlet {
+@WebServlet("/getEmpByEmpNo.do")
+public class SearchEmployeeByEmpNo extends HttpServlet {
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
 		response.setContentType("application/json; charset=utf-8;");
 		PrintWriter out = response.getWriter();
 		
+		int empNo = Integer.parseInt(request.getParameter("empNo"));
+		
 		try {
-			List<JobsVO> lst = GetInfo.getInstance().getJobsInfo();
-			
-			JobsVO job = new JobsVO("prog", "programmer", 5000, 100000);
+			Employee emp = EmployeeCRUD.getInstance().getEmployeeByEmpNo(empNo);
 			
 			Gson gson = new Gson();
 			
-			out.print(gson.toJson(lst));
-			
-			
+			out.print(gson.toJson(emp));
 			
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
@@ -63,6 +60,7 @@ public class GetJobsInfo extends HttpServlet {
 		
 		out.flush();
 		out.close();
+		
 	}
 
 }
