@@ -1,5 +1,8 @@
 package com.miniproj.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -21,8 +24,21 @@ public class MemberCRUD implements MemberDAO {
 	
 	@Override
 	public Member duplicateUserId(String tmpUserId) throws NamingException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Member result = null;
+		
+		Connection con = DBConnection.getInstance().dbConnect();
+		
+		String query = "select * from member where userId = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		
+		pstmt.setString(1, tmpUserId);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			result = new Member(rs.getString("userId"), rs.getString("userPwd"), rs.getString("userEmail"), 
+					rs.getTimestamp("registerDate"), rs.getString("userImg"), rs.getInt("userPoint"));
+		}
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+		return result;
 	}
 
 }
