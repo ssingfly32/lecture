@@ -7,9 +7,9 @@ public class Member {
 	private String userPwd;
 	private String userEmail;
 	private Timestamp registerDate;
-	private String userImg;
+	private int userImg;
 	private int userPoint;
-	public Member(String userId, String userPwd, String userEmail, Timestamp registerDate, String userImg,
+	public Member(String userId, String userPwd, String userEmail, Timestamp registerDate, int userImg,
 			int userPoint) {
 		super();
 		this.userId = userId;
@@ -43,10 +43,10 @@ public class Member {
 	public void setRegisterDate(Timestamp registerDate) {
 		this.registerDate = registerDate;
 	}
-	public String getUserImg() {
+	public int getUserImg() {
 		return userImg;
 	}
-	public void setUserImg(String userImg) {
+	public void setUserImg(int userImg) {
 		this.userImg = userImg;
 	}
 	public int getUserPoint() {
