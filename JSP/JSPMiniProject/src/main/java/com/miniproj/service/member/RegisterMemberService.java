@@ -114,9 +114,7 @@ public class RegisterMemberService implements MemberService {
 			if(uf != null) {	// 업로드된 파일이 있는 경우
 				uf.setNewFileName("memberImg/" + uf.getNewFileName());
 				result = mdao.registerMemberWithFile(uf, new Member(userId, userPwd, email, null, -1, -1), "회원가입", 100);
-				
-				
-				
+			
 			} else {	// 업로드된 파일이 없는 경우
 				result = mdao.registermember(new Member(userId, userPwd, email, null, -1, -1), "회원가입", 100);
 			}
