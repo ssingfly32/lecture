@@ -27,7 +27,7 @@
 				url : 'sendMail.mem', // 데이터를 수신받을 서버 주소
 				type : 'get', // 통신방식(GET, POST, PUT, DELETE)
 				data : {
-					"tmpUserEmail" : $('#userEmail').val()
+					"tmpUserEmail" : $('#iuserEmail').val()
 				},
 				dataType : 'json',
 				async : false, // 데이터가 오면 실행해야해서
@@ -92,7 +92,7 @@
 
 	<div class="container">
 		<h1>마이 페이지</h1>
-		<!--  <div>${requestScope.memberInfo }</div>-->
+		<div>${requestScope.memberInfo }</div>
 
 		<div class="userInfo">
 			<div class="mb-3 mt-3 userPhoto">
@@ -158,11 +158,11 @@
 				</div>
 
 				<!-- Modal body -->
-				<form action="" method="post">
+				<form action="updateEmail.mem" method="post">
 					<div class="modal-body">
 						<div class="mb-3">
 							<label for="userEmail" class="form-label">Email:</label> <input
-								type="text" class="form-control" id="iuserEmail" name="userEmail">
+								type="text" class="form-control" id="iuserEmail" name="iuserEmail">
 							<button type="button" class="btn btn-info sendMail">이메일인증</button>
 							<div class='codeDiv' style="display: none;">
 								<input type="text" class="form-control" id="mailcode"
