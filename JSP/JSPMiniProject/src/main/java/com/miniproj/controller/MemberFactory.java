@@ -2,12 +2,19 @@ package com.miniproj.controller;
 
 import com.miniproj.service.MemberService;
 import com.miniproj.service.member.ConfirmMailCodeService;
+import com.miniproj.service.member.DefaultImageService;
 import com.miniproj.service.member.DuplicateUserIdService;
+import com.miniproj.service.member.LoginMemberService;
+import com.miniproj.service.member.LogoutMemberService;
+import com.miniproj.service.member.MyPageService;
 import com.miniproj.service.member.RegisterMemberService;
 import com.miniproj.service.member.SendMailService;
 
 public class MemberFactory {
 	private static MemberFactory instance = null;
+	
+	private boolean isRedirect;	// redirect 할 것인지 말 것인지
+	private String whereIsGo;	// 어느 view단으로 이동할 것인지
 	
 	private MemberFactory() {}
 	
@@ -18,6 +25,24 @@ public class MemberFactory {
 		return instance;
 	}
 	
+	
+	
+	public boolean isRedirect() {
+		return isRedirect;
+	}
+
+	public void setRedirect(boolean isRedirect) {
+		this.isRedirect = isRedirect;
+	}
+
+	public String getWhereIsGo() {
+		return whereIsGo;
+	}
+
+	public void setWhereIsGo(String whereIsGo) {
+		this.whereIsGo = whereIsGo;
+	}
+
 	// command를 매개변수로 받아 해당 기능을 수행하는 객체를 반환함.
 	public MemberService getService(String command) {
 		MemberService result = null;
@@ -32,6 +57,14 @@ public class MemberFactory {
 			result = new SendMailService();
 		} else if (command.equals("/member/confirmCode.mem")) {
 			result = new ConfirmMailCodeService();
+		} else if (command.equals("/member/login.mem")) {
+			result = new LoginMemberService();
+		} else if (command.equals("/member/logout.mem")) {
+			result = new LogoutMemberService();
+		} else if (command.equals("/member/myPage.mem")) {
+			result = new MyPageService();
+		} else if (command.equals("/member/defaultImage.mem")) {
+			result = new DefaultImageService();
 		}
 		return result;
 	}

@@ -44,10 +44,15 @@ public class MemberServlet extends HttpServlet {
 		
 		// MemberService 객체가 가지고 있는 공통의 메서드 호출
 		// 실질적으로 executeService() 메서드에서 request / response 처리를 한다.
-		if(mf != null) { // 아직 response 처리가 완료 되지 않았음
+		if(service != null) { // 아직 response 처리가 완료 되지 않았음
 			mf = service.executeService(request, response);
 			
 		}
+		// mf == null ? ajax->json으로 반환할 경우에는 mf = null
+		if (mf != null && mf.isRedirect()) {
+			response.sendRedirect(mf.getWhereIsGo());
+		} 
+		
 	}
 
 }

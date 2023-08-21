@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
 import com.miniproj.etc.UploadedFile;
 import com.miniproj.vo.Member;
+import com.miniproj.vo.PointLog;
 
 public class MemberCRUD implements MemberDAO {
    private static MemberCRUD instance = null;
@@ -134,6 +137,7 @@ public class MemberCRUD implements MemberDAO {
    public int insertPointLog(Connection con, String userId, String why, int howmuch)
          throws NamingException, SQLException {
       int result = -1;
+      
       String query = "insert into pointlog(why, howmuch, who) values(?, ?, ?)";
       PreparedStatement pstmt = con.prepareStatement(query);
       pstmt.setString(1, why);
@@ -183,4 +187,117 @@ public class MemberCRUD implements MemberDAO {
       
       return result;   // 가입된 회원의 명 수(1명)
    }
+
+@Override
+public Member loginMember(String userId, String userPwd) throws NamingException, SQLException {
+	Member loginMember = null;
+	
+	Connection con = DBConnection.getInstance().dbConnect();
+	String query = "select * from member m inner join uploadedfile u on m.userImg = u.no where userId = ? and userPwd = sha1(md5(?));";
+	
+	PreparedStatement pstmt = con.prepareStatement(query);
+	pstmt.setString(1, userId);
+	pstmt.setString(2, userPwd);
+	
+	ResultSet rs = pstmt.executeQuery();
+	
+	while(rs.next()) {
+		loginMember = new Member(rs.getString("userId"), 
+				rs.getString("userPwd"), 
+				rs.getString("userEmail"), 
+				rs.getTimestamp("registerDate") , 
+				rs.getInt("userImg"), 
+				rs.getInt("userPoint"),
+				rs.getString("newFileName"),
+				rs.getString("isAdmin"));
+	}
+	DBConnection.getInstance().dbClose(rs,pstmt, con);
+	
+	
+	return loginMember;
+}
+
+@Override
+public int addPointToMember(String userId, int howmuch, String why) throws NamingException, SQLException {
+	int result = -1;
+	
+	Connection con = DBConnection.getInstance().dbConnect();
+	con.setAutoCommit(false);
+	String query = "update member set userPoint = userPoint + ? where userId = ?";
+	
+	PreparedStatement pstmt = con.prepareStatement(query);
+	pstmt.setInt(1, howmuch );
+	pstmt.setString(2, userId);
+	
+	result = pstmt.executeUpdate();
+	
+	pstmt.close();
+	if(result == 1) {
+		int afterPointLog = insertPointLog(con, userId, why, howmuch);
+		
+		if(afterPointLog == 1) {
+			con.commit();
+			result = 0;
+		} else {
+			con.rollback();
+		}
+	}
+	
+	con.setAutoCommit(true);
+	con.close();
+	
+	return result;
+	
+}
+
+@Override
+public Member getMemberInfo(String userId) throws NamingException, SQLException {
+	Member memberInfo = null;
+	
+	Connection con = DBConnection.getInstance().dbConnect();
+	String query = "select m.*, u.newFileName from member m inner join uploadedfile u \r\n"
+			+ "on m.userImg = u.no where userId = ?";
+	
+	PreparedStatement pstmt = con.prepareStatement(query);
+	pstmt.setString(1, userId);
+
+	
+	ResultSet rs = pstmt.executeQuery();
+	
+	while(rs.next()) {
+		memberInfo = new Member(rs.getString("userId"), 
+				rs.getString("userPwd"), 
+				rs.getString("userEmail"), 
+				rs.getTimestamp("registerDate") , 
+				rs.getInt("userImg"), 
+				rs.getInt("userPoint"),
+				rs.getString("newFileName"),
+				rs.getString("isAdmin"));
+	}
+	DBConnection.getInstance().dbClose(rs,pstmt, con);
+	
+	
+	return memberInfo;
+}
+
+@Override
+public List<PointLog> getPointLog(String userId) throws NamingException, SQLException {
+	 List<PointLog> pl = new ArrayList<PointLog>();
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select * from pointlog where who = ?";
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, userId);
+	
+		
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			pl.add(new PointLog(rs.getInt("id"), rs.getTimestamp("when"), rs.getString("why"), rs.getInt("howmuch"), rs.getString("who")));
+		}
+		DBConnection.getInstance().dbClose(rs,pstmt, con);
+	
+	return pl;
+}
+
 }

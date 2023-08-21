@@ -9,8 +9,24 @@ public class Member {
 	private Timestamp registerDate;
 	private int userImg;
 	private int userPoint;
-	public Member(String userId, String userPwd, String userEmail, Timestamp registerDate, int userImg,
-			int userPoint) {
+	private String memberImg;
+	private String isAdmin;
+	
+	public Member(String userId, String userPwd, String userEmail, Timestamp registerDate, int userImg, int userPoint,
+			String memberImg, String isAdmin) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userEmail = userEmail;
+		this.registerDate = registerDate;
+		this.userImg = userImg;
+		this.userPoint = userPoint;
+		this.memberImg = memberImg;
+		this.isAdmin = isAdmin;
+	}
+
+
+	public Member(String userId, String userPwd, String userEmail, Timestamp registerDate, int userImg, int userPoint) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -19,6 +35,32 @@ public class Member {
 		this.userImg = userImg;
 		this.userPoint = userPoint;
 	}
+	
+	
+	public Member(String userId, String userPwd, String userEmail, Timestamp registerDate, int userImg, int userPoint,
+			String memberImg) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userEmail = userEmail;
+		this.registerDate = registerDate;
+		this.userImg = userImg;
+		this.userPoint = userPoint;
+		this.memberImg = memberImg;
+	}
+
+
+	
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+
 	public String getUserId() {
 		return userId;
 	}
@@ -55,11 +97,24 @@ public class Member {
 	public void setUserPoint(int userPoint) {
 		this.userPoint = userPoint;
 	}
+	public String getMemberImg() {
+		return memberImg;
+	}
+	public void setMemberImg(String memberImg) {
+		this.memberImg = memberImg;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Member [userId=" + userId + ", userPwd=" + userPwd + ", userEmail=" + userEmail + ", registerDate="
-				+ registerDate + ", userImg=" + userImg + ", userPoint=" + userPoint + "]";
+				+ registerDate + ", userImg=" + userImg + ", userPoint=" + userPoint + ", memberImg=" + memberImg
+				+ ", isAdmin=" + isAdmin + "]";
 	}
+
+
+	
+	
 	
 	
 }
