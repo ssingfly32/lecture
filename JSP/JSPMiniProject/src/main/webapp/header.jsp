@@ -32,7 +32,7 @@
 			<div class="collapse navbar-collapse" id="mynavbar">
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="javascript:void(0)">게시판</a></li>
+						href="${contextPath }/board/listAll.bo">게시판</a></li>
 					<c:choose>
 						<c:when test='${sessionScope.loginUser == null}'>
 							<li class="nav-item"><a class="nav-link"

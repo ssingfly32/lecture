@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.miniproj.controller.MemberFactory;
+import com.miniproj.dao.MemberCRUD;
+import com.miniproj.dao.MemberDAO;
 import com.miniproj.service.MemberService;
 
 public class DefaultImageService implements MemberService {
@@ -16,9 +18,11 @@ public class DefaultImageService implements MemberService {
 			throws ServletException, IOException {
 		
 		String userId = request.getParameter("userId");
-		MemberFactory mf = MemberFactory.getInstance();
+		MemberDAO mdao = MemberCRUD.getInstance();
+//		mdao.defaultImage(userId);
+		return null;
 		
-		return mf;
+		
 	}
 
 }

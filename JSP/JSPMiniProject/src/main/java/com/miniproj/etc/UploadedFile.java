@@ -5,8 +5,23 @@ public class UploadedFile {
 	private String ext;
 	private String newFileName;
 	private long size;
+	private int boardNo;
 	private String base64String;
 	
+	
+	
+	public UploadedFile(String originalFileName, String ext, String newFileName, long size, int boardNo,
+			String base64String) {
+		super();
+		this.originalFileName = originalFileName;
+		this.ext = ext;
+		this.newFileName = newFileName;
+		this.size = size;
+		this.boardNo = boardNo;
+		this.base64String = base64String;
+	}
+
+
 	public UploadedFile(String originalFileName, String ext, String newFileName, long size) {
 		super();
 		this.originalFileName = originalFileName;
@@ -76,11 +91,24 @@ public class UploadedFile {
 	}
 
 
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "UploadedFile [originalFileName=" + originalFileName + ", ext=" + ext + ", newFileName=" + newFileName
-				+ ", size=" + size + ", base64String=" + base64String + "]";
+				+ ", size=" + size + ", boardNo=" + boardNo + ", base64String=" + base64String + "]";
 	}
+
+
+	
 
 
 	

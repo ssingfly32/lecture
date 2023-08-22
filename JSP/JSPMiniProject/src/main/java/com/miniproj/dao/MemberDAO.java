@@ -41,7 +41,7 @@ public interface MemberDAO {
 	// 회원의 멤버포인트 내역 가져오기
 	List<PointLog> getPointLog(String userId) throws NamingException, SQLException;
 
-	int updateEmail(String userId);
+	int updateEmail(String userId, String userEmail) throws NamingException, SQLException;
 	
 	
 	

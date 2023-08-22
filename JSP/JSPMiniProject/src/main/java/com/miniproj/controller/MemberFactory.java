@@ -9,7 +9,7 @@ import com.miniproj.service.member.LogoutMemberService;
 import com.miniproj.service.member.MyPageService;
 import com.miniproj.service.member.RegisterMemberService;
 import com.miniproj.service.member.SendMailService;
-import com.miniproj.service.member.updateEmailService;
+import com.miniproj.service.member.UpdateEmailService;
 
 public class MemberFactory {
 	private static MemberFactory instance = null;
@@ -67,7 +67,7 @@ public class MemberFactory {
 		} else if (command.equals("/member/defaultImage.mem")) {
 			result = new DefaultImageService();
 		} else if (command.equals("/member/updateEmail.mem")) {
-			result = new updateEmailService();
+			result = new UpdateEmailService();
 		}
 		return result;
 	}

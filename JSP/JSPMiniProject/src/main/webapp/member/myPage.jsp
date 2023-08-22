@@ -17,60 +17,60 @@
 	function updateEmailClose() {
 		$('#updateEmailModal').hide();
 	}
-	
-	$(function(){
+
+	$(function() {
 		// 아이디 작성을 마쳤을 때
-	
-	$('.sendMail').click(function() {
-		if($('#iuserEmail').val() != '') {
+
+		$('.sendMail').click(function() {
+			if ($('#iuserEmail').val() != '') {
+				$.ajax({
+					url : 'sendMail.mem', // 데이터를 수신받을 서버 주소
+					type : 'get', // 통신방식(GET, POST, PUT, DELETE)
+					data : {
+						"tmpUserEmail" : $('#iuserEmail').val()
+					},
+					dataType : 'json',
+					async : false, // 데이터가 오면 실행해야해서
+					success : function(data) {
+						console.log(data);
+						if (data.status == "success") {
+							alert('메일 발송 성공')
+						} else if (data.status == "fail") {
+							alert('메일 발송 실패')
+						}
+
+					},
+				});
+				$('.codeDiv').show();
+
+			} else {
+				alert('이메일 주소를 기입하고 인증 버튼을 눌러주세요.');
+				$('#userEmail').focus();
+			}
+		});
+
+		// 코드 확인 버튼 클릭 시
+		$('.confirmCode').click(function() {
+
 			$.ajax({
-				url : 'sendMail.mem', // 데이터를 수신받을 서버 주소
+				url : 'confirmCode.mem', // 데이터를 수신받을 서버 주소
 				type : 'get', // 통신방식(GET, POST, PUT, DELETE)
 				data : {
-					"tmpUserEmail" : $('#iuserEmail').val()
+					"tmpMailCode" : $('#mailcode').val()
 				},
 				dataType : 'json',
 				async : false, // 데이터가 오면 실행해야해서
 				success : function(data) {
 					console.log(data);
-					if(data.status == "success") {
-						alert('메일 발송 성공')
-					} else if(data.status == "fail") {
-						alert('메일 발송 실패')
+					if (data.activation == "success") {
+						MailValid = true;
+						alert('메일인증성공');
 					}
-					
+
 				},
 			});
-		$('.codeDiv').show();
-			
-		} else {
-			alert('이메일 주소를 기입하고 인증 버튼을 눌러주세요.');
-			$('#userEmail').focus();
-		}
-	});
-	
-	// 코드 확인 버튼 클릭 시
-	$('.confirmCode').click(function() {
-		
-		$.ajax({
-			url : 'confirmCode.mem', // 데이터를 수신받을 서버 주소
-			type : 'get', // 통신방식(GET, POST, PUT, DELETE)
-			data : {
-				"tmpMailCode" : $('#mailcode').val()
-			},
-			dataType : 'json',
-			async : false, // 데이터가 오면 실행해야해서
-			success : function(data) {
-				console.log(data);
-				if(data.activation == "success") {
-					MailValid = true;
-					alert('메일인증성공');
-				}
-				
-			},
 		});
 	});
-});
 </script>
 <style>
 .userPhoto {
@@ -161,8 +161,9 @@
 				<form action="updateEmail.mem" method="post">
 					<div class="modal-body">
 						<div class="mb-3">
-							<label for="userEmail" class="form-label">Email:</label> <input
-								type="text" class="form-control" id="iuserEmail" name="iuserEmail">
+							<label for="userEmail" class="form-label">변경할 Email:</label> <input
+								type="text" class="form-control" id="iuserEmail"
+								name="iuserEmail">
 							<button type="button" class="btn btn-info sendMail">이메일인증</button>
 							<div class='codeDiv' style="display: none;">
 								<input type="text" class="form-control" id="mailcode"
