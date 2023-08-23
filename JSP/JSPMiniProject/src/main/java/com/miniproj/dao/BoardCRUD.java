@@ -39,7 +39,7 @@ public class BoardCRUD implements BoardDAO {
 		while (rs.next()) {
 			lst.add(new Board(rs.getInt("no"), rs.getString("writer"), rs.getString("title"),
 					rs.getTimestamp("postDate"), new StringBuilder(rs.getString("content")), rs.getInt("readcount"),
-					rs.getInt("likecount"), rs.getInt("ref"), rs.getInt("step"), rs.getInt("reforder")));
+					rs.getInt("likecount"), rs.getInt("ref"), rs.getInt("step"), rs.getInt("reforder"), rs.getString("isDelete")));
 		}
 		DBConnection.getInstance().dbClose(rs, pstmt, con);
 		return lst;
@@ -138,20 +138,173 @@ public class BoardCRUD implements BoardDAO {
 		con.setAutoCommit(false);
 
 		if (insertBoard(tmpBoard, con)) {
-			
-				if (MemberCRUD.getInstance().addPointToMember(tmpBoard.getWriter(), 2, "게시물작성", con)) {
-					result = 0;
-					con.commit();
-				} else {
-					con.rollback();
-				}
-			
+
+			if (MemberCRUD.getInstance().addPointToMember(tmpBoard.getWriter(), 2, "게시물작성", con)) {
+				result = 0;
+				con.commit();
+			} else {
+				con.rollback();
+			}
+
 		} else {
 			con.rollback();
 		}
 
 		con.setAutoCommit(true);
 		con.close();
+		return result;
+	}
+
+	@Override
+	public boolean selectReadCountProcess(String userIp, int no) throws NamingException, SQLException {
+		boolean result = false;
+
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select * from readcountprocess where ipAddr = ? and boardNo = ?";
+
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, userIp);
+		pstmt.setInt(2, no);
+
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			result = true;
+		}
+
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+
+		return result;
+	}
+
+	@Override
+	public int selectHourDiff(String userIp, int no) throws NamingException, SQLException {
+		int result = -1;
+
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "SELECT TIMESTAMPDIFF(HOUR, (select readTime from readcountprocess where "
+				+ "ipAddr = ? and boardNo = ?), now()) as hourDiff";
+
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, userIp);
+		pstmt.setInt(2, no);
+
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			result = rs.getInt("hourDiff");
+		}
+
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+
+		return result;
+	}
+
+	@Override
+	public int readCountProcessWithReadCntInc(String userIp, int no, String how) throws NamingException, SQLException {
+		
+		int result = -1;
+		
+		Connection con = DBConnection.getInstance().dbConnect();
+		con.setAutoCommit(false);
+		
+		String query = "";
+		
+		PreparedStatement pstmt = null;
+		if(how.equals("insert")) {
+			query = "INSERT INTO readcountprocess (ipAddr, boardNo) VALUES (?, ?)";
+			
+			pstmt = con.prepareStatement(query);
+		} else if (how.equals("update")) {
+			query="update readcountprocess set readTime = now() where ipAddr = ? and boardNo = ?";
+		
+			pstmt = con.prepareStatement(query);
+		}
+		pstmt.setString(1, userIp);
+		pstmt.setInt(2, no);
+		
+		if (pstmt.executeUpdate() ==1) {
+			// 조회수 증가
+			if(updateReadCount(no, con)) {
+				result = 0;
+				con.commit();
+				
+			} else {
+				con.rollback();
+			}
+		}
+
+		con.setAutoCommit(true);
+		con.close();
+		return result;
+	}
+
+	private boolean updateReadCount(int no, Connection con) throws SQLException {
+		boolean result = false;
+		String query = "update board set readcount = readcount + 1 where no = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, no);
+		
+		if(pstmt.executeUpdate() == 1) {
+			result = true;
+		};
+		pstmt.close();
+		return result;
+	}
+
+	@Override
+	public Board selectBoardByNo(int no) throws NamingException, SQLException {
+		Board board = null;
+
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select * from board where no = ?;";
+		PreparedStatement pstmt = con.prepareCall(query);
+		pstmt.setInt(1, no);
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			board = new Board(rs.getInt("no"), rs.getString("writer"), rs.getString("title"),
+					rs.getTimestamp("postDate"), new StringBuilder(rs.getString("content")), rs.getInt("readcount"),
+					rs.getInt("likecount"), rs.getInt("ref"), rs.getInt("step"), rs.getInt("reforder"), rs.getString("isDelete"));
+		}
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+		return board;
+	}
+
+	@Override
+	public UploadedFile getFile(int no) throws NamingException, SQLException {
+		UploadedFile uf = null;
+		
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select * from uploadedfile where boardNo = ?";
+
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, no);
+		
+
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			uf = new UploadedFile(rs.getString("originalFileName"), rs.getString("ext"), "uploads/" + rs.getString("newFileName"), 
+					rs.getInt("fileSize"), rs.getInt("boardNo"), rs.getString("base64String"));
+		}
+
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+		return uf;
+	}
+
+	@Override
+	public boolean deleteBoard(int boardNo) throws NamingException, SQLException {
+		boolean result = false;
+		
+		Connection con = DBConnection.getInstance().dbConnect();
+		
+		String query = "update board set isDelete = 'Y' where no = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, boardNo);
+		
+		if(pstmt.executeUpdate() == 1) {
+			result = true;
+		};
+		
+		DBConnection.getInstance().dbClose(pstmt, con);
 		return result;
 	}
 

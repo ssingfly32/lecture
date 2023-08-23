@@ -318,6 +318,54 @@ public class MemberCRUD implements MemberDAO {
 		DBConnection.getInstance().dbClose(pstmt, con);
 		return result;
 	}
+
+	@Override
+	public int defaultImage(String userId, int no) throws NamingException, SQLException {
+		Connection con = DBConnection.getInstance().dbConnect();
+		con.setAutoCommit(false);
+		String query = "update member set userImg = 1 where userId = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, userId);
+		
+		pstmt.executeUpdate();
+		
+		int result = deleteImageDB(no, con);
+		pstmt.close();
+		if (result == 1) {
+			con.commit();
+		} else {
+			con.rollback();
+			System.out.println(result + "롤백됐습니다.");
+		}
+		con.setAutoCommit(true);
+		con.close();
+		return result;
+		
+	}
+
+	@Override
+	public int changeImage(String userId) throws NamingException, SQLException {
+		int result = -1;
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "update member set userImg = ";
+		
+		return result;
+	}
+
+	
+	public int deleteImageDB(int no, Connection con) throws NamingException, SQLException {
+		
+		int result = -1;
+		
+		String query = "delete from uploadedfile where no = ?";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, no);
+		result = pstmt.executeUpdate();
+		pstmt.close();
+		System.out.println("deleteImageDB result : " + result);
+		
+		return result;
+	}
 	
 	
 

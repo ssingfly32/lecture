@@ -13,8 +13,10 @@ public class Board {
 	private int ref;
 	private int step;
 	private int reforder;
+	private String isDelete;
+	
 	public Board(int no, String writer, String title, Timestamp postDate, StringBuilder content, int readcount,
-			int likecount, int ref, int step, int reforder) {
+			int likecount, int ref, int step, int reforder, String isDelete) {
 		super();
 		this.no = no;
 		this.writer = writer;
@@ -26,7 +28,20 @@ public class Board {
 		this.ref = ref;
 		this.step = step;
 		this.reforder = reforder;
+		this.isDelete = isDelete;
 	}
+	
+	
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
+
+
 	public int getNo() {
 		return no;
 	}
@@ -87,12 +102,15 @@ public class Board {
 	public void setReforder(int reforder) {
 		this.reforder = reforder;
 	}
+
+
 	@Override
 	public String toString() {
 		return "Board [no=" + no + ", writer=" + writer + ", title=" + title + ", postDate=" + postDate + ", content="
 				+ content + ", readcount=" + readcount + ", likecount=" + likecount + ", ref=" + ref + ", step=" + step
-				+ ", reforder=" + reforder + "]";
+				+ ", reforder=" + reforder + ", isDelete=" + isDelete + "]";
 	}
+	
 	
 	
 }

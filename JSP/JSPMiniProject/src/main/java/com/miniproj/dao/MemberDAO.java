@@ -41,7 +41,15 @@ public interface MemberDAO {
 	// 회원의 멤버포인트 내역 가져오기
 	List<PointLog> getPointLog(String userId) throws NamingException, SQLException;
 
+	// 이메일 업데이트
 	int updateEmail(String userId, String userEmail) throws NamingException, SQLException;
+
+	// 이미지 초기화
+	int defaultImage(String userId, int userImg) throws NamingException, SQLException;
+
+	// 유저 이미지 변경
+	int changeImage(String userId) throws NamingException, SQLException;
+	
 	
 	
 	

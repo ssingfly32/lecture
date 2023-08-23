@@ -42,7 +42,7 @@
 			</div>
 			<div class="mb-3">
 				<button type="reset" class="btn btn-secondary">취소</button>
-				<button type="submit" class="btn btn-success" onclick="return validCheck();">저장</button>
+				<button type="submit" class="btn btn-success">저장</button>
 			</div>
 		</form>
 	</div>

@@ -92,7 +92,7 @@ public class WriteBoardService implements BoardService {
 		content = content.replace("\r\n", "<br />");
 		
 		
-		Board tmpBoard = new Board(-1, writer, title, null, new StringBuilder(content), -1, -1, -1, -1, -1);
+		Board tmpBoard = new Board(-1, writer, title, null, new StringBuilder(content), -1, -1, -1, -1, -1, null);
 
 		// DAO단 호출
 		BoardDAO dao = BoardCRUD.getInstance();

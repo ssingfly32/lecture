@@ -1,6 +1,8 @@
 package com.miniproj.controller;
 
 import com.miniproj.service.BoardService;
+import com.miniproj.service.board.DeleteBoardService;
+import com.miniproj.service.board.GetBoardByNoService;
 import com.miniproj.service.board.GetEntireBoardService;
 import com.miniproj.service.board.WriteBoardService;
 
@@ -45,6 +47,10 @@ public class BoardFactory {
 			service = new GetEntireBoardService();
 		} else if (command.equals("/board/writeBoard.bo")) {
 			service = new WriteBoardService();
+		} else if (command.equals("/board/viewBoard.bo")) {
+			service = new GetBoardByNoService();
+		} else if (command.equals("/board/delBoard.bo")) {
+			service = new DeleteBoardService();
 		}
 		return service;//서블렛으로 반환
 	}

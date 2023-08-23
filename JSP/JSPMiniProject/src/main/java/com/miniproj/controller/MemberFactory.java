@@ -1,6 +1,8 @@
 package com.miniproj.controller;
 
 import com.miniproj.service.MemberService;
+
+import com.miniproj.service.member.ChangeImageService;
 import com.miniproj.service.member.ConfirmMailCodeService;
 import com.miniproj.service.member.DefaultImageService;
 import com.miniproj.service.member.DuplicateUserIdService;
@@ -68,6 +70,8 @@ public class MemberFactory {
 			result = new DefaultImageService();
 		} else if (command.equals("/member/updateEmail.mem")) {
 			result = new UpdateEmailService();
+		} else if (command.equals("/member/changeImage.mem")) {
+			result = new ChangeImageService();
 		}
 		return result;
 	}

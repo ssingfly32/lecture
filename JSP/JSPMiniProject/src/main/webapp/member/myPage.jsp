@@ -10,6 +10,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
+
+	function changeImgModal() {
+		$('#changeImageModal').show();
+	}
 	function updateEmail() {
 		$('#updateEmailModal').show();
 	}
@@ -71,17 +75,22 @@
 			});
 		});
 	});
+	
 </script>
 <style>
-.userPhoto {
-	display: flex;
-	justify-content: center;
-}
 
-.userPhoto img {
-	width: 50px;
-	height: 50px;
-}
+	.changeImage {
+		cursor: pointer;
+	}
+	.userPhoto {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.userPhoto img {
+		width: 50px;
+		height: 50px;
+	}
 </style>
 </head>
 <body>
@@ -93,6 +102,7 @@
 	<div class="container">
 		<h1>마이 페이지</h1>
 		<div>${requestScope.memberInfo }</div>
+		<div>${sessionScope.loginUser }</div>
 
 		<div class="userInfo">
 			<div class="mb-3 mt-3 userPhoto">
@@ -101,8 +111,8 @@
 
 			</div>
 			<div>
-				<a href="">이미지 변경</a> <a
-					href="${contextPath }/member/defaultImage.mem">이미지 초기화</a>
+				<a onclick="changeImgModal();"><span class="badge bg-info changeImage">이미지 변경</span></a> <a
+					href="${contextPath }/member/defaultImage.mem"><span class="badge bg-info">이미지 초기화</span></a>
 			</div>
 			<div class="mb-3 mt-3">
 
@@ -145,7 +155,7 @@
 			</table>
 		</div>
 	</div>
-	<!-- The Modal -->
+	<!-- The 이메일 변경 Modal -->
 	<div class="modal" id="updateEmailModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -173,6 +183,39 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success"
+							data-bs-dismiss="modal" >변경</button>
+						<button type="button" class="btn btn-danger"
+							data-bs-dismiss="modal" onclick="updateEmailClose();">취소</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- The 이미지 변경 Modal -->
+	<div class="modal" id="changeImageModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="changeImage.mem" method="post">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">이미지 변경</h4>
+						<button type="button" class="btn-close modifyModalClose"
+							data-bs-dismiss="modifyEmpModal"></button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="cuserImg" class="form-label">변경할 이미지:</label> <input
+								type="file" class="form-control" id="cuserImg" name="cuserImg">
+						</div>
+					</div>
+
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
