@@ -4,6 +4,7 @@ import com.miniproj.service.BoardService;
 import com.miniproj.service.board.DeleteBoardService;
 import com.miniproj.service.board.GetBoardByNoService;
 import com.miniproj.service.board.GetEntireBoardService;
+import com.miniproj.service.board.ReplyBoardService;
 import com.miniproj.service.board.WriteBoardService;
 
 public class BoardFactory {
@@ -51,6 +52,8 @@ public class BoardFactory {
 			service = new GetBoardByNoService();
 		} else if (command.equals("/board/delBoard.bo")) {
 			service = new DeleteBoardService();
+		} else if (command.equals("/board/reply.bo")) {
+			service = new ReplyBoardService();
 		}
 		return service;//서블렛으로 반환
 	}

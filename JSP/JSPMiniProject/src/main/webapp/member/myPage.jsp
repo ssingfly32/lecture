@@ -10,7 +10,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
-
+	let MailValid = false;
+	let SendMail = false;
 	function changeImgModal() {
 		$('#changeImageModal').show();
 	}
@@ -21,10 +22,14 @@
 	function updateEmailClose() {
 		$('#updateEmailModal').hide();
 	}
+	
+	function changeEmailClose() {
+		$('#changeImageModal').hide();
+	}
 
 	$(function() {
 		// 아이디 작성을 마쳤을 때
-
+		
 		$('.sendMail').click(function() {
 			if ($('#iuserEmail').val() != '') {
 				$.ajax({
@@ -42,7 +47,7 @@
 						} else if (data.status == "fail") {
 							alert('메일 발송 실패')
 						}
-
+						SendMail = true;
 					},
 				});
 				$('.codeDiv').show();
@@ -69,12 +74,24 @@
 					if (data.activation == "success") {
 						MailValid = true;
 						alert('메일인증성공');
+						validCheck();
 					}
 
 				},
 			});
 		});
+		
+		
 	});
+	
+		function validCheck() {
+			
+			if(MailValid && SendMail) {
+				$('.emailValid').show();
+			}
+			
+		}
+	
 	
 </script>
 <style>
@@ -128,10 +145,11 @@
 			<div class="mb-3">
 				<label for="userEmail" class="form-label">Email:</label> <input
 					type="text" class="form-control" id="userEmail" name="userEmail"
-					value="${requestScope.memberInfo.userEmail }">
+					value="${requestScope.memberInfo.userEmail }" readonly>
 				<button type="button" class="btn btn-info" onclick="updateEmail();">이메일
 					변경</button>
 			</div>
+			<div>사용가능한 총 포인트 : ${requestScope.memberInfo.userPoint } point <img alt="" src="${contextPath }/images/reward.png" width="25px"; /></div>
 
 		</div>
 		<div class="pointLog">
@@ -186,8 +204,8 @@
 
 					<!-- Modal footer -->
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success"
-							data-bs-dismiss="modal" >변경</button>
+						<button type="submit" class="btn btn-success emailValid"
+							data-bs-dismiss="modal" style="display: none;" >변경</button>
 						<button type="button" class="btn btn-danger"
 							data-bs-dismiss="modal" onclick="updateEmailClose();">취소</button>
 					</div>
@@ -222,7 +240,7 @@
 						<button type="submit" class="btn btn-success"
 							data-bs-dismiss="modal">변경</button>
 						<button type="button" class="btn btn-danger"
-							data-bs-dismiss="modal" onclick="updateEmailClose();">취소</button>
+							data-bs-dismiss="modal" onclick="changeEmailClose();">취소</button>
 					</div>
 				</form>
 			</div>

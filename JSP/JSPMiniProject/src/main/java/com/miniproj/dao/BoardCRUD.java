@@ -32,7 +32,7 @@ public class BoardCRUD implements BoardDAO {
 		List<Board> lst = new ArrayList<Board>();
 
 		Connection con = DBConnection.getInstance().dbConnect();
-		String query = "select * from board order by no desc";
+		String query = "select * from board order by ref desc, reforder asc";
 		PreparedStatement pstmt = con.prepareCall(query);
 		ResultSet rs = pstmt.executeQuery();
 
@@ -305,6 +305,73 @@ public class BoardCRUD implements BoardDAO {
 		};
 		
 		DBConnection.getInstance().dbClose(pstmt, con);
+		return result;
+	}
+
+
+	@Override
+	public boolean insertReplyTransaction(Board board) throws NamingException, SQLException {
+		boolean result = false;
+	
+		Connection con = DBConnection.getInstance().dbConnect();
+		con.setAutoCommit(false);
+		
+		
+		if(updateRefOrder(board, con) >= 0) {
+			if(insertReply(board, con) == 1) {
+				if(MemberCRUD.getInstance().addPointToMember(board.getWriter(), 1, "답글작성", con)) {
+					result = true;
+					con.commit();
+				} else {
+					con.rollback();
+				}
+				
+			} else {
+				con.rollback();
+			}
+		} else {
+			con.rollback();
+		}
+		
+		con.setAutoCommit(true);
+		con.close();
+		return result;
+	}
+
+	private int insertReply(Board board, Connection con) throws SQLException {
+		int result = -1;
+		String query = "insert into board(writer, title, content, ref, step, reforder) "
+				+ "values(?, ?, ?, ?, ?, ?)";
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, board.getWriter());
+		pstmt.setString(2, board.getTitle());
+		pstmt.setString(3, board.getContent().toString());
+		pstmt.setInt(4, board.getRef());
+		pstmt.setInt(5, board.getStep() + 1);
+		pstmt.setInt(6, board.getReforder() + 1);
+		
+		result = pstmt.executeUpdate();
+		
+		pstmt.close();
+		
+		return result;
+	}
+
+	private int updateRefOrder(Board board, Connection con) throws SQLException {
+		int result = -1;
+		
+		String query = "update board set reforder = reforder + 1 "
+				+ "where ref = ? and reforder > ?";
+		
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, board.getRef());
+		pstmt.setInt(2, board.getReforder());
+		
+		result = pstmt.executeUpdate();
+		
+		pstmt.close();
+		
 		return result;
 	}
 

@@ -34,6 +34,7 @@
 </style>
 </head>
 <body>
+	<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="container">
 		<h1>게시판 전체 목록 조회</h1>
@@ -57,11 +58,19 @@
 								<c:when test="${board.isDelete == 'N' }">
 								<tr id=`board${board.no }` class="board" onclick="location.href='viewBoard.bo?no=${board.no}';">
 									<td>${board.no }</td>
-									<td>${board.title }</td>
+									<td>
+										<c:if test="${board.step > 0 }">
+											<c:forEach var="i" begin="1" end="${board.step }" step="1">
+												<img alt="" src="${contextPath }/images/reply.png" width="15px"/>
+											</c:forEach>
+										</c:if>
+										${board.title }
+									</td>
 									<td>${board.writer }</td>
 									<td class="postDate">${board.postDate }</td>
 									<td>${board.readcount }</td>
 									<td>${board.likecount }</td>
+									
 								</tr>
 								</c:when>
 								<c:otherwise>
@@ -72,6 +81,7 @@
 									<td class="postDate">${board.postDate }</td>
 									<td>${board.readcount }</td>
 									<td>${board.likecount }</td>
+								
 								</tr>
 								</c:otherwise>
 							</c:choose>

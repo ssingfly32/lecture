@@ -43,13 +43,14 @@
 </script>
 </head>
 <body>
-	<jsp:include page="./../header.jsp"></jsp:include>
+	<c:if test="${param.no == '' or param.no == null }">
+		<c:redirect url="listAll.bo"></c:redirect>
+	</c:if>
 	<c:set var="contextPath" value="<%=request.getContextPath()%>" />
+	<jsp:include page="./../header.jsp"></jsp:include>
 
 	<div class="container">
 		<h1>게시판 글 조회</h1>
-
-
 		<div class="mb-3 mt-3">
 			<label for="boardNo" class="form-label">글번호 :</label> <input
 				type="text" class="form-control" id="boardNo"
@@ -93,7 +94,7 @@
 							onclick='showDeleteModal();'>삭제</button>
 
 					</c:if>
-					<button type="button" class="btn btn-success">답글달기</button>
+					<button type="button" class="btn btn-success" onclick="location.href='replyBoard.jsp?no=${requestScope.board.no }&ref=${requestScope.board.ref }&step=${requestScope.board.step }&reforder=${requestScope.board.reforder }';">답글달기</button>
 
 				</c:when>
 				<c:otherwise>
@@ -105,8 +106,6 @@
 			<button type="button" class="btn btn-info"
 				onclick="location.href='listAll.bo';">목록으로 가기</button>
 		</div>
-
-
 	</div>
 
 
@@ -133,7 +132,6 @@
 					<button type="button" class="btn btn-danger"
 						data-bs-dismiss="modal">취소</button>
 				</div>
-
 			</div>
 		</div>
 	</div>

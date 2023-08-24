@@ -39,4 +39,7 @@ public interface BoardDAO {
 	// 글 번호 해당 글을 삭제 처리
 	boolean deleteBoard(int boardNo)throws NamingException, SQLException;
 
+	// 답글을 저장
+	boolean insertReplyTransaction(Board board) throws NamingException, SQLException;
+
 }

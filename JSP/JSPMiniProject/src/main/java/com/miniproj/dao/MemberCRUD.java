@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import com.miniproj.etc.UploadedFile;
 import com.miniproj.vo.Member;
 import com.miniproj.vo.PointLog;
+import com.mysql.cj.protocol.Resultset;
 
 public class MemberCRUD implements MemberDAO {
 	private static MemberCRUD instance = null;
@@ -335,7 +336,6 @@ public class MemberCRUD implements MemberDAO {
 			con.commit();
 		} else {
 			con.rollback();
-			System.out.println(result + "롤백됐습니다.");
 		}
 		con.setAutoCommit(true);
 		con.close();
@@ -348,7 +348,7 @@ public class MemberCRUD implements MemberDAO {
 		int result = -1;
 		Connection con = DBConnection.getInstance().dbConnect();
 		String query = "update member set userImg = ";
-		
+		// 미완
 		return result;
 	}
 
@@ -362,10 +362,34 @@ public class MemberCRUD implements MemberDAO {
 		pstmt.setInt(1, no);
 		result = pstmt.executeUpdate();
 		pstmt.close();
-		System.out.println("deleteImageDB result : " + result);
 		
 		return result;
 	}
+	
+
+
+	@Override
+	public PointLog DailyLoginPoint(String userId, String why) throws NamingException, SQLException {
+		PointLog pointLog = null;
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select * from pointlog where who = ? and why = ? order by id desc limit 1;";
+		PreparedStatement pstmt = con.prepareStatement(query);
+		pstmt.setString(1, userId);
+		pstmt.setString(2, why);
+		ResultSet rs = pstmt.executeQuery();
+		
+		
+		while (rs.next()) {
+			pointLog = new PointLog(rs.getInt("id"), rs.getTimestamp("when"), 
+					rs.getString("why"), rs.getInt("howmuch"), rs.getString("who"));
+		}
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+
+		return pointLog;
+		
+	}
+
+	
 	
 	
 

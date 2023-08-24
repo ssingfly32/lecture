@@ -49,6 +49,11 @@ public interface MemberDAO {
 
 	// 유저 이미지 변경
 	int changeImage(String userId) throws NamingException, SQLException;
+	// 하루 한 번 포인트 적립
+	PointLog DailyLoginPoint(String userId, String why) throws NamingException, SQLException;
+
+
+
 	
 	
 	

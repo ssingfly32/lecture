@@ -17,11 +17,10 @@
 		<c:redirect url="../member/login.jsp"></c:redirect>
 	</c:if>
 	<jsp:include page="./../header.jsp"></jsp:include>
-	<!-- <iframe src="./membership.txt"></iframe>  약관-->
-	<div class="container">
-		<h1>게시판 글 작성</h1>
 
-		<form action="writeBoard.bo" method="post" enctype="multipart/form-data">
+	<div class="container">
+		<h1>게시판 답글 작성</h1>
+		<form action="reply.bo" method="post">
 			<div class="mb-3 mt-3">
 				<label for="writer" class="form-label">작성자 :</label> <input
 					type="text" class="form-control" id="writer"
@@ -35,14 +34,13 @@
 			<div class="mb-3">
 				<textarea rows="40" style="width:100%" id="content" name="content"></textarea> 
 			</div>
-			
-			<div class="mb-3">
-				<label for="upFile" class="form-label">첨부파일:</label> <input
-					type="file" class="form-control" id="upFile" name="upFile">
-			</div>
+			<input type="hidden" name="no" value="${param.no }" />
+			<input type="hidden" name="ref" value="${param.ref }" />
+			<input type="hidden" name="step" value="${param.step }" />
+			<input type="hidden" name="reforder" value="${param.reforder }" />
 			<div class="mb-3">
 				<button type="reset" class="btn btn-secondary">취소</button>
-				<button type="submit" class="btn btn-success" onclick="returnValidCheck();">저장</button>
+				<button type="submit" class="btn btn-success">저장</button>
 			</div>
 		</form>
 	</div>
