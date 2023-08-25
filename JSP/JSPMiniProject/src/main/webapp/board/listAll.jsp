@@ -27,14 +27,14 @@
 	});	
 </script>
 <style>
-	.delBoard td {
-		color : #333;
-		text-decoration: line-through;
-	}
+.delBoard td {
+	color: #333;
+	text-decoration: line-through;
+}
 </style>
 </head>
 <body>
-	<c:set var="contextPath" value="<%=request.getContextPath() %>"></c:set>
+	<c:set var="contextPath" value="<%=request.getContextPath()%>"></c:set>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="container">
 		<h1>게시판 전체 목록 조회</h1>
@@ -54,38 +54,37 @@
 						</thead>
 						<tbody>
 							<c:forEach var="board" items="${boardList }">
-							<c:choose>
-								<c:when test="${board.isDelete == 'N' }">
-								<tr id=`board${board.no }` class="board" onclick="location.href='viewBoard.bo?no=${board.no}';">
-									<td>${board.no }</td>
-									<td>
-										<c:if test="${board.step > 0 }">
-											<c:forEach var="i" begin="1" end="${board.step }" step="1">
-												<img alt="" src="${contextPath }/images/reply.png" width="15px"/>
-											</c:forEach>
-										</c:if>
-										${board.title }
-									</td>
-									<td>${board.writer }</td>
-									<td class="postDate">${board.postDate }</td>
-									<td>${board.readcount }</td>
-									<td>${board.likecount }</td>
-									
-								</tr>
-								</c:when>
-								<c:otherwise>
-									<tr id=`board${board.no }` class="board delBoard"">
-									<td>${board.no }</td>
-									<td>${board.title }</td>
-									<td>${board.writer }</td>
-									<td class="postDate">${board.postDate }</td>
-									<td>${board.readcount }</td>
-									<td>${board.likecount }</td>
-								
-								</tr>
-								</c:otherwise>
-							</c:choose>
-								
+								<c:choose>
+									<c:when test="${board.isDelete == 'N' }">
+										<tr id=`board${board.no }` class="board"
+											onclick="location.href='viewBoard.bo?no=${board.no}';">
+											<td>${board.no }</td>
+											<td><c:if test="${board.step > 0 }">
+													<c:forEach var="i" begin="1" end="${board.step }" step="1">
+														<img alt="" src="${contextPath }/images/reply.png"
+															width="15px" />
+													</c:forEach>
+												</c:if> ${board.title }</td>
+											<td>${board.writer }</td>
+											<td class="postDate">${board.postDate }</td>
+											<td>${board.readcount }</td>
+											<td>${board.likecount }</td>
+
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<tr id=`board${board.no }` class="board delBoard"">
+											<td>${board.no }</td>
+											<td>${board.title }</td>
+											<td>${board.writer }</td>
+											<td class="postDate">${board.postDate }</td>
+											<td>${board.readcount }</td>
+											<td>${board.likecount }</td>
+
+										</tr>
+									</c:otherwise>
+								</c:choose>
+
 							</c:forEach>
 						</tbody>
 					</table>
@@ -94,6 +93,26 @@
 					텅
 				</c:otherwise>
 			</c:choose>
+		</div>
+		<div class="paging">
+			<ul class="pagination">
+				<c:if test="${param.pageNo > 1 }">
+					<li class="page-item"><a class="page-link"
+						href="listAll.bo?pageNo=${param.pageNo - 1 }">Previous</a></li>
+				</c:if>
+				<c:forEach var="i"
+					begin="${requestScope.pagingInfo.startNumOfCurrentPagingBlock }"
+					end="${requestScope.pagingInfo.endNumOfCurrentPagingBlock }"
+					step="1">
+
+					<li class="page-item"><a class="page-link"
+						href="listAll.bo?pageNo=${i }">${i }</a></li>
+				</c:forEach>
+				<c:if test="${param.pageNo < requestScope.pagingInfo.totalPageCnt}">
+					<li class="page-item"><a class="page-link"
+						href="listAll.bo?pageNo=${param.pageNo + 1 }">Next</a></li>
+				</c:if>
+			</ul>
 		</div>
 		<div class="btns">
 			<button type="button" class="btn btn-primary"

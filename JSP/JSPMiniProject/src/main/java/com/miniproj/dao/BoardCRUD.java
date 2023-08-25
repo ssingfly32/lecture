@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import com.miniproj.etc.PagingInfo;
 import com.miniproj.etc.UploadedFile;
 import com.miniproj.vo.Board;
 
@@ -34,6 +35,26 @@ public class BoardCRUD implements BoardDAO {
 		Connection con = DBConnection.getInstance().dbConnect();
 		String query = "select * from board order by ref desc, reforder asc";
 		PreparedStatement pstmt = con.prepareCall(query);
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			lst.add(new Board(rs.getInt("no"), rs.getString("writer"), rs.getString("title"),
+					rs.getTimestamp("postDate"), new StringBuilder(rs.getString("content")), rs.getInt("readcount"),
+					rs.getInt("likecount"), rs.getInt("ref"), rs.getInt("step"), rs.getInt("reforder"), rs.getString("isDelete")));
+		}
+		DBConnection.getInstance().dbClose(rs, pstmt, con);
+		return lst;
+	}
+	
+	public List<Board> selectAllBoard(PagingInfo pi) throws NamingException, SQLException {
+		List<Board> lst = new ArrayList<Board>();
+
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select * from board order by ref desc, reforder asc limit ?, ?;";
+			
+		PreparedStatement pstmt = con.prepareCall(query);
+		pstmt.setInt(1, pi.getStartRowIndex());
+		pstmt.setInt(2, pi.getViewPostCntPerPage());
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
@@ -371,6 +392,25 @@ public class BoardCRUD implements BoardDAO {
 		result = pstmt.executeUpdate();
 		
 		pstmt.close();
+		
+		return result;
+	}
+
+	@Override
+	public int getTotalPostCnt() throws NamingException, SQLException {
+		int result = -1;
+		Connection con = DBConnection.getInstance().dbConnect();
+		String query = "select count(*) as totalPostCnt from board";
+		PreparedStatement pstmt = con.prepareStatement(query);
+	
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next()) {
+			result = rs.getInt("totalPostCnt");
+		}
+		
+		DBConnection.getInstance().dbClose(pstmt, con);
+
+		
 		
 		return result;
 	}
