@@ -128,7 +128,7 @@
 
 			</div>
 			<div>
-				<a onclick="changeImgModal();"><span class="badge bg-info changeImage">이미지 변경</span></a> <a
+				<a onclick="changeImgModal();"><span class="badge bg-info changeImage" >이미지 변경</span></a> <a
 					href="${contextPath }/member/defaultImage.mem"><span class="badge bg-info">이미지 초기화</span></a>
 			</div>
 			<div class="mb-3 mt-3">
@@ -140,6 +140,8 @@
 			<div class="mb-3">
 				<label for="userPwd" class="form-label">Password:</label> <input
 					type="password" class="form-control" id="userPwd" name="userPwd">
+					<button type="button" class="btn btn-info" onclick="updatePwd();">비밀번호
+					변경</button>
 			</div>
 
 			<div class="mb-3">
@@ -150,6 +152,7 @@
 					변경</button>
 			</div>
 			<div>사용가능한 총 포인트 : ${requestScope.memberInfo.userPoint } point <img alt="" src="${contextPath }/images/reward.png" width="25px"; /></div>
+			<div><a href="${contextPath }/member/detailTotalPoint.mem?userId=${sessionScope.loginUser.userId }&pageNo=1">포인트 적립 상세 내역</a></div>
 
 		</div>
 		<div class="pointLog">

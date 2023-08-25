@@ -23,7 +23,16 @@
 				let output = "<span><img src='./../images/new.png'/ width='32px'></span>";
 				 $(this).children().eq(1).html(output + title);
 			}
+			
 		}); // 태그를 선택해서 each 쓰면 태그 만날때마다 function 돈다.
+		
+		$('#selectView').change() {
+			// 첫번째는 3개씩보기
+			let num = $('#selectView option:selected').val();
+			console.log();	
+			$("#selectView").val(`${num}`).prop("selected", true);
+			
+		};
 	});	
 </script>
 <style>
@@ -38,6 +47,12 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="container">
 		<h1>게시판 전체 목록 조회</h1>
+		<select id="selectView">
+			<option value="3" >3개씩보기</option>
+			<option value="4" >4개씩보기</option>
+			<option value="5">5개씩보기</option>
+			<option value="10">10개씩보기</option>
+		</select>
 		<div class="boardList">
 			<c:choose>
 				<c:when test="${boardList != null}">
@@ -94,6 +109,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		${requestScope.pagingInfo }
 		<div class="paging">
 			<ul class="pagination">
 				<c:if test="${param.pageNo > 1 }">

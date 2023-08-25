@@ -12,6 +12,7 @@ import com.miniproj.service.member.MyPageService;
 import com.miniproj.service.member.RegisterMemberService;
 import com.miniproj.service.member.SendMailService;
 import com.miniproj.service.member.UpdateEmailService;
+import com.miniproj.service.member.ViewDetailTotalPoint;
 
 public class MemberFactory {
 	private static MemberFactory instance = null;
@@ -72,6 +73,8 @@ public class MemberFactory {
 			result = new UpdateEmailService();
 		} else if (command.equals("/member/changeImage.mem")) {
 			result = new ChangeImageService();
+		} else if (command.equals("/member/detailTotalPoint.mem")) {
+			result = new ViewDetailTotalPoint();
 		}
 		return result;
 	}
