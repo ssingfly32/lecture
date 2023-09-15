@@ -1,0 +1,22 @@
+ALTER TABLE `ksh`.`member` 
+ADD COLUMN `sessionLimit` DATETIME NULL AFTER `isAdmin`,
+ADD COLUMN `sessionKey` VARCHAR(60) NULL AFTER `sessionLimit`;
+
+
+CREATE TABLE `ksh`.`boardlike` (
+  `no` INT NOT NULL AUTO_INCREMENT,
+  `who` VARCHAR(8) NULL,
+  `boardNo` INT NULL,
+  PRIMARY KEY (`no`),
+  INDEX `boardLike_who_idx` (`who` ASC) VISIBLE,
+  INDEX `boardLike_boardNo_idx` (`boardNo` ASC) VISIBLE,
+  CONSTRAINT `boardLike_who`
+    FOREIGN KEY (`who`)
+    REFERENCES `ksh`.`member` (`userId`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `boardLike_boardNo`
+    FOREIGN KEY (`boardNo`)
+    REFERENCES `ksh`.`board` (`no`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

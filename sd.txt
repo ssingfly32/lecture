@@ -1,0 +1,33 @@
+update, delete, 회원탈퇴, 총 적립 포인트, 비밀번호 재설정
+모달창 이용?
+업데이트 시킨뒤 마이페이지 멤을 다시 호출
+마이페이지 로그인 안되있으면 접속 못하도록...
+
+command
+
+<!--<c:if test="${requestScope.memberInfo == null }">
+		<c:redirect url="/member/logout.mem"></c:redirect>
+	</c:if>-->
+<추가>
+하루가 지났는지 안지났는지로 게시판 조회수 일일포인트 적립
+관리자페이지 회원관리
+알고리즘
+
+이미지 변경
+1) 이미지 변경
+2) 기존 이미지 삭제
+3) 마이페이지 멤 다시 호출
+
+이미지 초기화
+1) 이미지 초기화 (db에 1넣고 user.png올라가도록)
+2) 기존 이미지 삭제
+3) 마이페이지 멤 다시 호출
+
+// 1) 업로드된 파일이 있다면 지워야 합니다.
+			if(uf!=null) {
+				System.out.println(uf.toString());
+				String without = uf.getNewFileName().substring("memberImg/".length());
+				System.out.println(without);
+				File deleteFile = new File(realPath + File.separator+without);
+				deleteFile.delete();
+			}

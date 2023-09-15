@@ -33,7 +33,6 @@ CREATE TABLE `kmh`.`member` (
 INSERT INTO `pointpolicy` (`why`, `howmuch`) VALUES ('로그인 ', '5');
 INSERT INTO `pointpolicy` (`why`, `howmuch`) VALUES ('답글작성', '1');
 INSERT INTO `pointpolicy` (`why`, `howmuch`) VALUES ('게시물 작성 ', '2');
-
 -- 포인트 로그(point log) 테이블 생성 쿼리문
 CREATE TABLE `kmh`.`pointlog` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -108,6 +107,8 @@ select * from member m inner join uploadedfile u on m.userImg = u.no where userI
 
 -- member point 가감
 update member set userPoint = userPoint + ? where userId = ?;
+
+
 
 select * from member;
 
@@ -203,8 +204,9 @@ CREATE TABLE `ksh`.`readcountprocess` (
 select * from readcountprocess where ipAddr = ? and boardNo = ?;
 
 -- ?ip주소가 ?번 글을 읽은 시간이 몇시간 차이인지 검사하는 쿼리문
+
 SELECT TIMESTAMPDIFF(HOUR, (select readTime from readcountprocess where 
-ipAddr = ? and boardNo = ?), now()) AS hourDiff; 
+ipAddr = '127.0.0.1' and boardNo = 5), now()) AS hourDiff; 
 
 -- insert
 INSERT INTO `readcountprocess` (`ipAddr`, `boardNo`) VALUES ('?', '?');
@@ -267,7 +269,7 @@ select * from board order by ref desc, reforder asc limit 0, 3;
 
 -- 2) 몇 페이지가 존재하냐?
 -- 2-1) 전체 글의 갯수를 구해야 함 : 내 기준 12
-select count(*) from board;
+select count(*) as totalPostCnt from board;
 
 -- 2-2) 한 페이지당 몇개의 글을 보여줄 것인가를 결정 : 3
 -- 2-3) 총 페이지 수 = 게시판의 글 수 / 한 페이지 당 보여줄 글의 갯수 -> 나누어 떨어지지 않으면 + 1
@@ -306,3 +308,113 @@ select * from board order by ref desc, reforder asc limit 9, 3;
 
 -- 4) 현재 페이징 블럭 끝 페이지 번호 = (현재 페이지 블럭번호) * pageCntPerBlock
 
+-- -------------------------------------------------------------------
+-- 게시물 검색 처리
+-- -------------------------------------------------------------------
+-- 1) 검색어가 있을 경우에도 페이징은 그대로 처리해야 한다.
+-- -> 검색어가 있을 경우에 검색조건에 따라 검색된 글의 갯수를 얻어야 한다.
+
+-- 작성자로 검색
+use ksh;
+select count(*) from board where writer like '%bbb%';
+
+-- 제목으로 검색
+select count(*) from board where title like '%bbb%';
+
+-- 본문으로 검색
+select count(*) from board where content like '%bbb%';
+
+-- 2) 검색어로 검색된 글을 가져오기 (페이징)
+-- 작성자로 검색
+use ksh;
+select * from board where writer like ? order by ref desc, reforder asc limit ?, ?;
+
+-- 제목으로 검색
+select * from board where title like ? order by ref desc, reforder asc limit ?, ?;
+
+-- 본문으로 검색
+select * from board where content like ? order by ref desc, reforder asc limit ?, ?;
+
+insert into readcountprocess(ipAddr, boardNo) values (?, ?);
+
+SELECT * FROM ksh.uploadedfile where boardNo = 5;
+
+-- ---------------------------------------------------------------------------------------
+-- spring 댓글 처리
+
+CREATE TABLE `ksh`.`reply` (
+  `replyNo` INT NOT NULL AUTO_INCREMENT,
+  `parentNo` INT NULL,
+  `replyText` VARCHAR(500) NOT NULL,
+  `replyer` VARCHAR(8) NULL,
+  `postDate` DATETIME NULL DEFAULT now(),
+  PRIMARY KEY (`replyNo`),
+  INDEX `parentNo_fk_idx` (`parentNo` ASC) VISIBLE,
+  INDEX `replyer_fk_idx` (`replyer` ASC) VISIBLE,
+  CONSTRAINT `parentNo_fk`
+    FOREIGN KEY (`parentNo`)
+    REFERENCES `ksh`.`board` (`no`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `replyer_fk`
+    FOREIGN KEY (`replyer`)
+    REFERENCES `ksh`.`member` (`userId`)
+    ON DELETE SET NULL
+    ON UPDATE NO ACTION);
+    
+    
+-- ?번 글의 모든 댓글 가져오기
+select * from reply where parentNo = ?;
+use ksh;
+
+-- 새로운 댓글 작성하기 
+INSERT INTO `reply` (`parentNo`, `replyText`, `replyer`) VALUES (?, ?, ?);
+
+select howmuch from pointpolicy where why = '';
+
+select writer from board where no = ?;
+
+-- 자동 로그인 member table 수정
+ALTER TABLE `ksh`.`member` 
+ADD COLUMN `sessionLimit` DATETIME NULL AFTER `isAdmin`,
+ADD COLUMN `sessionKey` VARCHAR(60) NULL AFTER `sessionLimit`;
+
+-- 자동로그인을 체크한 유저에게 세션 값 저장
+update member set sessionLimit = ?, sessionKey = ? where userId = ?;
+
+-- - 쿠키가 있다면, 쿠키에 저장된 세션과 DB에 저장된 sessionkey가 같은지 비교하고,
+-- DB에 저장된 세션 리미트가 현재시간보다 큰지 비교
+
+select * from member where sessionKey = ? and sessionLimit > now();
+
+-- 좋아요 기능
+CREATE TABLE `ksh`.`boardlike` (
+  `no` INT NOT NULL AUTO_INCREMENT,
+  `who` VARCHAR(8) NULL,
+  `boardNo` INT NULL,
+  PRIMARY KEY (`no`),
+  INDEX `boardLike_who_idx` (`who` ASC) VISIBLE,
+  INDEX `boardLike_boardNo_idx` (`boardNo` ASC) VISIBLE,
+  CONSTRAINT `boardLike_who`
+    FOREIGN KEY (`who`)
+    REFERENCES `ksh`.`member` (`userId`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `boardLike_boardNo`
+    FOREIGN KEY (`boardNo`)
+    REFERENCES `ksh`.`board` (`no`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+-- 안좋아요 -> 좋아요
+insert into boardLike(who, boardNo) values(?, ?);
+
+-- 좋아요 -> 안좋아요
+delete from boardLike where who = ? and boardNo = ?;
+
+-- 좋아요 수 증감
+update board set likecount = likecount + ? where no = ?;
+
+-- 몇 번 글을 누가 좋아하는지
+select who from boardLike where boardNo = ?;
+		

@@ -1,0 +1,22 @@
+업로드 파일이 있을 경우
+
+1) board 테이블 insert
+2) 1)번에서 insert된 no값을 가져와서 uploadfile 테이블에 insert
+3) 글쓴 member에게 포인트 부여(member 테이블 update)
+ 포인트 로그 insert
+
+
+
+
+업로드 파일이 없을 경우
+
+1) board 테이블 insert
+2) 글쓴 member에게 포인트 부여(member 테이블 update)
+ 포인트 로그 insert
+
+-----------------0824
+
+답글 insert (어떻게 답글을 처리할 것인가..)
+member 테이블에 userpoint . update
+pointlog 테이블에 포인트 적립 내역 insert
+
