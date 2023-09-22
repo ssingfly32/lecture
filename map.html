@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // key와 value의 쌍
+      // 모든 타입의 key, value 사용 가능
+      // map은 key를 문자열로 취급하지 않는다.
+      // key의 순서는 보장된다.
+
+      const user = {
+        name: "dooly",
+        age: 20,
+      };
+
+      console.log(user["name"]);
+
+      const map = new Map(); // 비어있는 Map 객체 생성
+
+      // set() : map에 원소 추가
+      map.set(1, "dooly");
+      map.set(2, "kildong");
+      map.set("2", "douner");
+
+      console.log(map);
+      map.set("2", "heedong"); // 해당 key가 존재한다면 value가 overwrite 된다.
+
+      // map에 있는 해당 key에 대한 value를 얻어오고자 할 때
+      console.log(map.get("2"));
+      console.log(map);
+
+      // has() : Map에 해당 key가 존재하는지
+      console.log(map.has("3"));
+
+      // delete() : Map에 원소 제거
+      map.delete("3");
+      console.log(map);
+
+      // clear() : 모든 원소 제거
+
+      // size : 크기 반환
+    </script>
+  </head>
+  <body></body>
+</html>

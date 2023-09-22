@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      const obj = {
+        x: 10,
+        y: 20,
+        z: 30,
+      };
+      console.log(obj.x);
+      console.log(obj["x"]);
+      console.log(Object.keys(obj)); // obj의 속성들을 배열로 반환
+      console.log(Object.values(obj)); // obj의 속성값을 배열로 반환
+      console.log(Object.entries(obj)); // obj의 전체 프로퍼티 배열(키, 값)로 반환
+
+      // 객체에 주어진 프로퍼티가 있는지 검사
+      console.log(obj.hasOwnProperty("x"));
+      console.log(obj.hasOwnProperty("name"));
+
+      // 선택적 연결 연산자(Optional Chaining Operator) : 존재하지 않을 수도 있는 property에 type error 없이 안전하게 접근할 수 있도록 하는 연산자 ?.
+
+      // 아래의 코드의 경우 data객체 안에 user라는 객체가 있을 수 있고 없을 수도 있는데, user 객체가 없으면 undefined 처리하여 더이상 하위 속성에 접근하지 않도록 하여 type error를 피한다.
+      //   const data = {
+      //     user: {
+      //       name: "dooly",
+      //       age: 20,
+      //     },
+      //   };
+      const data = {};
+      console.log(data.user?.name); // 에러없이 undefined
+    </script>
+  </head>
+  <body></body>
+</html>

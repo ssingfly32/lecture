@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 화살표 함수 : 함수 표현식보다 더 단순한 표현 방법으로 함수를 정의하는 것.
+
+      // 화살표 (=>) 다음에 {} 존재하면 반드시 return 키워드를 사용하여 반환값을 명시하여야 한다.
+      const sum1 = (a, b) => {
+        return a + b;
+      };
+
+      // 화살표 (=>) 다음에 {} 존재하지 않으면 return 키워드를 생략 가능하다.
+      const sum2 = (a, b) => a + b;
+
+      // 매개변수가 하나라면 ()를 생략 가능하다.
+      const sum3 = (a) => a + 10;
+
+      // 매개변수가 하나도 없다면.. ()를 생략해서는 안된다.
+      const greeting = () => "Hello";
+
+      console.log(sum1(3, 5));
+      console.log(sum2(3, 5));
+      console.log(sum(3));
+      console.log(greeting());
+    </script>
+  </head>
+  <body></body>
+</html>

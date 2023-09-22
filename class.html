@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //   class User {
+      //     name;
+      //     age;
+      //   }
+
+      //   const user1 = new User();
+      //   user1.name = "John";
+      //   user1.age = 23;
+      //   console.log(user1);
+      // -----------------------------------------------
+
+      class User {
+        // private 멤버 변수 선언
+        #name; // #을 붙이면 private
+        #age;
+
+        // 생성자
+        constructor(name, age) {
+          this.#name = name;
+          this.#age = age;
+        }
+
+        // getter, setter 이용 가능
+        getName() {
+          return this.#name;
+        }
+
+        getAge() {
+          return this.#age;
+        }
+
+        setName(name) {
+          this.#name = name;
+        }
+
+        setAge(age) {
+          this.#age = age;
+        }
+
+        static greeting() {
+          console.log("hello");
+        }
+      }
+
+      User.greeting(); // static한 멤버 메서드 호출
+
+      const user1 = new User("dooly", 21); // 빈 객체 생성
+      console.log(user1);
+
+      //   user1.name = "John"; // 사용 가능하지만 다른 의미 user1객체에 public한 name필드가 추가
+      //   user1.#name = "John"; // #name 필드는 private 하므로 접근 불가
+      user1.setName("John"); // public한 seName을 통해 접근 가능
+      console.log(user1);
+    </script>
+  </head>
+  <body></body>
+</html>
