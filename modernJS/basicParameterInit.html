@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 아래의 circleArea() 함수에 r값을 넘겨주지 않았을 때 r = 1로 계산되도록 해보자.
+      // r=1 -> r값을 넘겨주지 않았을 때 1로 할당하는 방법
+      function circleArea(r = 1) {
+        // const radius = r || 1; 단축 평가 논리 계산법 응용
+        // return Math.PI * radius * radius;
+
+        return Math.PI * r * r;
+      }
+
+      // 함수 표현식으로 할 땐 아래와 같이 사용하면 된다.
+      const circleArea2 = (r = 1) => Math.PI * r * r;
+
+      let r = 5;
+      console.log(circleArea(r));
+      console.log(circleArea()); // NAN
+    </script>
+  </head>
+  <body></body>
+</html>

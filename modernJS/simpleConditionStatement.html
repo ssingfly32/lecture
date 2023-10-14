@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function isAnimal(text) {
+        return (
+          text === "고양이" ||
+          text === "강아지" ||
+          text === "거북이" ||
+          text === "비둘기"
+        );
+      }
+
+      //   위 isAnimal 함수는 비교할 대상이 많으면 많을 수록 코드가 길어진다.
+      function isAnimal2(text) {
+        const animals = ["고양이", "강아지", "거북이", "비둘기"];
+        return animals.includes(text);
+      }
+
+      // 함수 표현식으로 하면..
+      const animals = ["고양이", "강아지", "거북이", "비둘기"];
+      const isAnimal3 = (text) => animals.includes(text);
+
+      console.log(isAnimal2("개")); // false
+      console.log(isAnimal2("강아지")); // true
+
+      // ---------------------------------------------------------------------------
+      function doCry(animal) {
+        const crySounds = {
+          cat: "야옹",
+          dog: "멍멍",
+          tiger: "어흥",
+          mouse: "찍찍",
+        };
+        return crySounds[animal] || "....";
+      }
+
+      console.log(doCry("tiger"));
+      console.log(doCry("lion"));
+    </script>
+  </head>
+  <body></body>
+</html>

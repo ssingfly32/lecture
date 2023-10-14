@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>단축 평가 논리 계산법</title>
+    <script>
+      const cat = {
+        name: "나비",
+      };
+
+      // animal이 null이면 undefined 반환, null이 아니면 name값을 반환하도록 아래처럼 코딩 가능
+      function getName(animal) {
+        if (animal) {
+          return animal.name;
+        }
+        return undefined;
+      }
+      // 위의 getName 함수를 단축평가논리 계산법으로 줄이면
+      function getName2(animal) {
+        return animal && animal.name; // 앞에 true가 있으면 무조건 뒤에값이 반환됨
+      }
+      //   const catName = getName(cat); // 실행 잘 됨
+      const catName = getName(); //animal이 null이므로
+      console.log(catName);
+
+      // A && B 연산을 수행 할 때 a가 truty한 값이라면, b결과가 되고,
+      // a가 falsy한 값이면 결과는 a가 된다.
+    </script>
+  </head>
+  <body></body>
+</html>

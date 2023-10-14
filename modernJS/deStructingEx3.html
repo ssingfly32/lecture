@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: "dooly",
+        age: 21,
+        job: "student",
+        hobby: ["playing", "excercise"],
+      };
+
+      function printObj(obj) {
+        console.log(`이름 : ${obj.name}`);
+        console.log(`나이 : ${obj.age}`);
+        console.log(`직업 : ${obj.job}`);
+        console.log(`취미 : ${obj.hobby[0]}, ${obj.hobby[1]}`);
+      }
+
+      printObj(obj);
+
+      function printObj2({ name, age, job, hobby }) {
+        // 객체를 받는 obj2함수를 만들자! 자주쓰임(구조분해할당 문법 이용)
+        console.log(`이름 : ${name}`);
+        console.log(`나이 : ${age}`);
+        console.log(`직업 : ${job}`);
+        console.log(`취미 : ${hobby[0]}, ${hobby[1]}`);
+      }
+
+      printObj2(obj);
+
+      // 연습
+      const obj3 = {
+        data: {
+          user: {
+            name: "dooly",
+            age: 21,
+          },
+        },
+      };
+
+      function printObj3({
+        data: {
+          user: { name, age },
+        },
+      }) {
+        console.log(`${name}`);
+        console.log(`${age}`);
+      }
+
+      printObj3(obj3);
+    </script>
+  </body>
+</html>

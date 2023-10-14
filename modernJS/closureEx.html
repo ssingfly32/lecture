@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      "use strict"; // 이제부터 아래의 코드는 modern JS 문법으로 엄격하게 수행된다. (반드시 코드의 최상단에 작성할 것)
+      //   let cnt = 1; // 전역변수
+
+      function add() {
+        let cnt = 1;
+        return function () {
+          cnt += 1;
+          return cnt;
+        };
+      }
+
+      console.log(add()); // 2
+      //   console.log(add()); // 3
+      //   cnt = 10000; // cnt 변수가 전역변수이기 때문에 접근하여 임의로 쉽게 값을 수정 가능
+      //   console.log(cnt); // 10000
+      //   console.log(add()); // 4
+
+      const count = add();
+      console.log(count);
+      console.log(count()); // 2
+      console.log(count()); // 3
+    </script>
+  </head>
+  <body></body>
+</html>

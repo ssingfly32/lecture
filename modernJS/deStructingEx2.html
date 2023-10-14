@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>객체의 구조 분해 할당</title>
+    <script>
+      const obj1 = {
+        x: 10,
+        y: 20,
+      };
+      const { x, y } = obj1;
+      console.log(x, y);
+
+      const obj2 = {
+        x: 10,
+        y: 20,
+      };
+
+      const { x: a, y: b } = obj2; // 할당할 변수의 이름을 변경하고 싶을 때
+      console.log(a, b);
+
+      // 중첩된 객체의 구조 분해 할당
+      const obj3 = {
+        data: {
+          user: {
+            name: "dooly",
+            age: 21,
+          },
+        },
+      };
+
+      // const name = obj3.data.user.name; 이렇게 쓰지말고
+      const {
+        data: {
+          user: { name },
+        },
+      } = obj3;
+      const {
+        data: {
+          user: { age },
+        },
+      } = obj3;
+      console.log(name, age);
+    </script>
+  </head>
+  <body></body>
+</html>

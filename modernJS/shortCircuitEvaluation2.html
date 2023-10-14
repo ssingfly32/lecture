@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>단축 평가 논리 계산법2</title>
+    <script>
+      // || 연산자를 이용해 코드 줄이기
+
+      const namelessCat = {
+        name: "",
+      };
+      const cat = {
+        name: "나비",
+      };
+
+      function getName(animal) {
+        const name = animal && animal.name;
+        // if (!name) {
+        //   return "이름이 없는 고양이 입니다.";
+        // }
+        // return name;
+
+        return name || "이름이 없는 고양이 입니다.";
+      }
+
+      const name = getName(namelessCat);
+      console.log(name);
+
+      // A || B 연산을 수행할 때, A가 Truthy 하다면 결과는 A,
+      // A가 Falsy 할 때는 결과가 B
+    </script>
+  </head>
+  <body></body>
+</html>

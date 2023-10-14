@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>배열의 구조분해 할당</title>
+    <script>
+      const arr = [1, 2, 3, 4, 5, 6];
+
+      // 위와 같은 배열이 있다고 할 때, arr[0], arr[1], arr[2]의 값을 어떤 변수에 할당하고 싶다
+      //   const one = arr[0];
+      //   const two = arr[1];
+      //   const three = arr[2];
+      //   console.log(one, two, three);
+      // 위와 같이 하지말고
+
+      // arr 배열의 구조를 분해(어떤 인덱스에 어떤 값이 있는지) 하여 first, one, two, three 상수에 각각 할당한다.
+      const [first, one, two, three] = arr; // 배열이 만들어진단 얘기 아니고 상수에 값 할당
+      console.log(first, one, two, three);
+      console.log(first);
+      //   first = 3;
+
+      const [il, , sam, , o] = arr; // 할당 하고 싶지 않은 인덱스는 건너뛰기 할 수 있다
+      console.log(il, sam, o);
+
+      const [, , , , a, b] = arr;
+      console.log(a, b);
+
+      const [c, d, ...rest] = arr;
+      console.log(c, d, rest); // 나머지는 배열로 들어온다.
+    </script>
+  </head>
+  <body></body>
+</html>

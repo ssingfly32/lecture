@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <script>
+      // BigInt : -2^53 -1 ~ + 2^53 - 1 까지의 숫자 표현
+      const bigInt = 12321312312323n;
+      console.log(bigInt);
+      console.log(typeof bigInt);
+
+      // String
+      // Boolean
+
+      // null : 값이 없음(존재하지 않음)
+      const isThere = null;
+      console.log(isThere);
+      // undefined : 아직 지정되지 않음
+
+      const userName = undefined;
+
+      // 배열
+      const arr = [1, 2, 4, 5];
+      console.log(arr);
+      // 객체
+      const user = {
+        userId: "dooly",
+        age: 20,
+      };
+
+      // Set : 중복을 허용하지 않는 데이터 집합
+      const set = new Set();
+      set.add(1);
+      set.add(2);
+      set.add(1);
+
+      console.log(set);
+
+      //   console.log(user.userId);
+      //   console.log(user["userId"]);
+
+      // Map : 키와 값을 연결하는 타입
+      const map = new Map();
+      map.set("name", "dooly");
+      map.set(123, 456);
+
+      console.log(map);
+    </script>
+  </head>
+
+  <body></body>
+</html>

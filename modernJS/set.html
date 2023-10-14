@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // set : 중복을 허용하지 않는 데이터 집합. 인덱스 개념이 없다(순서가 없다)
+      // Iterable 객체이므로 반복 가능
+
+      const arr = [1, 2, 3, 1];
+
+      //   const set = new Set(); 비어 있는 Set 객체를 생성
+      const set = new Set(arr);
+
+      set.add("a"); // add : 새 원소를 추가
+
+      set.delete("a"); // delete : 원소를 삭제
+
+      console.log(set.has("a")); // a라는 원소를 가지고 있는지?
+
+      //   set.clear(); // set 초기화
+      //   set = null; // set 객체 삭제
+
+      console.log(set.size);
+
+      set.forEach(function (num) {
+        document.write(num + ",");
+      });
+    </script>
+  </head>
+  <body></body>
+</html>

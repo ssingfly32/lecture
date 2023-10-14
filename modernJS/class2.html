@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      class SmartPhone {
+        type;
+
+        constructor(type) {
+          this.type = type;
+        }
+        displayPhone() {
+          console.log(this.type + "이야");
+        }
+      }
+
+      class Iphone extends SmartPhone {
+        brand;
+
+        constructor(type, brand) {
+          super(type); // 부모의 생성자 호출
+          this.brand = brand;
+        }
+
+        displayPhone() {
+          // 메서드 오버라이딩
+          console.log(this.brand + ", " + this.type + "이야");
+        }
+      }
+
+      // 부모 객체 생성
+      const phone = new SmartPhone("phone");
+      phone.displayPhone();
+
+      // 자식 객체 생성
+      const iphone = new Iphone("phone", "apple");
+
+      console.log(iphone.brand);
+      console.log(iphone.type);
+      iphone.displayPhone(); // 오버라이딩된 메서드 출력
+
+      console.log(iphone instanceof SmartPhone); // iphone 객체가 SmartPhone의 객체냐
+    </script>
+  </head>
+  <body></body>
+</html>

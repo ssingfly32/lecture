@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // arguments : 자바스크립트에서는 함수의 매개변수를 필요 이상으로 보내거나 필요한것보다 적게 보내어 호출하더라도 에러가 발생하지 않는다
+
+      console.log(sum(1)); // NaN : not a number
+      console.log(sum(1, 2, 4, 5));
+
+      function sum(a, b, c) {
+        console.log(arguments); // 매개변수를 받아 저장하는 일종의 저장소
+        console.log(arguments[1]); // 전달되지 않은 값은 undefined
+        return a + b + c;
+      }
+
+      // ------------------------------------------------------------------------------------
+      // 나머지 인자(rest parameter) : 지정한 인자를 제외한 나머지 모든 인자를 배열로 묶어 나타낸다.
+      // rest를 사용할 때는 마지막 인자에 위치하여야 한다.
+
+      function sum2(a, b, ...rest) {
+        console.log(a, b);
+        console.log(rest);
+      }
+
+      sum2(1, 2, 3, 4);
+
+      // -----------------------------------------------------------------------------------
+      // console.log(sum3(1, 3));
+
+      // 함수 표현식 : 호출 하기전에 반드시 먼저 표현식이 있어야 한다. (hoisting x)
+      // 함수를 객체처럼 보자
+      const sum3 = function (a, b) {
+        return a + b;
+      };
+
+      // 함수 선언식 : 위치에 상관없이 호출 가능 (선언 하는 부분을 찾아 먼저 hoisting 하므로)
+      console.log(sum3(1, 3));
+
+      //   function sum3(a, b) {
+      //     return a + b;
+      //   }
+    </script>
+  </head>
+  <body></body>
+</html>
